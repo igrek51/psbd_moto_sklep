@@ -4,6 +4,7 @@
 
 MySQL_y::MySQL_y(){
     mysql_init(&mysql);
+    mysql_options(&mysql, MYSQL_SET_CHARSET_NAME, "utf8");
     connection = NULL;
     result = NULL;
     row_nr = -1;

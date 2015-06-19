@@ -13,7 +13,6 @@ HEADERS  += mainwindow.h \
     mysql_y.h
 
 FORMS    += mainwindow.ui\
-		logowanie.ui\
 		magazynier.ui\
 		magazynier_wprowadz.ui\
 		menadzer.ui\

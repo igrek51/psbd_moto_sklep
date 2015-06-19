@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sprzedawca_klient.ui'
 **
-** Created: Fri 19. Jun 17:59:21 2015
+** Created: Fri 19. Jun 19:13:47 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -63,7 +63,6 @@ public:
     QSpacerItem *horizontalSpacer_3;
     QSpacerItem *verticalSpacer_3;
     QHBoxLayout *horizontalLayout_18;
-    QPushButton *pushButton_4;
     QSpacerItem *horizontalSpacer_4;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
@@ -252,11 +251,6 @@ public:
         horizontalLayout_18 = new QHBoxLayout();
         horizontalLayout_18->setSpacing(6);
         horizontalLayout_18->setObjectName(QString::fromUtf8("horizontalLayout_18"));
-        pushButton_4 = new QPushButton(centralWidget);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-
-        horizontalLayout_18->addWidget(pushButton_4);
-
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_18->addItem(horizontalSpacer_4);
@@ -298,7 +292,6 @@ public:
         label_14->setText(QApplication::translate("MainWindow", "Kod pocztowy", 0, QApplication::UnicodeUTF8));
         label_15->setText(QApplication::translate("MainWindow", "Miasto:", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("MainWindow", "Telefon", 0, QApplication::UnicodeUTF8));
-        pushButton_4->setText(QApplication::translate("MainWindow", "Wyczy\305\233\304\207 pola", 0, QApplication::UnicodeUTF8));
         pushButton_2->setText(QApplication::translate("MainWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
         pushButton_3->setText(QApplication::translate("MainWindow", "Dodaj klienta", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
