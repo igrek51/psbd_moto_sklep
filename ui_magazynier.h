@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'magazynier.ui'
 **
-** Created: Fri 19. Jun 16:01:39 2015
+** Created: Fri 19. Jun 17:59:21 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
