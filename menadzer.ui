@@ -1,0 +1,1829 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>440</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Menadżer</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>9</y>
+      <width>710</width>
+      <height>430</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>673</height>
+     </size>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Samochody</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>691</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Marka</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Model</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Wersja</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Silnik</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nadwozie</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Skrzynia biegów</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>561</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Wersja:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_3"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Rocznik:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Typ silnika:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineEdit_5"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Objętość silnika [l]:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineEdit_4"/>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Liczba biegów:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Model:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_2"/>
+       </item>
+       <item row="8" column="1">
+        <widget class="QLineEdit" name="lineEdit_6"/>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Nadwozie:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="comboBox"/>
+       </item>
+       <item row="7" column="1">
+        <widget class="QComboBox" name="comboBox_3"/>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Rodzaj skrzyni biegów:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QComboBox" name="comboBox_2"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Marka:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>220</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj nową wersję</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>140</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj markę</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>180</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj model</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_6">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>100</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Szukaj</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Producenci</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>70</y>
+        <width>291</width>
+        <height>331</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>120</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Nazwa producenta</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Adres</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>10</y>
+        <width>291</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>Nazwa producenta:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_7"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_30">
+         <property name="text">
+          <string>Adres:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_16"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="pushButton_7">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>20</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj producenta</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Dostawcy</string>
+     </attribute>
+     <widget class="QWidget" name="gridLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>571</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>Nazwa dostawcy:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_8"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>E-mail:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_13">
+         <property name="text">
+          <string>Telefon:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="text">
+          <string>Ulica i nr:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_10"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string>Kod pocztowy:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineEdit_12"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_9"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineEdit_11"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_16">
+         <property name="text">
+          <string>Miasto:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="lineEdit_13"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>691</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>120</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Nazwa dostawcy</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>E-mail</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>telefon</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Adres</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>120</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj dostawcę</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_11">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>80</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Szukaj</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_12">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>160</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zapisz</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Produkty</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>277</y>
+        <width>738</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>120</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Nazwa produktu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Okres gwarancyjny</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Minimalna liczba</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Producent</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Dostawca</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Czas dostawy</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cena zakupu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cena sprzedaży</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>411</width>
+        <height>262</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="lineEdit_14"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPlainTextEdit" name="plainTextEdit_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>55</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPlainTextEdit" name="plainTextEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>55</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_18">
+         <property name="text">
+          <string>Opis:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="lineEdit_18"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>Nazwa produktu:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_19">
+         <property name="text">
+          <string>Parametry techniczne:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_21">
+         <property name="text">
+          <string>Producent:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>Okres gwarancyjny:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_23">
+         <property name="text">
+          <string>Kategoria:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QComboBox" name="comboBox_14"/>
+       </item>
+       <item row="5" column="2">
+        <widget class="QListWidget" name="listWidget">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>60</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Wszystkie</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kategoria1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kategoria2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kategoria3</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_1">
+      <property name="geometry">
+       <rect>
+        <x>433</x>
+        <y>10</y>
+        <width>261</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Dostawcy produktu</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_28">
+              <property name="text">
+               <string>Dostawca:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QComboBox" name="comboBox_4"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_31">
+              <property name="text">
+               <string>Czas dostawy:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_29">
+              <property name="text">
+               <string>Cena sprzedaży:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QLineEdit" name="lineEdit_21"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_27">
+              <property name="text">
+               <string>Cena zakupu:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QLineEdit" name="lineEdit_22"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLineEdit" name="lineEdit_23"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QPushButton" name="pushButton_13">
+             <property name="text">
+              <string>Szukaj produktu</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_15">
+             <property name="text">
+              <string>Dodaj produkt</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_14">
+             <property name="text">
+              <string>Zapisz produkt</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QPushButton" name="pushButton_16">
+             <property name="text">
+              <string>Dodaj dostawcę produktu</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_17">
+             <property name="text">
+              <string>Usuń dostawcę produktu</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_18">
+             <property name="text">
+              <string>Zapisz dostawcę produktu</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_10">
+     <attribute name="title">
+      <string>Dopasowanie</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>341</width>
+        <height>401</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Produkt</string>
+      </property>
+      <widget class="QTableWidget" name="tableWidget_10">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>321</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>120</number>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Nazwa produktu</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Producent</string>
+        </property>
+       </column>
+      </widget>
+      <widget class="QWidget" name="layoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>321</width>
+         <height>131</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="1" column="2">
+         <widget class="QComboBox" name="comboBox_15"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_26">
+          <property name="text">
+           <string>Producent:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_24">
+          <property name="text">
+           <string>Nazwa produktu:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_25">
+          <property name="text">
+           <string>Kategoria:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLineEdit" name="lineEdit_15"/>
+        </item>
+        <item row="3" column="2">
+         <widget class="QListWidget" name="listWidget_2">
+          <item>
+           <property name="text">
+            <string>Wszystkie</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Kategoria1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Kategoria2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Kategoria3</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButton_28">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>150</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Szukaj produktu</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>0</y>
+        <width>351</width>
+        <height>401</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Pasuje do samochodu</string>
+      </property>
+      <widget class="QTableWidget" name="tableWidget_12">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>331</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <column>
+        <property name="text">
+         <string>Marka</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Model</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Wersja</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Silnik</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Nadwozie</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Skrzynia biegów</string>
+        </property>
+       </column>
+      </widget>
+      <widget class="QWidget" name="gridLayoutWidget_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>260</y>
+         <width>331</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_13">
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string>Wersja:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="comboBox_21"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="comboBox_22"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_80">
+          <property name="text">
+           <string>Marka:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_77">
+          <property name="text">
+           <string>Model:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="comboBox_20">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButton_36">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>360</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Dodaj pasujący samochód</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_37">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>360</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Usuń pasujący samochód</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_7">
+     <attribute name="title">
+      <string>Pracownicy</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton_22">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>220</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zapisz</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_26">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>180</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj pracownika</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>691</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>120</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Imię i nazwisko</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Stanowisko</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>E-mail</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Telefon</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Adres</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>561</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_9">
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_53">
+         <property name="text">
+          <string>Kod pocztowy:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_29"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_43">
+         <property name="text">
+          <string>Imię:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_46">
+         <property name="text">
+          <string>Nazwisko:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_47">
+         <property name="text">
+          <string>E-mail:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_48">
+         <property name="text">
+          <string>Telefon:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_54">
+         <property name="text">
+          <string>Miasto:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_49">
+         <property name="text">
+          <string>Adres:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineEdit_33"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_52">
+         <property name="text">
+          <string>Ulica i nr:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_32"/>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="lineEdit_34"/>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineEdit_31"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_30"/>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_55">
+         <property name="text">
+          <string>Stanowisko:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="lineEdit_35"/>
+       </item>
+       <item row="7" column="1">
+        <widget class="QLineEdit" name="lineEdit_36"/>
+       </item>
+       <item row="8" column="1">
+        <widget class="QComboBox" name="comboBox_11"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="pushButton_27">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>140</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Szukaj</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_8">
+     <attribute name="title">
+      <string>Klienci</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>230</y>
+        <width>691</width>
+        <height>171</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>120</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Imię i nazwisko</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>E-mail</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Telefon</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Adres</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_29">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>150</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj klienta</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_9">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>571</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_10">
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_63">
+         <property name="text">
+          <string>Ulica i nr:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="lineEdit_40"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_39"/>
+       </item>
+       <item row="7" column="1">
+        <widget class="QLineEdit" name="lineEdit_44"/>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineEdit_41"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_42"/>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="lineEdit_43"/>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_56">
+         <property name="text">
+          <string>Kod pocztowy:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_37"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_57">
+         <property name="text">
+          <string>Imię:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_58">
+         <property name="text">
+          <string>Nazwisko:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_59">
+         <property name="text">
+          <string>E-mail:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_60">
+         <property name="text">
+          <string>Telefon:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_61">
+         <property name="text">
+          <string>Miasto:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_62">
+         <property name="text">
+          <string>Adres:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineEdit_38"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="pushButton_31">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>190</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zapisz</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_30">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>110</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Szukaj</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_6">
+     <attribute name="title">
+      <string>Raporty</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>691</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Generuj raport</string>
+      </property>
+      <widget class="QWidget" name="gridLayoutWidget_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>501</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="0" column="3">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QDateTimeEdit" name="dateTimeEdit_5"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_44">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateTimeEdit" name="dateTimeEdit_6"/>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="1">
+         <widget class="QCheckBox" name="checkBox">
+          <property name="text">
+           <string>Okres:</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>671</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Raport zamówień i faktur</string>
+       </property>
+       <widget class="QWidget" name="gridLayoutWidget_10">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>461</width>
+          <height>48</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_11">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_67">
+           <property name="text">
+            <string>Klient:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBox_5">
+           <item>
+            <property name="text">
+             <string>Wszyscy</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_68">
+           <property name="text">
+            <string>Status zamówienia:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="comboBox_6"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QPushButton" name="pushButton_23">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>40</y>
+          <width>149</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Generuj raport zamówień</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>671</width>
+         <height>80</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Raport dostaw</string>
+       </property>
+       <widget class="QWidget" name="gridLayoutWidget_11">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>461</width>
+          <height>48</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_12">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_69">
+           <property name="text">
+            <string>Dostawca:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBox_7">
+           <item>
+            <property name="text">
+             <string>Wszyscy</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_70">
+           <property name="text">
+            <string>Status dostawy:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="comboBox_8"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QPushButton" name="pushButton_24">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>40</y>
+          <width>149</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Generuj raport dostaw</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>240</y>
+         <width>671</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Raport sztuk</string>
+       </property>
+       <widget class="QWidget" name="gridLayoutWidget_13">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>461</width>
+          <height>74</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_15">
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBox_12">
+           <item>
+            <property name="text">
+             <string>Wszyscy</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_76">
+           <property name="text">
+            <string>Status sztuki:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="comboBox_13"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_74">
+           <property name="text">
+            <string>Producent:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_81">
+           <property name="text">
+            <string>Dostawca:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="comboBox_16">
+           <item>
+            <property name="text">
+             <string>Wszyscy</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QPushButton" name="pushButton_33">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>60</y>
+          <width>149</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Generuj raport sztuk</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
