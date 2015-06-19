@@ -147,3 +147,11 @@ string MySQL_y::el(string name){
     if(n==-1) return "";
     return el(n);
 }
+
+const char* MySQL_y::elc(int index){
+    return el(index).c_str();
+}
+
+const char* MySQL_y::elc(string name){
+    return el(name).c_str();
+}

@@ -39,6 +39,10 @@ public:
     string el(int index);
     //weź z wiersza element o podanej nazwie, w przypadku zawartości NULL zwróć ""
     string el(string name);
+    //tak jak el(...), ale zwraca char*
+    const char *elc(int index);
+    //tak jak el(...), ale zwraca char*
+    const char* elc(string name);
 
 private:
     MYSQL mysql; //instancja mysql

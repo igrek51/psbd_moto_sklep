@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri 19. Jun 19:13:47 2015
+** Created: Fri 19. Jun 19:35:18 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -36,7 +36,7 @@ public:
     QLabel *label_2;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
-    QComboBox *comboBox;
+    QComboBox *stanowisko_combo;
     QLabel *label_3;
 
     void setupUi(QMainWindow *MainWindow)
@@ -67,9 +67,9 @@ public:
         pushButton_2 = new QPushButton(groupBox);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setGeometry(QRect(110, 110, 81, 25));
-        comboBox = new QComboBox(groupBox);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setGeometry(QRect(70, 80, 121, 22));
+        stanowisko_combo = new QComboBox(groupBox);
+        stanowisko_combo->setObjectName(QString::fromUtf8("stanowisko_combo"));
+        stanowisko_combo->setGeometry(QRect(80, 80, 111, 22));
         label_3 = new QLabel(groupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(10, 80, 61, 20));
