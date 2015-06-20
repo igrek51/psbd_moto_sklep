@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MenadzerWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <widget class="QMainWindow" name="MenadzerWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -94,7 +94,7 @@
         <x>10</x>
         <y>10</y>
         <width>561</width>
-        <height>241</height>
+        <height>248</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -303,7 +303,7 @@
         <x>140</x>
         <y>10</y>
         <width>291</width>
-        <height>51</height>
+        <height>52</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -579,7 +579,7 @@
         <x>10</x>
         <y>10</y>
         <width>411</width>
-        <height>262</height>
+        <height>268</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
@@ -1185,7 +1185,7 @@
         <x>10</x>
         <y>10</y>
         <width>561</width>
-        <height>241</height>
+        <height>248</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_9">
@@ -1378,7 +1378,7 @@
         <x>10</x>
         <y>10</y>
         <width>571</width>
-        <height>211</height>
+        <height>220</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_10">
@@ -1607,7 +1607,7 @@
           <x>10</x>
           <y>20</y>
           <width>461</width>
-          <height>48</height>
+          <height>52</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_11">
@@ -1677,7 +1677,7 @@
           <x>10</x>
           <y>20</y>
           <width>461</width>
-          <height>48</height>
+          <height>52</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_12">
@@ -1747,7 +1747,7 @@
           <x>10</x>
           <y>20</y>
           <width>461</width>
-          <height>74</height>
+          <height>80</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_15">

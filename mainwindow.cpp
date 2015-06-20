@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     */
     ui->le_pesel->setFocus();
+//    ui->le_pesel->
 }
 
 MainWindow::~MainWindow()

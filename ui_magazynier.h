@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'magazynier.ui'
 **
-** Created: Sat 20. Jun 13:25:40 2015
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 5.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,21 +10,21 @@
 #define UI_MAGAZYNIER_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QMainWindow>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QTabWidget>
-#include <QtGui/QTableWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -67,25 +66,25 @@ public:
     QLabel *label_3;
     QPushButton *pushButton_5;
 
-    void setupUi(QMainWindow *MainWindow)
+    void setupUi(QMainWindow *MagazynierWindow)
     {
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(831, 407);
-        centralWidget = new QWidget(MainWindow);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        if (MagazynierWindow->objectName().isEmpty())
+            MagazynierWindow->setObjectName(QStringLiteral("MagazynierWindow"));
+        MagazynierWindow->resize(831, 407);
+        centralWidget = new QWidget(MagazynierWindow);
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_3 = new QVBoxLayout(centralWidget);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         tabWidget = new QTabWidget(centralWidget);
-        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
         tab_2 = new QWidget();
-        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        tab_2->setObjectName(QStringLiteral("tab_2"));
         verticalLayout = new QVBoxLayout(tab_2);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tableWidget_3 = new QTableWidget(tab_2);
         if (tableWidget_3->columnCount() < 4)
             tableWidget_3->setColumnCount(4);
@@ -97,7 +96,7 @@ public:
         tableWidget_3->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         tableWidget_3->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        tableWidget_3->setObjectName(QString::fromUtf8("tableWidget_3"));
+        tableWidget_3->setObjectName(QStringLiteral("tableWidget_3"));
         QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -109,17 +108,17 @@ public:
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label = new QLabel(tab_2);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
         pushButton_3 = new QPushButton(tab_2);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
 
         horizontalLayout->addWidget(pushButton_3);
 
@@ -131,7 +130,7 @@ public:
         horizontalLayout_3->addLayout(horizontalLayout);
 
         pushButton = new QPushButton(tab_2);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setObjectName(QStringLiteral("pushButton"));
 
         horizontalLayout_3->addWidget(pushButton);
 
@@ -141,14 +140,14 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label_2 = new QLabel(tab_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         horizontalLayout_2->addWidget(label_2);
 
         lineEdit = new QLineEdit(tab_2);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
 
         horizontalLayout_2->addWidget(lineEdit);
 
@@ -156,7 +155,7 @@ public:
         horizontalLayout_3->addLayout(horizontalLayout_2);
 
         pushButton_4 = new QPushButton(tab_2);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
 
         horizontalLayout_3->addWidget(pushButton_4);
 
@@ -165,11 +164,11 @@ public:
 
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
-        tab_3->setObjectName(QString::fromUtf8("tab_3"));
+        tab_3->setObjectName(QStringLiteral("tab_3"));
         verticalLayout_10 = new QVBoxLayout(tab_3);
         verticalLayout_10->setSpacing(6);
         verticalLayout_10->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
+        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
         tableWidget = new QTableWidget(tab_3);
         if (tableWidget->columnCount() < 4)
             tableWidget->setColumnCount(4);
@@ -181,17 +180,17 @@ public:
         tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem7);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
         tableWidget->horizontalHeader()->setStretchLastSection(true);
 
         verticalLayout_10->addWidget(tableWidget);
 
         groupBox_2 = new QGroupBox(tab_3);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         verticalLayout_9 = new QVBoxLayout(groupBox_2);
         verticalLayout_9->setSpacing(6);
         verticalLayout_9->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
+        verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
         tableWidget_4 = new QTableWidget(groupBox_2);
         if (tableWidget_4->columnCount() < 3)
             tableWidget_4->setColumnCount(3);
@@ -201,7 +200,7 @@ public:
         tableWidget_4->setHorizontalHeaderItem(1, __qtablewidgetitem9);
         QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
         tableWidget_4->setHorizontalHeaderItem(2, __qtablewidgetitem10);
-        tableWidget_4->setObjectName(QString::fromUtf8("tableWidget_4"));
+        tableWidget_4->setObjectName(QStringLiteral("tableWidget_4"));
         tableWidget_4->horizontalHeader()->setStretchLastSection(true);
         tableWidget_4->verticalHeader()->setStretchLastSection(true);
 
@@ -209,12 +208,12 @@ public:
 
         horizontalLayout_14 = new QHBoxLayout();
         horizontalLayout_14->setSpacing(15);
-        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
+        horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
         verticalLayout_11 = new QVBoxLayout();
         verticalLayout_11->setSpacing(6);
-        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
+        verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
         pushButton_2 = new QPushButton(groupBox_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
 
         verticalLayout_11->addWidget(pushButton_2);
 
@@ -233,11 +232,11 @@ public:
 
         tabWidget->addTab(tab_3, QString());
         tab = new QWidget();
-        tab->setObjectName(QString::fromUtf8("tab"));
+        tab->setObjectName(QStringLiteral("tab"));
         verticalLayout_2 = new QVBoxLayout(tab);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         tableWidget_5 = new QTableWidget(tab);
         if (tableWidget_5->columnCount() < 4)
             tableWidget_5->setColumnCount(4);
@@ -249,24 +248,24 @@ public:
         tableWidget_5->setHorizontalHeaderItem(2, __qtablewidgetitem13);
         QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
         tableWidget_5->setHorizontalHeaderItem(3, __qtablewidgetitem14);
-        tableWidget_5->setObjectName(QString::fromUtf8("tableWidget_5"));
+        tableWidget_5->setObjectName(QStringLiteral("tableWidget_5"));
 
         verticalLayout_2->addWidget(tableWidget_5);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_2);
 
         label_3 = new QLabel(tab);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         horizontalLayout_4->addWidget(label_3);
 
         pushButton_5 = new QPushButton(tab);
-        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
 
         horizontalLayout_4->addWidget(pushButton_5);
 
@@ -277,61 +276,61 @@ public:
 
         verticalLayout_3->addWidget(tabWidget);
 
-        MainWindow->setCentralWidget(centralWidget);
+        MagazynierWindow->setCentralWidget(centralWidget);
 
-        retranslateUi(MainWindow);
+        retranslateUi(MagazynierWindow);
 
         tabWidget->setCurrentIndex(0);
 
 
-        QMetaObject::connectSlotsByName(MainWindow);
+        QMetaObject::connectSlotsByName(MagazynierWindow);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QMainWindow *MagazynierWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MagazynierWindow", "Magazynier", 0, QApplication::UnicodeUTF8));
+        MagazynierWindow->setWindowTitle(QApplication::translate("MagazynierWindow", "Magazynier", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_3->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MagazynierWindow", "Dostawca", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QApplication::translate("MagazynierWindow", "Dostawca", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_3->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MagazynierWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QApplication::translate("MagazynierWindow", "Nazwa produktu", 0));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget_3->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MagazynierWindow", "Cena za sztuk\304\231", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem2->setText(QApplication::translate("MagazynierWindow", "Cena za sztuk\304\231", 0));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_3->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MagazynierWindow", "Status", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MagazynierWindow", "Anuluj dostaw\304\231", 0, QApplication::UnicodeUTF8));
-        pushButton_3->setText(QApplication::translate("MagazynierWindow", "Anuluj", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("MagazynierWindow", "Zam\303\263wiono", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("MagazynierWindow", "Numer seryjny:", 0, QApplication::UnicodeUTF8));
-        pushButton_4->setText(QApplication::translate("MagazynierWindow", "Przyj\304\231to", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MagazynierWindow", "Zapotrzebowanie / Dostawy", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem3->setText(QApplication::translate("MagazynierWindow", "Status", 0));
+        label->setText(QApplication::translate("MagazynierWindow", "Anuluj dostaw\304\231", 0));
+        pushButton_3->setText(QApplication::translate("MagazynierWindow", "Anuluj", 0));
+        pushButton->setText(QApplication::translate("MagazynierWindow", "Zam\303\263wiono", 0));
+        label_2->setText(QApplication::translate("MagazynierWindow", "Numer seryjny:", 0));
+        pushButton_4->setText(QApplication::translate("MagazynierWindow", "Przyj\304\231to", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MagazynierWindow", "Zapotrzebowanie / Dostawy", 0));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem4->setText(QApplication::translate("MagazynierWindow", "Numer zam\303\263wienia", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem4->setText(QApplication::translate("MagazynierWindow", "Numer zam\303\263wienia", 0));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem5->setText(QApplication::translate("MagazynierWindow", "Data z\305\202o\305\274enia", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem5->setText(QApplication::translate("MagazynierWindow", "Data z\305\202o\305\274enia", 0));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem6->setText(QApplication::translate("MagazynierWindow", "Imi\304\231", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem6->setText(QApplication::translate("MagazynierWindow", "Imi\304\231", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem7->setText(QApplication::translate("MagazynierWindow", "Nazwisko", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("MagazynierWindow", "Zawarto\305\233\304\207 zam\303\263wienia", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem7->setText(QApplication::translate("MagazynierWindow", "Nazwisko", 0));
+        groupBox_2->setTitle(QApplication::translate("MagazynierWindow", "Zawarto\305\233\304\207 zam\303\263wienia", 0));
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget_4->horizontalHeaderItem(0);
-        ___qtablewidgetitem8->setText(QApplication::translate("MagazynierWindow", "Numer sztuki", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem8->setText(QApplication::translate("MagazynierWindow", "Numer sztuki", 0));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidget_4->horizontalHeaderItem(1);
-        ___qtablewidgetitem9->setText(QApplication::translate("MagazynierWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem9->setText(QApplication::translate("MagazynierWindow", "Nazwa produktu", 0));
         QTableWidgetItem *___qtablewidgetitem10 = tableWidget_4->horizontalHeaderItem(2);
-        ___qtablewidgetitem10->setText(QApplication::translate("MagazynierWindow", "Numer seryjny", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("MagazynierWindow", "Przygotowane", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MagazynierWindow", "Zam\303\263wienia klient\303\263w", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem10->setText(QApplication::translate("MagazynierWindow", "Numer seryjny", 0));
+        pushButton_2->setText(QApplication::translate("MagazynierWindow", "Przygotowane", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MagazynierWindow", "Zam\303\263wienia klient\303\263w", 0));
         QTableWidgetItem *___qtablewidgetitem11 = tableWidget_5->horizontalHeaderItem(0);
-        ___qtablewidgetitem11->setText(QApplication::translate("MagazynierWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem11->setText(QApplication::translate("MagazynierWindow", "Nazwa produktu", 0));
         QTableWidgetItem *___qtablewidgetitem12 = tableWidget_5->horizontalHeaderItem(1);
-        ___qtablewidgetitem12->setText(QApplication::translate("MagazynierWindow", "Numer seryjny", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem12->setText(QApplication::translate("MagazynierWindow", "Numer seryjny", 0));
         QTableWidgetItem *___qtablewidgetitem13 = tableWidget_5->horizontalHeaderItem(2);
-        ___qtablewidgetitem13->setText(QApplication::translate("MagazynierWindow", "Data przyj\304\231cia reklamacji", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem13->setText(QApplication::translate("MagazynierWindow", "Data przyj\304\231cia reklamacji", 0));
         QTableWidgetItem *___qtablewidgetitem14 = tableWidget_5->horizontalHeaderItem(3);
-        ___qtablewidgetitem14->setText(QApplication::translate("MagazynierWindow", "Status reklamacji", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MagazynierWindow", "Odes\305\202ano do producenta", 0, QApplication::UnicodeUTF8));
-        pushButton_5->setText(QApplication::translate("MagazynierWindow", "Odes\305\202ano", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MagazynierWindow", "Reklamacje", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem14->setText(QApplication::translate("MagazynierWindow", "Status reklamacji", 0));
+        label_3->setText(QApplication::translate("MagazynierWindow", "Odes\305\202ano do producenta", 0));
+        pushButton_5->setText(QApplication::translate("MagazynierWindow", "Odes\305\202ano", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MagazynierWindow", "Reklamacje", 0));
     } // retranslateUi
 
 };

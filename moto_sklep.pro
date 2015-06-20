@@ -8,15 +8,20 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     mysql_y.cpp \
-    app.cpp
+    app.cpp \
+    magazynierwindow.cpp \
+    sprzedawcawindow.cpp \
+    menadzerwindow.cpp
 
 HEADERS  += mainwindow.h \
     mysql_y.h \
-    app.h
+    app.h \
+    magazynierwindow.h \
+    sprzedawcawindow.h \
+    menadzerwindow.h
 
 FORMS    += mainwindow.ui\
 		magazynier.ui\
-		magazynier_wprowadz.ui\
 		menadzer.ui\
 		sprzedawca.ui\
 		sprzedawca_klient.ui\
