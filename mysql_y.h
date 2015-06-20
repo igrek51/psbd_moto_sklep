@@ -48,6 +48,8 @@ public:
     //tak jak el(...), ale zwraca char*
     const char* elc(string name);
 
+
+
 private:
     MYSQL mysql; //instancja mysql
     MYSQL *connection; //instancja połączenia
