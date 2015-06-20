@@ -15,6 +15,8 @@ public:
     explicit MenadzerWindow(QWidget *parent = 0);
     ~MenadzerWindow();
 
+    void closeEvent(QCloseEvent *event);
+
 private:
     Ui::MenadzerWindow *ui;
 };

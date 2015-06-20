@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'menadzer.ui'
 **
-** Created: Sat 20. Jun 17:26:32 2015
+** Created: Sat 20. Jun 17:37:40 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

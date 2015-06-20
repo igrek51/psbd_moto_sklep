@@ -7,6 +7,8 @@
 #include "magazynierwindow.h"
 #include "sprzedawcawindow.h"
 
+class App;
+
 namespace Ui {
 class MainWindow;
 }

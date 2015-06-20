@@ -15,6 +15,8 @@ public:
     explicit SprzedawcaWindow(QWidget *parent = 0);
     ~SprzedawcaWindow();
 
+    void closeEvent(QCloseEvent *event);
+
 private:
     Ui::SprzedawcaWindow *ui;
 };

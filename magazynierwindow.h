@@ -15,6 +15,8 @@ public:
     explicit MagazynierWindow(QWidget *parent = 0);
     ~MagazynierWindow();
 
+    void closeEvent(QCloseEvent *event);
+
 private:
     Ui::MagazynierWindow *ui;
 };
