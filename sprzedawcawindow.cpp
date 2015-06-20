@@ -39,7 +39,7 @@ void SprzedawcaWindow::closeEvent(QCloseEvent *event)
 
 void SprzedawcaWindow::on_pb_wybierz_klienta_clicked()
 {
-
+     //wybranie klienta
 }
 
 void SprzedawcaWindow::on_cb_czy_okres_clicked(bool checked)
@@ -79,4 +79,19 @@ void SprzedawcaWindow::on_pb_anuluj_zamowienie_clicked()
 void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
 {
     //zmiana statusu zamówienia na wydano
+}
+
+void SprzedawcaWindow::on_pb_wybierz_klienta_reklamacje_clicked()
+{
+    //wybranie klienta
+}
+
+void SprzedawcaWindow::on_le_nazwa_produktu_reklamacje_textChanged(const QString &arg1)
+{
+    //wyświetlenie produktów do reklamacji
+}
+
+void SprzedawcaWindow::on_comboBox_3_currentIndexChanged(int index)
+{
+    //wyśietlenie produktów jeżeli nazwa nie pusta
 }

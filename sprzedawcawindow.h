@@ -31,6 +31,14 @@ private slots:
 
     void on_pb_anuluj_zamowienie_clicked();
 
+    void on_pb_wydaj_zamowienei_clicked();
+
+    void on_pb_wybierz_klienta_reklamacje_clicked();
+
+    void on_le_nazwa_produktu_reklamacje_textChanged(const QString &arg1);
+
+    void on_comboBox_3_currentIndexChanged(int index);
+
 private:
     Ui::SprzedawcaWindow *ui;
     DataModel* zamowienia_wyszukane;
