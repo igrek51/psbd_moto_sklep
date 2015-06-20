@@ -6,8 +6,8 @@
 
 /* dostawa: status:
  * 0 - anulowana dostawa
- * 1 - nieprzyjęta dostawa (zapotrzebowanie)
- * 2 - niezrealizowana dostawa (zamówiona)
+ * 1 - niezamówiona dostawa (zapotrzebowanie)
+ * 2 - zamówiona, nieodebrana (niezrealizowana)
  * 3 - zrealizowana dostawa
  * */
 
@@ -46,7 +46,7 @@ void MagazynierWindow::tab_dostawy(){
     while(ui->table_1->rowCount()>0){
         ui->table_1->removeRow(0);
     }
-    App::mysql->get_result("SELECT dostawca.nazwa AS 'dostawca', produkt.nazwa AS 'produkt', dostawa.cena_zakupu AS 'cena', dostawa.status AS 'status' FROM ((dostawa LEFT JOIN dostawca USING (id_dostawca)) LEFT JOIN produkt USING (id_produkt)) WHERE dostawa.status = 1 OR dostawa.status = 2 ORDER BY dostawa.data_utworzenia");
+    App::mysql->get_result("SELECT dostawca.nazwa AS 'dostawca', produkt.nazwa AS 'produkt', dostawa.cena_zakupu AS 'cena', dostawa.status AS 'status' FROM ((dostawa LEFT JOIN dostawca USING (id_dostawca)) LEFT JOIN produkt USING (id_produkt)) WHERE dostawa.status = 1 OR dostawa.status = 2 ORDER BY dostawa.status, dostawa.data_utworzenia");
     while(App::mysql->get_row()){
         ui->table_1->insertRow(App::mysql->row_nr);
         //wypełnienie komórek wiersza
@@ -58,7 +58,7 @@ void MagazynierWindow::tab_dostawy(){
         ss<<App::mysql->el("cena")<<" zł";
         item = new QTableWidgetItem(ss.str().c_str());
         ui->table_1->setItem(App::mysql->row_nr, 2, item);
-        string status = App::mysql->eli("status")==1 ? "nieprzyjęta" : "niezrealizowana";
+        string status = App::mysql->eli("status")==1 ? "niezamówiona" : "nieodebrana";
         item = new QTableWidgetItem(status.c_str());
         ui->table_1->setItem(App::mysql->row_nr, 3, item);
     }
