@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat 20. Jun 16:57:52 2015
+** Created: Sat 20. Jun 17:19:01 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -80,6 +80,8 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Logowanie pracownika", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("MainWindow", "Logowanie pracownika", 0, QApplication::UnicodeUTF8));
+        le_haslo->setText(QApplication::translate("MainWindow", "janko", 0, QApplication::UnicodeUTF8));
+        le_pesel->setText(QApplication::translate("MainWindow", "90586985478", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "PESEL:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "Has\305\202o:", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("MainWindow", "Zaloguj", 0, QApplication::UnicodeUTF8));

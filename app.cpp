@@ -24,5 +24,6 @@ void App::message(string m){
     msgBox.exec();
 }
 
+MainWindow* App::mw = NULL;
 MySQL_y* App::mysql = NULL;
 int App::login_id = 0;
