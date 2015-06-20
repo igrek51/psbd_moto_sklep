@@ -18,6 +18,7 @@ public:
     static MainWindow* mw;
 
     static void message(string m);
+    static void ss_clear(stringstream &sstream);
 };
 
 #endif // APP_H

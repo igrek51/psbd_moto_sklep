@@ -116,7 +116,7 @@ int MySQL_y::field_index(string nazwa){
             return i;
         }
     }
-    error("nie znaleziono kolumny o podanej nazwie.");
+    error("nie znaleziono kolumny o podanej nazwie: "+nazwa);
     return -1;
 }
 
@@ -163,4 +163,12 @@ const char* MySQL_y::elc(int index){
 
 const char* MySQL_y::elc(string name){
     return el(name).c_str();
+}
+
+int MySQL_y::eli(int index){
+    return atoi(el(index).c_str());
+}
+
+int MySQL_y::eli(string name){
+    return atoi(el(name).c_str());
 }

@@ -44,9 +44,13 @@ public:
     //weź z wiersza element o podanej nazwie, w przypadku zawartości NULL zwróć ""
     string el(string name);
     //tak jak el(...), ale zwraca char*
-    const char *elc(int index);
+    const char* elc(int index);
     //tak jak el(...), ale zwraca char*
     const char* elc(string name);
+    //tak jak el(...), zwraca int
+    int eli(int index);
+    //tak jak el(...), zwraca int
+    int eli(string name);
 
 
 

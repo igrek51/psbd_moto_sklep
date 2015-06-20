@@ -78,15 +78,14 @@ void MainWindow::zaloguj(){
     }
     App::mysql->get_row();
     this->hide();
-    if(App::mysql->el("id_stanowisko")=="1"){ //menadżer
+    int id_staowisko = App::mysql->eli("id_stanowisko");
+    if(id_staowisko==1){ //menadżer
         menadzerwindow = new MenadzerWindow();
         menadzerwindow->show();
-    }
-    if(App::mysql->el("id_stanowisko")=="2"){ //magazynier
+    }else if(id_staowisko==2){ //magazynier
         magazynierwindow = new MagazynierWindow();
         magazynierwindow->show();
-    }
-    if(App::mysql->el("id_stanowisko")=="3"){ //sprzedawca
+    }else if(id_staowisko==3){ //sprzedawca
         sprzedawcawindow = new SprzedawcaWindow();
         sprzedawcawindow->show();
     }
