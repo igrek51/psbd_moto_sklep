@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include "app.h"
+#include "menadzerwindow.h"
+#include "magazynierwindow.h"
+#include "sprzedawcawindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,8 +19,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void zaloguj();
-
 private slots:
 
     void on_pushButton_clicked();
@@ -30,6 +31,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    void zaloguj();
+
+    MenadzerWindow* menadzerwindow;
+    MagazynierWindow* magazynierwindow;
+    SprzedawcaWindow* sprzedawcawindow;
 
 };
 

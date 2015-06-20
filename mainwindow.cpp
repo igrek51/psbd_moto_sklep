@@ -11,6 +11,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    menadzerwindow = NULL;
+    magazynierwindow = NULL;
+    sprzedawcawindow = NULL;
+
     /*
     mysql->get_result("SELECT * FROM klient ORDER BY id_klient DESC");
     stringstream ss;
@@ -73,7 +77,20 @@ void MainWindow::zaloguj(){
         return;
     }
     App::mysql->get_row();
-    App::message("Zalogowano pomyślnie na stanowisko "+App::mysql->el("id_stanowisko"));
+    this->hide();
+    if(App::mysql->el("id_stanowisko")=="1"){ //menadżer
+        menadzerwindow = new MenadzerWindow();
+        menadzerwindow->show();
+    }
+    if(App::mysql->el("id_stanowisko")=="2"){ //magazynier
+        magazynierwindow = new MagazynierWindow();
+        magazynierwindow->show();
+    }
+    if(App::mysql->el("id_stanowisko")=="3"){ //sprzedawca
+        sprzedawcawindow = new SprzedawcaWindow();
+        sprzedawcawindow->show();
+    }
+    //App::message("Zalogowano pomyślnie na stanowisko "+App::mysql->el("id_stanowisko"));
 }
 
 void MainWindow::on_pushButton_2_clicked()
