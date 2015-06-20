@@ -4,7 +4,7 @@
 
 App::App()
 {
-dupa
+
 }
 
 App::~App()
