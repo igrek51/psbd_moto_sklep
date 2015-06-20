@@ -1,6 +1,7 @@
 #include "app.h"
 #include <QMessageBox>
 #include <QTextCodec>
+#include <sstream>
 
 App::App()
 {
@@ -22,6 +23,11 @@ void App::message(string m){
     QMessageBox msgBox;
     msgBox.setText(m.c_str());
     msgBox.exec();
+}
+
+void App::ss_clear(stringstream &sstream){
+    sstream.str("");
+    sstream.clear();
 }
 
 MainWindow* App::mw = NULL;

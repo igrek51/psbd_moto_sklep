@@ -26,7 +26,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QTableWidget" name="tableWidget_3">
+         <widget class="QTableWidget" name="table_1">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -70,7 +70,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_3">
+             <widget class="QPushButton" name="pb_anuluj">
               <property name="text">
                <string>Anuluj</string>
               </property>
@@ -92,7 +92,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pb_zamowiono">
             <property name="text">
              <string>Zamówiono</string>
             </property>
@@ -121,12 +121,12 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit"/>
+             <widget class="QLineEdit" name="le_numerser"/>
             </item>
            </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="pb_przyjeto">
             <property name="text">
              <string>Przyjęto</string>
             </property>

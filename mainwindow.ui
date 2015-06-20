@@ -36,7 +36,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>janko</string>
+      <string>magazyn</string>
      </property>
      <property name="echoMode">
       <enum>QLineEdit::Password</enum>
