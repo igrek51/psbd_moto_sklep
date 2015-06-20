@@ -11,6 +11,8 @@ public:
     MySQL_y();
     MySQL_y(string host, string username, string password, string database, int port=3306);
     ~MySQL_y();
+    //czy pojawił się błąd
+    bool ok;
     //wyświetl błąd
     void error(string e);
     //połącz z serwerem i wybierz bazę danych
@@ -21,6 +23,8 @@ public:
     //  WYNIK ZAPYTANIA
     //zachowaj wynik zapytania
     bool get_result(string query);
+    //czy wynik zapytania ma dokładnie 1 wiersz
+    bool has1row(string query);
     //liczba rekordów ostatniego zapytania
     int rows();
     //liczba kolumn ostatniego zapytania

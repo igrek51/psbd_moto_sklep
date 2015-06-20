@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sprzedawca.ui'
 **
-** Created: Fri 19. Jun 19:35:18 2015
+** Created: Sat 20. Jun 13:25:40 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -34,7 +34,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_SprzedawcaWindow
 {
 public:
     QWidget *centralWidget;
@@ -528,87 +528,87 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Sprzedawca", 0, QApplication::UnicodeUTF8));
-        pushButton_6->setText(QApplication::translate("MainWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("MainWindow", "Imi\304\231 i nazwisko               ", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("MainWindow", "Status", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("SprzedawcaWindow", "Sprzedawca", 0, QApplication::UnicodeUTF8));
+        pushButton_6->setText(QApplication::translate("SprzedawcaWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("SprzedawcaWindow", "Imi\304\231 i nazwisko               ", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("SprzedawcaWindow", "Status", 0, QApplication::UnicodeUTF8));
         comboBox_2->clear();
         comboBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Wszystkie", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SprzedawcaWindow", "Wszystkie", 0, QApplication::UnicodeUTF8)
         );
-        checkBox->setText(QApplication::translate("MainWindow", "Okres  ", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("MainWindow", "od", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("MainWindow", "do", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("MainWindow", "Zawieraj\304\205ce produkt o nazwie", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("MainWindow", "Zawieraj\304\205ce produkt od producenta", 0, QApplication::UnicodeUTF8));
+        checkBox->setText(QApplication::translate("SprzedawcaWindow", "Okres  ", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("SprzedawcaWindow", "od", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("SprzedawcaWindow", "do", 0, QApplication::UnicodeUTF8));
+        label_14->setText(QApplication::translate("SprzedawcaWindow", "Zawieraj\304\205ce produkt o nazwie", 0, QApplication::UnicodeUTF8));
+        label_15->setText(QApplication::translate("SprzedawcaWindow", "Zawieraj\304\205ce produkt od producenta", 0, QApplication::UnicodeUTF8));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Wszyscy", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SprzedawcaWindow", "Wszyscy", 0, QApplication::UnicodeUTF8)
         );
-        label_17->setText(QApplication::translate("MainWindow", "Zawieraj\304\205ce produkt od dostawcy", 0, QApplication::UnicodeUTF8));
+        label_17->setText(QApplication::translate("SprzedawcaWindow", "Zawieraj\304\205ce produkt od dostawcy", 0, QApplication::UnicodeUTF8));
         comboBox_4->clear();
         comboBox_4->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Wszyscy", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SprzedawcaWindow", "Wszyscy", 0, QApplication::UnicodeUTF8)
         );
-        label_6->setText(QApplication::translate("MainWindow", "Szykaj zam\303\263wie\305\204", 0, QApplication::UnicodeUTF8));
-        pushButton_7->setText(QApplication::translate("MainWindow", "Szukaj", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "Dodaj nowe zam\303\263wienie", 0, QApplication::UnicodeUTF8));
-        pushButton_4->setText(QApplication::translate("MainWindow", "Nowe", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("SprzedawcaWindow", "Szykaj zam\303\263wie\305\204", 0, QApplication::UnicodeUTF8));
+        pushButton_7->setText(QApplication::translate("SprzedawcaWindow", "Szukaj", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("SprzedawcaWindow", "Dodaj nowe zam\303\263wienie", 0, QApplication::UnicodeUTF8));
+        pushButton_4->setText(QApplication::translate("SprzedawcaWindow", "Nowe", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Numer zam\303\263wienia", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QApplication::translate("SprzedawcaWindow", "Numer zam\303\263wienia", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Data z\305\202o\305\274enia", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QApplication::translate("SprzedawcaWindow", "Data z\305\202o\305\274enia", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Imi\304\231", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem2->setText(QApplication::translate("SprzedawcaWindow", "Imi\304\231", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Nazwisko", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem3->setText(QApplication::translate("SprzedawcaWindow", "Nazwisko", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Warto\305\233\304\207 zam\303\263wienia", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem4->setText(QApplication::translate("SprzedawcaWindow", "Warto\305\233\304\207 zam\303\263wienia", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "Status", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Zawarto\305\233\304\207 zam\303\263wienia", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem5->setText(QApplication::translate("SprzedawcaWindow", "Status", 0, QApplication::UnicodeUTF8));
+        groupBox->setTitle(QApplication::translate("SprzedawcaWindow", "Zawarto\305\233\304\207 zam\303\263wienia", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidget_2->horizontalHeaderItem(0);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem6->setText(QApplication::translate("SprzedawcaWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem7 = tableWidget_2->horizontalHeaderItem(1);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "Cena za sztuk\304\231", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("MainWindow", "Edytuj zam\303\263wienie", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("MainWindow", "Edytuj", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MainWindow", "Anuluj zam\303\263wienie", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Anuluj", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("MainWindow", "Wydaj zam\303\263wienie", 0, QApplication::UnicodeUTF8));
-        pushButton_5->setText(QApplication::translate("MainWindow", "Wydaj", 0, QApplication::UnicodeUTF8));
-        tabWidget_2->setTabText(tabWidget_2->indexOf(tabWidget_2Page1), QApplication::translate("MainWindow", "Zam\303\263wienia", 0, QApplication::UnicodeUTF8));
-        pushButton_8->setText(QApplication::translate("MainWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("MainWindow", "Imi\304\231 i nazwisko               ", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "Poka\305\274 sztuki:", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem7->setText(QApplication::translate("SprzedawcaWindow", "Cena za sztuk\304\231", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("SprzedawcaWindow", "Edytuj zam\303\263wienie", 0, QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("SprzedawcaWindow", "Edytuj", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("SprzedawcaWindow", "Anuluj zam\303\263wienie", 0, QApplication::UnicodeUTF8));
+        pushButton_2->setText(QApplication::translate("SprzedawcaWindow", "Anuluj", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("SprzedawcaWindow", "Wydaj zam\303\263wienie", 0, QApplication::UnicodeUTF8));
+        pushButton_5->setText(QApplication::translate("SprzedawcaWindow", "Wydaj", 0, QApplication::UnicodeUTF8));
+        tabWidget_2->setTabText(tabWidget_2->indexOf(tabWidget_2Page1), QApplication::translate("SprzedawcaWindow", "Zam\303\263wienia", 0, QApplication::UnicodeUTF8));
+        pushButton_8->setText(QApplication::translate("SprzedawcaWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("SprzedawcaWindow", "Imi\304\231 i nazwisko               ", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("SprzedawcaWindow", "Poka\305\274 sztuki:", 0, QApplication::UnicodeUTF8));
         comboBox_3->clear();
         comboBox_3->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Niereklamowane", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SprzedawcaWindow", "Niereklamowane", 0, QApplication::UnicodeUTF8)
         );
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget_5->horizontalHeaderItem(0);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem8->setText(QApplication::translate("SprzedawcaWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidget_5->horizontalHeaderItem(1);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "Numer seryjny", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem9->setText(QApplication::translate("SprzedawcaWindow", "Numer seryjny", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem10 = tableWidget_5->horizontalHeaderItem(2);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "Data wydania", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem10->setText(QApplication::translate("SprzedawcaWindow", "Data wydania", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem11 = tableWidget_5->horizontalHeaderItem(3);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "Cena sprzeda\305\274y", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem11->setText(QApplication::translate("SprzedawcaWindow", "Cena sprzeda\305\274y", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem12 = tableWidget_5->horizontalHeaderItem(4);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "Status reklamacji", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("MainWindow", "Wynik reklamacji", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem12->setText(QApplication::translate("SprzedawcaWindow", "Status reklamacji", 0, QApplication::UnicodeUTF8));
+        label_13->setText(QApplication::translate("SprzedawcaWindow", "Wynik reklamacji", 0, QApplication::UnicodeUTF8));
         comboBox_5->clear();
         comboBox_5->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "Pozytywny - Zwrot pieni\304\231dzy", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("SprzedawcaWindow", "Pozytywny - Zwrot pieni\304\231dzy", 0, QApplication::UnicodeUTF8)
         );
-        label->setText(QApplication::translate("MainWindow", "Przyjmij reklamacj\304\231", 0, QApplication::UnicodeUTF8));
-        pushButton_14->setText(QApplication::translate("MainWindow", "Przyjmij", 0, QApplication::UnicodeUTF8));
-        tabWidget_2->setTabText(tabWidget_2->indexOf(tab), QApplication::translate("MainWindow", "Reklamacje", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("SprzedawcaWindow", "Przyjmij reklamacj\304\231", 0, QApplication::UnicodeUTF8));
+        pushButton_14->setText(QApplication::translate("SprzedawcaWindow", "Przyjmij", 0, QApplication::UnicodeUTF8));
+        tabWidget_2->setTabText(tabWidget_2->indexOf(tab), QApplication::translate("SprzedawcaWindow", "Reklamacje", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class SprzedawcaWindow: public Ui_SprzedawcaWindow {};
 } // namespace Ui
 
 QT_END_NAMESPACE

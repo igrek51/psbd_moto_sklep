@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sprzedawca_klient.ui'
 **
-** Created: Fri 19. Jun 19:35:18 2015
+** Created: Sat 20. Jun 13:25:40 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -27,7 +27,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_SprzedawcaKlientWindow
 {
 public:
     QWidget *centralWidget;
@@ -280,26 +280,26 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Wyb\303\263r klienta", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("MainWindow", "Imi\304\231:", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("MainWindow", "Nazwisko", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("SprzedawcaKlientWindow", "Wyb\303\263r klienta", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("SprzedawcaKlientWindow", "Imi\304\231:", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("SprzedawcaKlientWindow", "Nazwisko", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_4->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Imi\304\231", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QApplication::translate("SprzedawcaKlientWindow", "Imi\304\231", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_4->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Nazwisko", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("MainWindow", "Ulica", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("MainWindow", "Nr", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("MainWindow", "Kod pocztowy", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("MainWindow", "Miasto:", 0, QApplication::UnicodeUTF8));
-        label_16->setText(QApplication::translate("MainWindow", "Telefon", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
-        pushButton_3->setText(QApplication::translate("MainWindow", "Dodaj klienta", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QApplication::translate("SprzedawcaKlientWindow", "Nazwisko", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("SprzedawcaKlientWindow", "Ulica", 0, QApplication::UnicodeUTF8));
+        label_13->setText(QApplication::translate("SprzedawcaKlientWindow", "Nr", 0, QApplication::UnicodeUTF8));
+        label_14->setText(QApplication::translate("SprzedawcaKlientWindow", "Kod pocztowy", 0, QApplication::UnicodeUTF8));
+        label_15->setText(QApplication::translate("SprzedawcaKlientWindow", "Miasto:", 0, QApplication::UnicodeUTF8));
+        label_16->setText(QApplication::translate("SprzedawcaKlientWindow", "Telefon", 0, QApplication::UnicodeUTF8));
+        pushButton_2->setText(QApplication::translate("SprzedawcaKlientWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
+        pushButton_3->setText(QApplication::translate("SprzedawcaKlientWindow", "Dodaj klienta", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class SprzedawcaKlientWindow: public Ui_SprzedawcaKlientWindow {};
 } // namespace Ui
 
 QT_END_NAMESPACE

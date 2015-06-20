@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'magazynier_wprowadz.ui'
 **
-** Created: Fri 19. Jun 19:35:18 2015
+** Created: Sat 20. Jun 13:25:40 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -27,7 +27,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_MagazynierWprowadzWindow
 {
 public:
     QWidget *centralWidget;
@@ -186,27 +186,27 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Wprowad\305\272", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MainWindow", "Nazwa produktu:", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "Opis:", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "Parametry techniczne:", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("MainWindow", "Dostawca:", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("MainWindow", "Data zam\303\263wienia:", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("MainWindow", "Data dostarczenia:", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("MainWindow", "Cena zakupu:", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("MainWindow", "Okres gwarancyjny:", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MagazynierWprowadzWindow", "Wprowad\305\272", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("MagazynierWprowadzWindow", "Nazwa produktu:", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("MagazynierWprowadzWindow", "Opis:", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("MagazynierWprowadzWindow", "Parametry techniczne:", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("MagazynierWprowadzWindow", "Dostawca:", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("MagazynierWprowadzWindow", "Data zam\303\263wienia:", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("MagazynierWprowadzWindow", "Data dostarczenia:", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("MagazynierWprowadzWindow", "Cena zakupu:", 0, QApplication::UnicodeUTF8));
+        label_13->setText(QApplication::translate("MagazynierWprowadzWindow", "Okres gwarancyjny:", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Nr sztuki", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QApplication::translate("MagazynierWprowadzWindow", "Nr sztuki", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Numer seryjny", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("MainWindow", "Wprowad\305\272", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Anuluj", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QApplication::translate("MagazynierWprowadzWindow", "Numer seryjny", 0, QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("MagazynierWprowadzWindow", "Wprowad\305\272", 0, QApplication::UnicodeUTF8));
+        pushButton_2->setText(QApplication::translate("MagazynierWprowadzWindow", "Anuluj", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class MagazynierWprowadzWindow: public Ui_MagazynierWprowadzWindow {};
 } // namespace Ui
 
 QT_END_NAMESPACE

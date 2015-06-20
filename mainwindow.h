@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "mysql_y.h"
+#include "app.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,7 +16,17 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    MySQL_y *mysql;
+    void zaloguj();
+
+private slots:
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_le_haslo_returnPressed();
+
+    void on_le_pesel_returnPressed();
 
 private:
     Ui::MainWindow *ui;

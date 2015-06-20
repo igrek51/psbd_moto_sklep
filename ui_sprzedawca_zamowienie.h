@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sprzedawca_zamowienie.ui'
 **
-** Created: Fri 19. Jun 19:35:18 2015
+** Created: Sat 20. Jun 13:25:40 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -31,7 +31,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_SprzedawcaZamowienieWindow
 {
 public:
     QWidget *centralWidget;
@@ -532,48 +532,48 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Edycja zam\303\263wienia", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "Kategoria produktu", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "Samoch\303\263d", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("MainWindow", "Marka", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("MainWindow", "Model", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("MainWindow", "Rocznik", 0, QApplication::UnicodeUTF8));
-        label_16->setText(QApplication::translate("MainWindow", "Nadwozie", 0, QApplication::UnicodeUTF8));
-        label_18->setText(QApplication::translate("MainWindow", "Silnik", 0, QApplication::UnicodeUTF8));
-        label_19->setText(QApplication::translate("MainWindow", "Skrzynia bieg\303\263w", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("MainWindow", "Wersja", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("MainWindow", "Szukaj:", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("SprzedawcaZamowienieWindow", "Edycja zam\303\263wienia", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Kategoria produktu", 0, QApplication::UnicodeUTF8));
+        groupBox_2->setTitle(QApplication::translate("SprzedawcaZamowienieWindow", "Samoch\303\263d", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Marka", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Model", 0, QApplication::UnicodeUTF8));
+        label_15->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Rocznik", 0, QApplication::UnicodeUTF8));
+        label_16->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Nadwozie", 0, QApplication::UnicodeUTF8));
+        label_18->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Silnik", 0, QApplication::UnicodeUTF8));
+        label_19->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Skrzynia bieg\303\263w", 0, QApplication::UnicodeUTF8));
+        label_13->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Wersja", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Szukaj:", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_2->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QString());
-        label_3->setText(QApplication::translate("MainWindow", "Nazwa produktu:", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "Opis:", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "Parametry techniczne:", 0, QApplication::UnicodeUTF8));
-        label_17->setText(QApplication::translate("MainWindow", "Ilo\305\233\304\207:", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("MainWindow", "Dost\304\231pny w magazynie:", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("MainWindow", "Dost\304\231pny", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("MainWindow", "Dostawca:", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("MainWindow", "Cena:", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("MainWindow", "Czas dostawy:", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("MainWindow", "Dodaj produkt", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Nazwa produktu:", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Opis:", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Parametry techniczne:", 0, QApplication::UnicodeUTF8));
+        label_17->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Ilo\305\233\304\207:", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Dost\304\231pny w magazynie:", 0, QApplication::UnicodeUTF8));
+        label_14->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Dost\304\231pny", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Dostawca:", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Cena:", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Czas dostawy:", 0, QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Dodaj produkt", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_3->horizontalHeaderItem(0);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Nazwa produktu", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget_3->horizontalHeaderItem(1);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Cena za sztuk\304\231", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem2->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Cena za sztuk\304\231", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_3->horizontalHeaderItem(2);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Czas dostawy", 0, QApplication::UnicodeUTF8));
-        pushButton_7->setText(QApplication::translate("MainWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
-        label_21->setText(QApplication::translate("MainWindow", "Imi\304\231 i nazwisko               ", 0, QApplication::UnicodeUTF8));
-        label_20->setText(QApplication::translate("MainWindow", "Usu\305\204 zaznaczony produkt", 0, QApplication::UnicodeUTF8));
-        pushButton_6->setText(QApplication::translate("MainWindow", "Usu\305\204", 0, QApplication::UnicodeUTF8));
-        pushButton_3->setText(QApplication::translate("MainWindow", "Zatwierd\305\272", 0, QApplication::UnicodeUTF8));
-        pushButton_4->setText(QApplication::translate("MainWindow", "Anuluj", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem3->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Czas dostawy", 0, QApplication::UnicodeUTF8));
+        pushButton_7->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Wybierz klienta", 0, QApplication::UnicodeUTF8));
+        label_21->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Imi\304\231 i nazwisko               ", 0, QApplication::UnicodeUTF8));
+        label_20->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Usu\305\204 zaznaczony produkt", 0, QApplication::UnicodeUTF8));
+        pushButton_6->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Usu\305\204", 0, QApplication::UnicodeUTF8));
+        pushButton_3->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Zatwierd\305\272", 0, QApplication::UnicodeUTF8));
+        pushButton_4->setText(QApplication::translate("SprzedawcaZamowienieWindow", "Anuluj", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class SprzedawcaZamowienieWindow: public Ui_SprzedawcaZamowienieWindow {};
 } // namespace Ui
 
 QT_END_NAMESPACE

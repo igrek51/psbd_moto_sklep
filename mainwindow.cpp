@@ -10,10 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-
-    mysql = new MySQL_y();
-    mysql->connect("localhost", "user1", "haslo1", "psbd");
 
     /*
     mysql->get_result("SELECT * FROM klient ORDER BY id_klient DESC");
@@ -29,14 +25,74 @@ MainWindow::MainWindow(QWidget *parent) :
         ss<<endl;
     }
     */
-    mysql->get_result("SELECT nazwa FROM stanowisko ORDER BY id_stanowisko");
-    while(mysql->get_row()){
-        ui->stanowisko_combo->addItem(mysql->elc("nazwa"));
+    /*
+    App::mysql->get_result("SELECT nazwa FROM stanowisko ORDER BY id_stanowisko");
+    while(App::mysql->get_row()){
+        ui->stanowisko_combo->addItem(App::mysql->elc("nazwa"));
     }
+    */
+    ui->le_pesel->setFocus();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete mysql;
+    delete App::mysql;
 }
+
+void MainWindow::on_le_haslo_returnPressed()
+{
+    zaloguj();
+}
+
+void MainWindow::on_le_pesel_returnPressed()
+{
+    zaloguj();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    zaloguj();
+}
+
+void MainWindow::zaloguj(){
+    string pesel = ui->le_pesel->text().toStdString();
+    string haslo = ui->le_haslo->text().toStdString();
+    if(pesel.length()!=11){
+        App::message("Nieprawidłowy numer PESEL");
+        return;
+    }
+    if(haslo.length()==0){
+        App::message("Wprowadź hasło");
+        return;
+    }
+    App::mysql->get_result("SELECT id_pracownik, id_stanowisko FROM pracownik WHERE pesel = '"+pesel+"' AND haslo = MD5('"+haslo+"')");
+    if(App::mysql->rows()==0){
+        App::message("Nieprawidłowy PESEL lub hasło");
+        return;
+    }
+    App::mysql->get_row();
+    App::message("Zalogowano pomyślnie na stanowisko "+App::mysql->el("id_stanowisko"));
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    string pesel = ui->le_pesel->text().toStdString();
+    if(pesel.length()!=11){
+        App::message("Nieprawidłowy numer PESEL");
+        return;
+    }
+    App::mysql->get_result("SELECT id_pracownik, e_mail FROM pracownik WHERE pesel = '"+pesel+"'");
+    if(App::mysql->rows()==0){
+        App::message("Nie znaleziono pracownika o podanym numerze PESEL.");
+        return;
+    }
+    App::mysql->get_row();
+    string mail = App::mysql->el("e_mail");
+    /*
+    wysyłanie nowego hasłoa na maila
+    */
+    App::message("Nowe hasło zostało wysłane na maila:\r\n"+mail);
+}
+
+

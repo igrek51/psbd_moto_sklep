@@ -7,10 +7,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    mysql_y.cpp
+    mysql_y.cpp \
+    app.cpp
 
 HEADERS  += mainwindow.h \
-    mysql_y.h
+    mysql_y.h \
+    app.h
 
 FORMS    += mainwindow.ui\
 		magazynier.ui\
