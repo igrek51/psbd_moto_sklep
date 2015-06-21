@@ -11,14 +11,16 @@ SOURCES += main.cpp\
     app.cpp \
     magazynierwindow.cpp \
     sprzedawcawindow.cpp \
-    menadzerwindow.cpp
+    menadzerwindow.cpp \
+    datamodel.cpp
 
 HEADERS  += mainwindow.h \
     mysql_y.h \
     app.h \
     magazynierwindow.h \
     sprzedawcawindow.h \
-    menadzerwindow.h
+    menadzerwindow.h \
+    datamodel.h
 
 FORMS    += mainwindow.ui\
 		magazynier.ui\

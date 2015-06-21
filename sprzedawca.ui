@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>SprzedawcaWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <widget class="QMainWindow" name="SprzedawcaWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget_2">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabWidget_2Page1">
        <attribute name="title">
@@ -32,14 +32,14 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QPushButton" name="pushButton_6">
+               <widget class="QPushButton" name="pb_wybierz_klienta">
                 <property name="text">
                  <string>Wybierz klienta</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_9">
+               <widget class="QLabel" name="l_klient">
                 <property name="text">
                  <string>Imię i nazwisko               </string>
                 </property>
@@ -57,7 +57,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_2">
+               <widget class="QComboBox" name="cb_statusy_zamowien">
                 <property name="minimumSize">
                  <size>
                   <width>150</width>
@@ -95,7 +95,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <widget class="QCheckBox" name="checkBox">
+             <widget class="QCheckBox" name="cb_czy_okres">
               <property name="text">
                <string>Okres  </string>
               </property>
@@ -112,7 +112,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="dateEdit"/>
+             <widget class="QDateEdit" name="de_poczatek"/>
             </item>
             <item>
              <widget class="QLabel" name="label_12">
@@ -122,7 +122,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="dateEdit_2">
+             <widget class="QDateEdit" name="de_koniec">
               <property name="date">
                <date>
                 <year>2015</year>
@@ -161,7 +161,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit"/>
+             <widget class="QLineEdit" name="le_nazwa_produktu"/>
             </item>
            </layout>
           </item>
@@ -192,7 +192,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox">
+             <widget class="QComboBox" name="cb_producent">
               <item>
                <property name="text">
                 <string>Wszyscy</string>
@@ -212,7 +212,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_4">
+             <widget class="QComboBox" name="cb_dostawca">
               <item>
                <property name="text">
                 <string>Wszyscy</string>
@@ -231,12 +231,12 @@
             <item>
              <widget class="QLabel" name="label_6">
               <property name="text">
-               <string>Szykaj zamówień</string>
+               <string>Szykaj pasujących zamówień</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_7">
+             <widget class="QPushButton" name="pb_szukaj">
               <property name="text">
                <string>Szukaj</string>
               </property>
@@ -245,60 +245,25 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>Dodaj nowe zamówienie</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_4">
-              <property name="text">
-               <string>Nowe</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>37</width>
+              <height>17</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidget">
-          <attribute name="horizontalHeaderStretchLastSection">
+         <widget class="QTableView" name="tv_zamowienia_wyszukane">
+          <attribute name="verticalHeaderCascadingSectionResizes">
            <bool>true</bool>
           </attribute>
-          <column>
-           <property name="text">
-            <string>Numer zamówienia</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Data złożenia</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Imię</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Nazwisko</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Wartość zamówienia</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </column>
          </widget>
         </item>
         <item>
@@ -308,20 +273,10 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
-            <widget class="QTableWidget" name="tableWidget_2">
-             <attribute name="horizontalHeaderStretchLastSection">
+            <widget class="QTableView" name="tv_zawartosc_zamowienia">
+             <attribute name="verticalHeaderCascadingSectionResizes">
               <bool>true</bool>
              </attribute>
-             <column>
-              <property name="text">
-               <string>Nazwa produktu</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Cena za sztukę</string>
-              </property>
-             </column>
             </widget>
            </item>
            <item>
@@ -329,6 +284,24 @@
              <property name="spacing">
               <number>15</number>
              </property>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>Nowe zamówienie:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pb_nowe_zamowienie">
+                 <property name="text">
+                  <string>Nowe</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item>
               <spacer name="horizontalSpacer_7">
                <property name="orientation">
@@ -352,7 +325,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton">
+                <widget class="QPushButton" name="pb_edytuj_zamowienie">
                  <property name="text">
                   <string>Edytuj</string>
                  </property>
@@ -370,7 +343,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_2">
+                <widget class="QPushButton" name="pb_anuluj_zamowienie">
                  <property name="text">
                   <string>Anuluj</string>
                  </property>
@@ -388,7 +361,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_5">
+                <widget class="QPushButton" name="pb_wydaj_zamowienei">
                  <property name="text">
                   <string>Wydaj</string>
                  </property>
@@ -411,14 +384,14 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QPushButton" name="pushButton_8">
+           <widget class="QPushButton" name="pb_wybierz_klienta_reklamacje">
             <property name="text">
              <string>Wybierz klienta</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="l_klient_reklamacje">
             <property name="text">
              <string>Imię i nazwisko               </string>
             </property>
@@ -436,6 +409,16 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Nazwa produktu:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="le_nazwa_produktu_reklamacje"/>
           </item>
           <item>
            <widget class="QLabel" name="label_4">
@@ -462,33 +445,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidget_5">
-          <column>
-           <property name="text">
-            <string>Nazwa produktu</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Numer seryjny</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Data wydania</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Cena sprzedaży</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Status reklamacji</string>
-           </property>
-          </column>
-         </widget>
+         <widget class="QTableView" name="tv_reklamacje"/>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -500,7 +457,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_5">
+           <widget class="QComboBox" name="cb_wynik_reklamacji">
             <property name="minimumSize">
              <size>
               <width>206</width>
@@ -535,7 +492,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_14">
+           <widget class="QPushButton" name="pb_przyjmij_reklamacje">
             <property name="text">
              <string>Przyjmij</string>
             </property>
@@ -555,7 +512,7 @@
      <x>0</x>
      <y>0</y>
      <width>785</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
