@@ -3,6 +3,7 @@
 
 #include "mysql_y.h"
 #include "mainwindow.h"
+#include <ctime>
 
 class MainWindow;
 
@@ -18,6 +19,7 @@ public:
     static MainWindow* mw;
 
     static void message(string m);
+    static void message(int i);
     //czyszczenie strumienia
     static void ss_clear(stringstream &sstream);
     //int to string

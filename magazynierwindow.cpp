@@ -123,22 +123,42 @@ void MagazynierWindow::on_pb_przyjeto_clicked()
     float cena_sprzedazy = atof(App::mysql->elc("cena_sprzedazy"));
     if(!App::mysql->ok) return;
     //szukaj id_faktury
+    int id_faktura = 0;
     App::mysql->get_result("SELECT faktura.id_faktura FROM ((dostawa INNER JOIN zamowienie USING(id_zamowienie)) INNER JOIN faktura USING(id_zamowienie)) WHERE dostawa.id_dostawa = '"+App::itos(dostawa_id)+"'");
-    if(App::mysql->rows()==0){
-        App::message("Brak faktury odpowiadającej dostawie.");
-        return;
+    if(App::mysql->rows()>0){
+        App::mysql->get_row();
+        id_faktura = App::mysql->eli("id_faktura");
     }
-    App::mysql->get_row();
-    int id_faktura = App::mysql->eli("id_faktura");
     //zmień status dostawy
     App::mysql->exec("UPDATE dostawa SET status = 3 WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
     if(!App::mysql->ok) return;
-    //dodaj nową sztukę do bazy
+    //zmień datę realizacji
     stringstream ss;
-    ss<<"INSERT INTO sztuka (id_sztuka, status, numer_seryjny, cena_sprzedazy, id_dostawa, id_faktura) VALUES (NULL, '1', '"<<numer_ser<<"', '"<<cena_sprzedazy<<"', '"<<dostawa_id<<"', '"<<id_faktura<<"')";
+    ss<<"UPDATE dostawa SET data_realizacji = from_unixtime("<<time(0)<<") WHERE id_dostawa = '"<<dostawa_id<<"'";
+    App::mysql->exec(ss.str());
+    if(!App::mysql->ok) return;
+    //dodaj nową sztukę do bazy
+    App::ss_clear(ss);
+    ss<<"INSERT INTO sztuka (id_sztuka, status, numer_seryjny, cena_sprzedazy, id_dostawa, id_faktura) VALUES (NULL, '1', '"<<numer_ser<<"', '"<<cena_sprzedazy<<"', '"<<dostawa_id<<"', ";
+    if(id_faktura==0) ss<<"NULL";
+    else ss<<"'"<<id_faktura<<"'";
+    ss<<")";
     App::mysql->exec(ss.str());
     //odświeżenie tabelki
-    tab_dostawy();
     if(!App::mysql->ok) return;
+    tab_dostawy();
     App::message("Dostawa została przyjęta. Utworzono nową sztukę.");
+}
+
+void MagazynierWindow::on_pb_anuluj_clicked()
+{
+    int dostawa_id = get_tab_dostawy_id();
+    if(dostawa_id==-1){
+        App::message("Nie wybrano żadnej dostawy.");
+        return;
+    }
+    App::mysql->exec("UPDATE dostawa SET status = 0 WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
+    if(!App::mysql->ok) return;
+    tab_dostawy();
+    App::message("Dostawa została anulowana.");
 }

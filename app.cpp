@@ -25,6 +25,10 @@ void App::message(string m){
     msgBox.exec();
 }
 
+void App::message(int i){
+    message(itos(i));
+}
+
 void App::ss_clear(stringstream &sstream){
     sstream.str("");
     sstream.clear();
