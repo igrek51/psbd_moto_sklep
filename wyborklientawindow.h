@@ -16,6 +16,9 @@ public:
     explicit WyborKlientaWindow(QWidget *parent = 0);
     ~WyborKlientaWindow();
 
+    //dane klienta: imie, nazwisko, adres, pesel, telefon, e_mail, id_klient
+    QVector<QString> dane_klienta;
+
 private slots:
 
     void on_pb_wybierz_clicked();

@@ -41,6 +41,8 @@ private slots:
     void on_comboBox_3_currentIndexChanged(int index);
 
 private:
+    QVector<QString> dane_klienta;
+
     Ui::SprzedawcaWindow *ui;
     DataModel* zamowienia_wyszukane;
     DataModel* zawartosc_zamowienia;

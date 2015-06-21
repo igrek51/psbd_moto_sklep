@@ -56,6 +56,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
        <attribute name="verticalHeaderCascadingSectionResizes">
         <bool>true</bool>
        </attribute>

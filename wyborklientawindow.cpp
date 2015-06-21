@@ -10,7 +10,7 @@ WyborKlientaWindow::WyborKlientaWindow(QWidget *parent) :
 
     znalezieni_klienci = new DataModel;
     znalezieni_klienci->header << "Imie" << "Nazwisko" << "Adres" << "PESEL" << "Telefon" << "E-mail";
-    znalezieni_klienci->column_count = 2;
+    znalezieni_klienci->column_count = znalezieni_klienci->header.size();
     ui->tv_klienci->setModel(znalezieni_klienci);
     //dopasowanie kolumn do wersji qt +5.2
 //    ui->tv_klienci->horizontalHeader()->setResizeContentsPrecision(QHeaderView::ResizeToContents);
@@ -23,7 +23,13 @@ WyborKlientaWindow::~WyborKlientaWindow()
 
 void WyborKlientaWindow::on_pb_wybierz_clicked()
 {
+    dane_klienta.clear();
     //wybranie klienta i zamknięcie dialogu
+    QModelIndexList indexes = ui->tv_klienci->selectionModel()->selection().indexes();
+    if(!indexes.isEmpty())
+        dane_klienta = znalezieni_klienci->current_data.at(indexes.at(0).row());
+
+    accept();
 }
 
 void WyborKlientaWindow::on_pb_dodaj_clicked()
@@ -50,7 +56,7 @@ void WyborKlientaWindow::szukajKlientow()
         znalezieni_klienci->clear();
     else
     {
-        query = "SELECT klient.imie, klient.nazwisko, klient.adres, klient.pesel, klient.telefon, klient.e_mail"
+        query = "SELECT klient.imie, klient.nazwisko, klient.adres, klient.pesel, klient.telefon, klient.e_mail, klient.id_klient "
                 "FROM klient WHERE klient.imie LIKE \'%" + imie + "%\' AND klient.nazwisko LIKE \'%" + nazwisko + "%\'";
         znalezieni_klienci->getDataFromDB(query);
     }
