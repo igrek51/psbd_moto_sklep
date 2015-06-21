@@ -49,6 +49,10 @@ bool MySQL_y::exec(string query){
         error("Brak połączenia z bazą danych");
         return false;
     }
+    if(!ok){
+        error("Z powodu poprzednich błędów zapytanie nie zostało wykonane.");
+        return false;
+    }
     if(mysql_query(&mysql, query.c_str())!=0){
         stringstream ss;
         ss<<"Błąd wykonania zapytania:\r\n"<<query;
