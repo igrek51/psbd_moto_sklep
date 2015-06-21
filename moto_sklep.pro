@@ -28,7 +28,8 @@ FORMS    += mainwindow.ui\
 		magazynier.ui\
 		menadzer.ui\
 		sprzedawca.ui\
-    wybor_klienta.ui
+    wybor_klienta.ui \
+    sprzedawca_zamowienie.ui
 
 
 LIBS += -Lmysql_lib -llibmysql
