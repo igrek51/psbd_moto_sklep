@@ -11,7 +11,9 @@ class DataModel : public QAbstractItemModel
 public:
     DataModel();
 
-    void getData(std::string query);
+    void getDataFromDB(std::string query);
+    void getDataFromDB(QString query);
+    void clear();
 
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;

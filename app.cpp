@@ -14,7 +14,7 @@ App::~App()
 }
 
 void App::init(){
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+//    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
     mysql = new MySQL_y();
     mysql->connect("y", "user1", "haslo1", "psbd");
 }
