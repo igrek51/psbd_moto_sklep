@@ -8,7 +8,7 @@
  * 0 - anulowana dostawa
  * 1 - niezamówiona dostawa (zapotrzebowanie)
  * 2 - zamówiona, nieodebrana (niezrealizowana)
- * 3 - zrealizowana dostawa
+ * 3 - zrealizowana dostawa (odebrana)
  * */
 
 MagazynierWindow::MagazynierWindow(QWidget *parent) :
@@ -95,6 +95,50 @@ void MagazynierWindow::on_pb_przyjeto_clicked()
         return;
     }
     //sprawdz, czy dostawa ma status 2 - zamówiona, nieodebrana (niezrealizowana)
-    App::mysql->get_result("SELECT dostawa.status FROM dostawa WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
-
+    App::mysql->get_result("SELECT status FROM dostawa WHERE id_dostawa = '"+App::itos(dostawa_id)+"' AND status = 2");
+    if(App::mysql->rows()==0){
+        App::message("Wybrana dostawa powinna mieć status: nieodebrana.");
+        return;
+    }
+    string numer_ser = ui->le_numerser->text().toLower().toStdString();
+    //sprawdzenie nieprawidlowych znakow
+    bool nieprawidlowy = false;
+    for(unsigned int i=0; i<numer_ser.length(); i++){
+        if(!((numer_ser[i]>='a'&&numer_ser[i]<='z')||(numer_ser[i]>='0'&&numer_ser[i]<='9'))){
+            nieprawidlowy = true;
+            break;
+        }
+    }
+    if(nieprawidlowy){
+        App::message("Numer seryjny zawiera nieprawidłowe znaki");
+        return;
+    }
+    //szukaj ceny sprzedaży z dostępności dostawy
+    App::mysql->get_result("SELECT dostepnosc_dostawy.cena_sprzedazy AS cena_sprzedazy FROM (dostawa INNER JOIN dostepnosc_dostawy USING (id_produkt, id_dostawca)) WHERE dostawa.id_dostawa = '"+App::itos(dostawa_id)+"'");
+    if(App::mysql->rows()==0){
+        App::message("Nie można wyznaczyć ceny sprzedaży, brak odpowiedniej dostępności dostawy.");
+        return;
+    }
+    App::mysql->get_row();
+    float cena_sprzedazy = atof(App::mysql->elc("cena_sprzedazy"));
+    if(!App::mysql->ok) return;
+    //szukaj id_faktury
+    App::mysql->get_result("SELECT faktura.id_faktura FROM ((dostawa INNER JOIN zamowienie USING(id_zamowienie)) INNER JOIN faktura USING(id_zamowienie)) WHERE dostawa.id_dostawa = '"+App::itos(dostawa_id)+"'");
+    if(App::mysql->rows()==0){
+        App::message("Brak faktury odpowiadającej dostawie.");
+        return;
+    }
+    App::mysql->get_row();
+    int id_faktura = App::mysql->eli("id_faktura");
+    //zmień status dostawy
+    App::mysql->exec("UPDATE dostawa SET status = 3 WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
+    if(!App::mysql->ok) return;
+    //dodaj nową sztukę do bazy
+    stringstream ss;
+    ss<<"INSERT INTO sztuka (id_sztuka, status, numer_seryjny, cena_sprzedazy, id_dostawa, id_faktura) VALUES (NULL, '1', '"<<numer_ser<<"', '"<<cena_sprzedazy<<"', '"<<dostawa_id<<"', '"<<id_faktura<<"')";
+    App::mysql->exec(ss.str());
+    //odświeżenie tabelki
+    tab_dostawy();
+    if(!App::mysql->ok) return;
+    App::message("Dostawa została przyjęta. Utworzono nową sztukę.");
 }
