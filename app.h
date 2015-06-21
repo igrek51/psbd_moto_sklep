@@ -18,7 +18,10 @@ public:
     static MainWindow* mw;
 
     static void message(string m);
+    //czyszczenie strumienia
     static void ss_clear(stringstream &sstream);
+    //int to string
+    static string itos(int i);
 };
 
 #endif // APP_H

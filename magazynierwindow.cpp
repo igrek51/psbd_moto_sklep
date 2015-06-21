@@ -94,5 +94,7 @@ void MagazynierWindow::on_pb_przyjeto_clicked()
         App::message("Nie wybrano żadnej dostawy.");
         return;
     }
+    //sprawdz, czy dostawa ma status 2 - zamówiona, nieodebrana (niezrealizowana)
+    App::mysql->get_result("SELECT dostawa.status FROM dostawa WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
 
 }

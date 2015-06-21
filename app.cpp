@@ -30,6 +30,12 @@ void App::ss_clear(stringstream &sstream){
     sstream.clear();
 }
 
+string App::itos(int i){
+    stringstream ss;
+    ss<<i;
+    return ss.str();
+}
+
 MainWindow* App::mw = NULL;
 MySQL_y* App::mysql = NULL;
 int App::login_id = 0;
