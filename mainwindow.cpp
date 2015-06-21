@@ -14,29 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     menadzerwindow = NULL;
     magazynierwindow = NULL;
     sprzedawcawindow = NULL;
-
-    /*
-    mysql->get_result("SELECT * FROM klient ORDER BY id_klient DESC");
-    stringstream ss;
-    ss<<"liczba wierszy: "<<mysql->rows()<<endl;
-    ss<<"liczba kolumn: "<<mysql->fields()<<endl;
-    while(mysql->get_row()){
-        ss<<"wiersz "<<mysql->row_nr<<": ";
-        for(int i=0; i<mysql->fields(); i++){
-            ss<<mysql->el(i)<<", ";
-        }
-        ss<<mysql->row_nr+1<<". "<<mysql->el("imie")<<" "<<mysql->el("nazwisko")<<endl;
-        ss<<endl;
-    }
-    */
-    /*
-    App::mysql->get_result("SELECT nazwa FROM stanowisko ORDER BY id_stanowisko");
-    while(App::mysql->get_row()){
-        ui->stanowisko_combo->addItem(App::mysql->elc("nazwa"));
-    }
-    */
     ui->le_pesel->setFocus();
-//    ui->le_pesel->
 }
 
 MainWindow::~MainWindow()
@@ -78,14 +56,16 @@ void MainWindow::zaloguj(){
     }
     App::mysql->get_row();
     this->hide();
-    int id_staowisko = App::mysql->eli("id_stanowisko");
-    if(id_staowisko==1){ //menadżer
+    int id_stanowisko = App::mysql->eli("id_stanowisko");
+    //id zalogowanego pracownika
+    App::login_id = App::mysql->eli("id_pracownik");
+    if(id_stanowisko==1){ //menadżer
         menadzerwindow = new MenadzerWindow();
         menadzerwindow->show();
-    }else if(id_staowisko==2){ //magazynier
+    }else if(id_stanowisko==2){ //magazynier
         magazynierwindow = new MagazynierWindow();
         magazynierwindow->show();
-    }else if(id_staowisko==3){ //sprzedawca
+    }else if(id_stanowisko==3){ //sprzedawca
         sprzedawcawindow = new SprzedawcaWindow();
         sprzedawcawindow->show();
     }

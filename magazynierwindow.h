@@ -28,6 +28,8 @@ private slots:
 
     void on_pb_anuluj_clicked();
 
+    void on_pb_zamowiono_clicked();
+
 private:
     Ui::MagazynierWindow *ui;
 

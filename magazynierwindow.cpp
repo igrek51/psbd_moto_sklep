@@ -144,10 +144,13 @@ void MagazynierWindow::on_pb_przyjeto_clicked()
     else ss<<"'"<<id_faktura<<"'";
     ss<<")";
     App::mysql->exec(ss.str());
+    //zapisanie pracownika, który wprowadził ostatnią zmianę
+    App::mysql->exec("UPDATE dostawa SET id_pracownik = '"+App::itos(App::login_id)+"' WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
+    if(!App::mysql->ok) return;
     //odświeżenie tabelki
     if(!App::mysql->ok) return;
     tab_dostawy();
-    App::message("Dostawa została przyjęta. Utworzono nową sztukę.");
+    App::message("Dostawa została przyjęta (zrealizowana). Utworzono nową sztukę.");
 }
 
 void MagazynierWindow::on_pb_anuluj_clicked()
@@ -159,6 +162,32 @@ void MagazynierWindow::on_pb_anuluj_clicked()
     }
     App::mysql->exec("UPDATE dostawa SET status = 0 WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
     if(!App::mysql->ok) return;
+    //zapisanie pracownika, który wprowadził ostatnią zmianę
+    App::mysql->exec("UPDATE dostawa SET id_pracownik = '"+App::itos(App::login_id)+"' WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
+    if(!App::mysql->ok) return;
     tab_dostawy();
     App::message("Dostawa została anulowana.");
+}
+
+void MagazynierWindow::on_pb_zamowiono_clicked()
+{
+    int dostawa_id = get_tab_dostawy_id();
+    if(dostawa_id==-1){
+        App::message("Nie wybrano żadnej dostawy.");
+        return;
+    }
+    //sprawdz, czy dostawa ma status 1 - niezamówiona dostawa (zapotrzebowanie)
+    App::mysql->get_result("SELECT status FROM dostawa WHERE id_dostawa = '"+App::itos(dostawa_id)+"' AND status = 1");
+    if(App::mysql->rows()==0){
+        App::message("Wybrana dostawa powinna mieć status: niezamówiona.");
+        return;
+    }
+    //zmiana statusu
+    App::mysql->exec("UPDATE dostawa SET status = 2 WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
+    if(!App::mysql->ok) return;
+    //zapisanie pracownika, który wprowadził ostatnią zmianę
+    App::mysql->exec("UPDATE dostawa SET id_pracownik = '"+App::itos(App::login_id)+"' WHERE id_dostawa = '"+App::itos(dostawa_id)+"'");
+    if(!App::mysql->ok) return;
+    tab_dostawy();
+    App::message("Zmieniono status dostawy na zamówioną.");
 }
