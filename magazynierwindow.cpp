@@ -11,6 +11,13 @@
  * 3 - zrealizowana dostawa (odebrana)
  * */
 
+/* reklamacja: status:
+ * 1 - złożona przez klienta, sztuka czeka na wysłanie
+ * 2 - sztuka wysłana do producenta, czeka na rozpatrzenie reklamacji, lub jest w trakcie powrotu
+ * 3 - sztuka została odebrana i czeka na klienta
+ * 4 - reklamacja rozpatrzona i zakończona
+ * */
+
 MagazynierWindow::MagazynierWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MagazynierWindow)
