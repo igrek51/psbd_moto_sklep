@@ -34,6 +34,10 @@ private slots:
 
     void on_pb_odebrano_clicked();
 
+    void on_table_3_cellClicked(int row, int column);
+
+    void on_pb_przygotowane_clicked();
+
 private:
     Ui::MagazynierWindow *ui;
 
@@ -42,11 +46,14 @@ private:
     void tab_reklamacje();
 
     vector<int> tab_dostawy_id;
+    vector<int> tab_zamowienia_id;
     vector<int> tab_reklamacje_id;
     //weź id zaznaczonego wiersza (dostawy)
     int get_tab_dostawy_id();
     //weź id zaznaczonego wiersza (reklamacje)
     int get_tab_reklamacje_id();
+    //weź id zaznaczonego wiersza (zamówienia)
+    int get_tab_zamowienia_id();
 };
 
 #endif // MAGAZYNIERWINDOW_H
