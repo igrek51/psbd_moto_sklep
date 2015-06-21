@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "datamodel.h"
+#include "wyborklientawindow.h"
 
 namespace Ui {
 class SprzedawcaWindow;
@@ -40,10 +41,14 @@ private slots:
     void on_comboBox_3_currentIndexChanged(int index);
 
 private:
+    QVector<QString> dane_klienta;
+
     Ui::SprzedawcaWindow *ui;
     DataModel* zamowienia_wyszukane;
     DataModel* zawartosc_zamowienia;
     DataModel* reklamacje;
+
+    WyborKlientaWindow* wybor_klienta;
 };
 
 #endif // SPRZEDAWCAWINDOW_H

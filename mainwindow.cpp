@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     magazynierwindow = NULL;
     sprzedawcawindow = NULL;
     ui->le_pesel->setFocus();
+
 }
 
 MainWindow::~MainWindow()
