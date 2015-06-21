@@ -6,3 +6,5 @@ Makefile
 Makefile.Debug
 Makefile.Release
 moto_sklep.pro.user
+object_script.Moto_Sklep.Debug
+object_script.Moto_Sklep.Release
