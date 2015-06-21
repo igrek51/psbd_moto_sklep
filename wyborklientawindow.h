@@ -21,6 +21,7 @@ public:
 
 private slots:
 
+    //wybranie klienta i zamknięcie dialogu
     void on_pb_wybierz_clicked();
 
     void on_pb_dodaj_clicked();
