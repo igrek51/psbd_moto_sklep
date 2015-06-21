@@ -2,3 +2,7 @@
 ui*.h
 release/moc*
 release/Moto_Sklep.exe
+Makefile
+Makefile.Debug
+Makefile.Release
+moto_sklep.pro.user
