@@ -52,8 +52,6 @@ public:
     //tak jak el(...), zwraca int
     int eli(string name);
 
-
-
 private:
     MYSQL mysql; //instancja mysql
     MYSQL *connection; //instancja połączenia

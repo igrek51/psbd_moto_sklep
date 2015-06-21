@@ -2,6 +2,9 @@
 #define MAGAZYNIERWINDOW_H
 
 #include <QMainWindow>
+#include <vector>
+
+using namespace std;
 
 namespace Ui {
 class MagazynierWindow;
@@ -17,8 +20,11 @@ public:
 
     void closeEvent(QCloseEvent *event);
 
+
 private slots:
     void on_tabWidget_currentChanged(int index);
+
+    void on_pb_przyjeto_clicked();
 
 private:
     Ui::MagazynierWindow *ui;
@@ -26,6 +32,10 @@ private:
     void tab_dostawy();
     void tab_zamowienia();
     void tab_reklamacje();
+
+    vector<int> tab_dostawy_id;
+    //weź id zaznaczonego wiersza (dostawy)
+    int get_tab_dostawy_id();
 };
 
 #endif // MAGAZYNIERWINDOW_H

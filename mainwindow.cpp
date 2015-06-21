@@ -112,4 +112,3 @@ void MainWindow::on_pushButton_2_clicked()
     App::message("Nowe hasło zostało wysłane na maila:\r\n"+mail);
 }
 
-

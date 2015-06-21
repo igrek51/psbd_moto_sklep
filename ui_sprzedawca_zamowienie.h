@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sprzedawca_zamowienie.ui'
 **
-** Created: Sat 20. Jun 18:56:12 2015
+** Created: Sun 21. Jun 11:41:13 2015
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
