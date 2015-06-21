@@ -30,6 +30,10 @@ private slots:
 
     void on_pb_zamowiono_clicked();
 
+    void on_pb_odeslano_clicked();
+
+    void on_pb_odebrano_clicked();
+
 private:
     Ui::MagazynierWindow *ui;
 
@@ -38,8 +42,11 @@ private:
     void tab_reklamacje();
 
     vector<int> tab_dostawy_id;
+    vector<int> tab_reklamacje_id;
     //weź id zaznaczonego wiersza (dostawy)
     int get_tab_dostawy_id();
+    //weź id zaznaczonego wiersza (reklamacje)
+    int get_tab_reklamacje_id();
 };
 
 #endif // MAGAZYNIERWINDOW_H

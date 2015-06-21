@@ -19,6 +19,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    if(menadzerwindow!=NULL)
+        delete menadzerwindow;
+    if(magazynierwindow!=NULL)
+        delete magazynierwindow;
+    if(sprzedawcawindow!=NULL)
+        delete sprzedawcawindow;
     delete ui;
     delete App::mysql;
 }
@@ -60,12 +66,18 @@ void MainWindow::zaloguj(){
     //id zalogowanego pracownika
     App::login_id = App::mysql->eli("id_pracownik");
     if(id_stanowisko==1){ //menadżer
+        if(menadzerwindow!=NULL)
+            delete menadzerwindow;
         menadzerwindow = new MenadzerWindow();
         menadzerwindow->show();
     }else if(id_stanowisko==2){ //magazynier
+        if(magazynierwindow!=NULL)
+            delete magazynierwindow;
         magazynierwindow = new MagazynierWindow();
         magazynierwindow->show();
     }else if(id_stanowisko==3){ //sprzedawca
+        if(sprzedawcawindow!=NULL)
+            delete sprzedawcawindow;
         sprzedawcawindow = new SprzedawcaWindow();
         sprzedawcawindow->show();
     }

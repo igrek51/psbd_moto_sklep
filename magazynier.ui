@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
@@ -241,7 +241,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTableWidget" name="tableWidget_5">
+         <widget class="QTableWidget" name="table_2">
           <column>
            <property name="text">
             <string>Nazwa produktu</string>
@@ -267,6 +267,20 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Odesłano do producenta:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_odeslano">
+            <property name="text">
+             <string>Odesłano</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -280,16 +294,52 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="label_4">
             <property name="text">
-             <string>Odesłano do producenta</string>
+             <string>Odebrano, Wynik reklamacji:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_5">
+           <widget class="QComboBox" name="cb_wynikr">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>120</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>negatywny</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>pozytywny - zwrot pieniędzy</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>pozytywny - naprawa produktu</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>pozytywny - wymiana produktu</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_odebrano">
             <property name="text">
-             <string>Odesłano</string>
+             <string>Odebrano</string>
             </property>
            </widget>
           </item>

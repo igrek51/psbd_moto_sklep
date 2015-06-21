@@ -85,7 +85,36 @@ void MagazynierWindow::tab_zamowienia(){
 }
 
 void MagazynierWindow::tab_reklamacje(){
-
+    //wyczyszczenie wierszy tabelki
+    while(ui->table_2->rowCount()>0){
+        ui->table_2->removeRow(0);
+    }
+    tab_reklamacje_id.clear();
+    //nazwa produktu, numer seryjny, data przyjęcia reklamacji, status reklamacji
+    //nowe zapytanie
+    App::mysql->get_result("SELECT reklamacja.id_reklamacja, produkt.nazwa, sztuka.numer_seryjny, reklamacja.data_zlozenia, reklamacja.status FROM (((reklamacja LEFT JOIN sztuka USING(id_sztuka)) LEFT JOIN dostawa USING(id_dostawa)) LEFT JOIN produkt USING(id_produkt)) WHERE reklamacja.status = 1 OR reklamacja.status = 2 ORDER BY reklamacja.status, reklamacja.data_zlozenia");
+    while(App::mysql->get_row()){
+        ui->table_2->insertRow(App::mysql->row_nr);
+        //wypełnienie komórek wiersza
+        QTableWidgetItem *item = new QTableWidgetItem(App::mysql->elc("nazwa"));
+        ui->table_2->setItem(App::mysql->row_nr, 0, item);
+        item = new QTableWidgetItem(App::mysql->elc("numer_seryjny"));
+        ui->table_2->setItem(App::mysql->row_nr, 1, item);
+        stringstream ss;
+        ss<<App::mysql->el("data_zlozenia");
+        item = new QTableWidgetItem(ss.str().c_str());
+        ui->table_2->setItem(App::mysql->row_nr, 2, item);
+        string status = App::mysql->eli("status")==1 ? "przyjęto, do odesłania" : "odesłano, czeka na rozpatrzenie";
+        item = new QTableWidgetItem(status.c_str());
+        ui->table_2->setItem(App::mysql->row_nr, 3, item);
+        tab_reklamacje_id.push_back(App::mysql->eli("id_reklamacja"));
+    }
+    //zmiana rozmiaru kolumn
+    QHeaderView *qheader = ui->table_2->horizontalHeader();
+    qheader->resizeSection(0,220);
+    qheader->resizeSection(1,150);
+    qheader->resizeSection(2,170);
+    qheader->resizeSection(3,180);
 }
 
 int MagazynierWindow::get_tab_dostawy_id(){
@@ -94,6 +123,15 @@ int MagazynierWindow::get_tab_dostawy_id(){
     if(index>=(int)tab_dostawy_id.size()) return -1;
     return tab_dostawy_id[index];
 }
+
+int MagazynierWindow::get_tab_reklamacje_id(){
+    int index = ui->table_2->currentRow();
+    if(index<0) return -1;
+    if(index>=(int)tab_reklamacje_id.size()) return -1;
+    return tab_reklamacje_id[index];
+}
+
+
 void MagazynierWindow::on_pb_przyjeto_clicked()
 {
     int dostawa_id = get_tab_dostawy_id();
@@ -197,4 +235,59 @@ void MagazynierWindow::on_pb_zamowiono_clicked()
     if(!App::mysql->ok) return;
     tab_dostawy();
     App::message("Zmieniono status dostawy na zamówioną.");
+}
+
+void MagazynierWindow::on_pb_odeslano_clicked()
+{
+    int reklamacja_id = get_tab_reklamacje_id();
+    if(reklamacja_id==-1){
+        App::message("Nie wybrano żadnej reklamacji.");
+        return;
+    }
+    //sprawdz, czy reklamacja_id ma status 1
+    App::mysql->get_result("SELECT status FROM reklamacja WHERE id_reklamacja = '"+App::itos(reklamacja_id)+"' AND status = 1");
+    if(App::mysql->rows()==0){
+        App::message("Wybrana reklamacja powinna mieć status: przyjęto, do odesłania.");
+        return;
+    }
+    //zmiana statusu
+    App::mysql->exec("UPDATE reklamacja SET status = 2 WHERE id_reklamacja = '"+App::itos(reklamacja_id)+"'");
+    if(!App::mysql->ok) return;
+    //zapisanie pracownika, który wprowadził ostatnią zmianę
+    App::mysql->exec("UPDATE reklamacja SET id_pracownik = '"+App::itos(App::login_id)+"' WHERE id_reklamacja = '"+App::itos(reklamacja_id)+"'");
+    if(!App::mysql->ok) return;
+    tab_reklamacje();
+    App::message("Zmieniono status reklamacji na odesłaną.");
+}
+
+void MagazynierWindow::on_pb_odebrano_clicked()
+{
+    int reklamacja_id = get_tab_reklamacje_id();
+    if(reklamacja_id==-1){
+        App::message("Nie wybrano żadnej reklamacji.");
+        return;
+    }
+    //sprawdz, czy reklamacja_id ma status 2
+    App::mysql->get_result("SELECT status FROM reklamacja WHERE id_reklamacja = '"+App::itos(reklamacja_id)+"' AND status = 2");
+    if(App::mysql->rows()==0){
+        App::message("Wybrana reklamacja powinna mieć status: odesłano, czeka na rozpatrzenie.");
+        return;
+    }
+    //wpisanie daty rozpatrzenia
+    stringstream ss;
+    ss<<"UPDATE reklamacja SET data_rozpatrzenia = from_unixtime("<<time(0)<<") WHERE id_reklamacja = '"<<reklamacja_id<<"'";
+    App::mysql->exec(ss.str());
+    //wpisanie wyniku reklamacji
+    int wynik_r = ui->cb_wynikr->currentIndex() + 1;
+    App::ss_clear(ss);
+    ss<<"UPDATE reklamacja SET wynik_reklamacji = '"<<wynik_r<<"' WHERE id_reklamacja = '"<<reklamacja_id<<"'";
+    App::mysql->exec(ss.str());
+    //zmiana statusu
+    App::mysql->exec("UPDATE reklamacja SET status = 3 WHERE id_reklamacja = '"+App::itos(reklamacja_id)+"'");
+    if(!App::mysql->ok) return;
+    //zapisanie pracownika, który wprowadził ostatnią zmianę
+    App::mysql->exec("UPDATE reklamacja SET id_pracownik = '"+App::itos(App::login_id)+"' WHERE id_reklamacja = '"+App::itos(reklamacja_id)+"'");
+    if(!App::mysql->ok) return;
+    tab_reklamacje();
+    App::message("Zmieniono status reklamacji na odebraną i rozpatrzoną.");
 }
