@@ -11,6 +11,7 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     zamowienia_wyszukane = new DataModel;
     zamowienia_wyszukane->header << "Numer zamówienia" << "Data złożenia" << "Imię" << "Nazwisko" << "Wartość zamówienia" << "Status";
     zamowienia_wyszukane->column_count = 6;
+    zamowienia_wyszukane->getData("SELECT dostawa.id_dostawa AS 'id_dostawa', dostawca.nazwa AS 'dostawca', produkt.nazwa AS 'produkt', dostawa.cena_zakupu AS 'cena', dostawa.status AS 'status' FROM ((dostawa LEFT JOIN dostawca USING (id_dostawca)) LEFT JOIN produkt USING (id_produkt)) WHERE dostawa.status = 1 OR dostawa.status = 2 ORDER BY dostawa.status, dostawa.data_utworzenia");
     ui->tv_zamowienia_wyszukane->setModel(zamowienia_wyszukane);
 
     zawartosc_zamowienia = new DataModel;
@@ -22,6 +23,8 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     reklamacje->header << "Nazwa Produktu" << "Numer seryjny" << "Data wydania" << "Cena sprzedarzy" << "Status reklamacji" << "Wynk reklamacji";
     reklamacje->column_count = 2;
     ui->tv_reklamacje->setModel(reklamacje);
+
+    wybor_klienta = NULL;
 
     on_cb_czy_okres_clicked(false);
 }
@@ -39,6 +42,14 @@ void SprzedawcaWindow::closeEvent(QCloseEvent *event)
 
 void SprzedawcaWindow::on_pb_wybierz_klienta_clicked()
 {
+//    wybor_klienta = new WyborKlientaWindow;
+    WyborKlientaWindow wybor_klienta;
+        wybor_klienta.setModal(true);
+        wybor_klienta.exec();
+
+        if(wybor_klienta.result() == QDialog::Accepted)
+        {
+        }
      //wybranie klienta
 }
 
