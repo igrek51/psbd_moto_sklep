@@ -1,3 +1,4 @@
 *.o
 ui*.h
 release/moc*
+release/Moto_Sklep.exe
