@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>505</width>
-    <height>438</height>
+    <height>405</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Wybór klienta</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -28,7 +28,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="le_imie"/>
          </item>
         </layout>
        </item>
@@ -42,33 +42,23 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="le_nazwisko"/>
          </item>
         </layout>
        </item>
       </layout>
      </item>
      <item>
-      <widget class="QTableWidget" name="tableWidget_4">
+      <widget class="QTableView" name="tv_klienci">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <attribute name="horizontalHeaderStretchLastSection">
+       <attribute name="verticalHeaderCascadingSectionResizes">
         <bool>true</bool>
        </attribute>
-       <column>
-        <property name="text">
-         <string>Imię</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Nazwisko</string>
-        </property>
-       </column>
       </widget>
      </item>
     </layout>

@@ -22,7 +22,13 @@ private slots:
 
     void on_pb_dodaj_clicked();
 
+    void on_le_imie_textChanged(const QString &arg1);
+
+    void on_le_nazwisko_textChanged(const QString &arg1);
+
 private:
+    void szukajKlientow();
+
     Ui::WyborKlientaWindow *ui;
     DataModel* znalezieni_klienci;
 };

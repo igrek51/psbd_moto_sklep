@@ -6,8 +6,9 @@ DataModel::DataModel()
     column_count = 1;
 }
 
-void DataModel::getData(std::string query)
+void DataModel::getDataFromDB(std::string query)
 {
+    current_data.clear();
     App::mysql->get_result(query);
     while(App::mysql->get_row())
     {
@@ -18,6 +19,18 @@ void DataModel::getData(std::string query)
 
         current_data.push_back(data_row);
     }
+    layoutChanged();
+}
+
+void DataModel::getDataFromDB(QString query)
+{
+    getDataFromDB(query.toStdString());
+}
+
+void DataModel::clear()
+{
+    current_data.clear();
+    layoutChanged();
 }
 
 int DataModel::rowCount(const QModelIndex &parent) const
