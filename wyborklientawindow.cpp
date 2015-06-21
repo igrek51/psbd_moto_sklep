@@ -3,7 +3,7 @@
 #include "ui_wybor_klienta.h"
 #include "app.h"
 #include <QDebug>
-WyborKlientaWindow::WyborKlientaWindow(QWidget *parent) :
+WyborKlientaWindow::WyborKlientaWindow(QVector<QString> klient, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::WyborKlientaWindow)
 {
@@ -13,6 +13,16 @@ WyborKlientaWindow::WyborKlientaWindow(QWidget *parent) :
     znalezieni_klienci->header << "Imie" << "Nazwisko" << "Adres" << "PESEL" << "Telefon" << "E-mail";
     znalezieni_klienci->column_count = znalezieni_klienci->header.size();
     ui->tv_klienci->setModel(znalezieni_klienci);
+    if(klient.size() > 0)
+    {
+        QString query = "SELECT klient.imie, klient.nazwisko, klient.adres, klient.pesel, klient.telefon, klient.e_mail, klient.id_klient "
+                "FROM klient WHERE klient.id_klient = \'" + klient.at(klient.size()-1) + "\'";
+        znalezieni_klienci->getDataFromDB(query);
+
+        ui->tv_klienci->setVisible(false);
+        ui->tv_klienci->resizeColumnsToContents();
+        ui->tv_klienci->setVisible(true);
+    }
     //dopasowanie kolumn do wersji qt +5.2
 //    ui->tv_klienci->horizontalHeader()->setResizeContentsPrecision(QHeaderView::ResizeToContents);
 }
@@ -61,11 +71,12 @@ void WyborKlientaWindow::on_pb_dodaj_clicked()
                             "\'" + imie + "\', " + "\'" + nazwisko + "\', " + "\'" + pesel + "\', " + "\'" +
                             email + "\', " + "\'" + telefon + "\', " + "\'" + adres + "\');";
 
-            znalezieni_klienci->getDataFromDB(query1, false);
-            if(znalezieni_klienci->current_data.size() == 0)
-                App::mysql->exec(query2.toStdString());
-            else
+            App::mysql->get_result(query1.toStdString());
+            if(App::mysql->get_row())
                 App::message("Klient o podanych danych już jest zapisany");
+            else
+                App::mysql->exec(query2.toStdString());
+
             szukajKlientow();
         }
     }

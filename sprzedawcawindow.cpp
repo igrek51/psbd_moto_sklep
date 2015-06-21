@@ -43,7 +43,7 @@ void SprzedawcaWindow::closeEvent(QCloseEvent *event)
 
 void SprzedawcaWindow::on_pb_wybierz_klienta_clicked()
 {
-    WyborKlientaWindow wybor_klienta;
+    WyborKlientaWindow wybor_klienta(dane_klienta);
     wybor_klienta.setModal(true);
     wybor_klienta.exec();
 
