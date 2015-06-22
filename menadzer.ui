@@ -1544,7 +1544,7 @@
         <item row="0" column="3">
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QDateTimeEdit" name="dateTimeEdit_5"/>
+           <widget class="QDateTimeEdit" name="dt_od"/>
           </item>
           <item>
            <widget class="QLabel" name="label_44">
@@ -1560,17 +1560,17 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateTimeEdit" name="dateTimeEdit_6"/>
+           <widget class="QDateTimeEdit" name="dt_do"/>
           </item>
          </layout>
         </item>
         <item row="0" column="1">
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="cb_okres">
           <property name="text">
            <string>Okres:</string>
           </property>
           <property name="checked">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -1622,7 +1622,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="comboBox_5">
+          <widget class="QComboBox" name="cb_klient">
            <item>
             <property name="text">
              <string>Wszyscy</string>
@@ -1641,11 +1641,32 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_6"/>
+          <widget class="QComboBox" name="cb_status_zamowienia">
+           <item>
+            <property name="text">
+             <string>przyjęte</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>gotowe do odbioru</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>zrealizowane</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>anulowane</string>
+            </property>
+           </item>
+          </widget>
          </item>
         </layout>
        </widget>
-       <widget class="QPushButton" name="pushButton_23">
+       <widget class="QPushButton" name="pb_raport_zamowien">
         <property name="geometry">
          <rect>
           <x>500</x>
@@ -1692,7 +1713,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="comboBox_7">
+          <widget class="QComboBox" name="cb_dostawca1">
            <item>
             <property name="text">
              <string>Wszyscy</string>
@@ -1711,11 +1732,32 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_8"/>
+          <widget class="QComboBox" name="cb_status_dostawy">
+           <item>
+            <property name="text">
+             <string>anulowana</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>niezamówiona</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>nieodebrana</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>zrealizowana</string>
+            </property>
+           </item>
+          </widget>
          </item>
         </layout>
        </widget>
-       <widget class="QPushButton" name="pushButton_24">
+       <widget class="QPushButton" name="pb_raport_dostaw">
         <property name="geometry">
          <rect>
           <x>500</x>
@@ -1752,7 +1794,7 @@
         </property>
         <layout class="QGridLayout" name="gridLayout_15">
          <item row="0" column="1">
-          <widget class="QComboBox" name="comboBox_12">
+          <widget class="QComboBox" name="cb_producent">
            <item>
             <property name="text">
              <string>Wszyscy</string>
@@ -1771,7 +1813,23 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QComboBox" name="comboBox_13"/>
+          <widget class="QComboBox" name="cb_status_sztuki">
+           <item>
+            <property name="text">
+             <string>wolna</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>zarezerwowana</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>sprzedana</string>
+            </property>
+           </item>
+          </widget>
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label_74">
@@ -1794,7 +1852,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_16">
+          <widget class="QComboBox" name="cb_dostawca2">
            <item>
             <property name="text">
              <string>Wszyscy</string>
@@ -1804,7 +1862,7 @@
          </item>
         </layout>
        </widget>
-       <widget class="QPushButton" name="pushButton_33">
+       <widget class="QPushButton" name="pb_raport_sztuk">
         <property name="geometry">
          <rect>
           <x>500</x>

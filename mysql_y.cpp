@@ -112,15 +112,22 @@ string MySQL_y::field_name(int index){
 int MySQL_y::field_index(string nazwa){
     if(result==NULL){
         error("brak wyniku zapytania.");
-        return 0;
+        return -1;
     }
     MYSQL_FIELD *fields_table = mysql_fetch_fields(result);
+    int index = -1; //aktualny indeks znalezionej nazwy (możliwość wielu dopasowań)
     for(int i=0; i<fields(); i++){
         if(strcmp(fields_table[i].name, nazwa.c_str())==0){
-            return i;
+            if(index==-1){
+                index = i;
+            }else{
+                error("Istnieje wiele pól o szukanej nazwie: "+nazwa);
+                return -1;
+            }
         }
     }
-    error("nie znaleziono kolumny o podanej nazwie: "+nazwa);
+    if(index>=0) return index;
+    error("Nie znaleziono kolumny o podanej nazwie: "+nazwa);
     return -1;
 }
 
