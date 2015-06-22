@@ -44,6 +44,8 @@ private slots:
 
     void on_pb_zakoncz_reklamacje_clicked();
 
+    void on_tabWidget_2_currentChanged(int index);
+
 private:
     QVector<QString> dane_klienta;
 
@@ -51,6 +53,9 @@ private:
     DataModel* zamowienia_wyszukane;
     DataModel* zawartosc_zamowienia;
     DataModel* reklamacje;
+    DataModel* producenci;
+    DataModel* dostawcy;
+    DataModel* statusy;
 
     WyborKlientaWindow* wybor_klienta;
 };

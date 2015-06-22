@@ -26,9 +26,22 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     reklamacje->column_count = reklamacje->header.size();
     ui->tv_reklamacje->setModel(reklamacje);
 
+    producenci = new DataModel;
+    producenci->column_count = 1;
+    ui->cb_producent->setModel(producenci);
+
+    dostawcy = new DataModel;
+    dostawcy->column_count = 1;
+    ui->cb_dostawca->setModel(dostawcy);
+
+    statusy = new DataModel;
+    statusy->current_data << (QVector<QString>() << "Wszystkie") << (QVector<QString>() << "1") << (QVector<QString>() << "2") << (QVector<QString>() << "3") << (QVector<QString>() << "4");
+    statusy->column_count = 1;
+    ui->cb_statusy_zamowien->setModel(statusy);
     wybor_klienta = NULL;
 
     on_cb_czy_okres_clicked(false);
+    on_tabWidget_2_currentChanged(0);
 }
 
 SprzedawcaWindow::~SprzedawcaWindow()
@@ -81,6 +94,45 @@ void SprzedawcaWindow::on_cb_czy_okres_clicked(bool checked)
 void SprzedawcaWindow::on_pb_szukaj_clicked()
 {
     //wyszukanie pasujących zamówień
+//    "Numer zamówienia" << "Data złożenia" << "Imię" << "Nazwisko" << "Wartość zamówienia" << "Status";
+
+    QString query = "SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, ROUND(SUM(dostawa.cena_zakupu), 2), zamowienie.status"
+    " FROM "
+    "klient JOIN zamowienie ON klient.id_klient = zamowienie.id_klient "
+    "JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+    "JOIN producent ON produkt.id_producent = producent.id_producent "
+    "JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
+    "WHERE produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu->text() + "%\' ";
+    if(!dane_klienta.isEmpty()) query += " AND klient.id_klient = \'" + dane_klienta.at(dane_klienta.size()-1) + "\' ";
+
+    if(ui->cb_czy_okres->isChecked())
+    {
+//        QDateTime::fromString(data_zakupu_str, "yyyy-MM-dd HH:mm:ss")
+        query += " AND zamowienie.data_zlozenia >= \'" + ui->de_poczatek->dateTime().toString("yyyy-MM-dd HH:mm:ss") + "\'";
+        query += " AND zamowienie.data_zlozenia <= \'" + ui->de_koniec->dateTime().toString("yyyy-MM-dd HH:mm:ss") + "\'";
+    }
+    int dostawca_index = ui->cb_dostawca->currentIndex();
+    if(dostawca_index > 0)
+    {
+        QVector<QString> dostawca = dostawcy->current_data.at(dostawca_index);
+        query += " AND dostawca.id_dostwca = \'" + dostawca.at(dostawca.size()-1) + "\'";
+    }
+    int producent_index = ui->cb_producent->currentIndex();
+    if(producent_index > 0)
+    {
+        QVector<QString> producent = producenci->current_data.at(producent_index);
+        query += " AND producent.id_producenta = \'" + producent.at(producent.size()-1) + "\'";
+    }
+    int status_index = ui->cb_statusy_zamowien->currentIndex();
+    if(status_index > 0)
+    {
+        QVector<QString> s = statusy->current_data.at(status_index);
+        query += " AND zamowienie.status = \'" + s.at(s.size()-1) + "\' ";
+    }
+    query += "GROUP BY zamowienie.id_zamowienie;";
+
+    zamowienia_wyszukane->getDataFromDB(query);
 }
 
 void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
@@ -214,5 +266,20 @@ void SprzedawcaWindow::on_pb_zakoncz_reklamacje_clicked()
             else
                 App::message("Nie można zakończyć procesu reklamacji sztuki");
         }
+    }
+}
+
+void SprzedawcaWindow::on_tabWidget_2_currentChanged(int index)
+{
+    if(index == 0) //zamówienia
+    {
+        QVector<QString> dowolny;
+        dowolny.push_back("Dowolny"); //nazwa
+        dowolny.push_back("0"); //indeks
+
+        producenci->getDataFromDB(QString("SELECT producent.nazwa, producent.id_producent FROM producent ORDER BY producent.nazwa ASC"));
+        producenci->current_data.prepend(dowolny);
+        dostawcy->getDataFromDB(QString("SELECT dostawca.nazwa, dostawca.id_dostawca FROM dostawca ORDER BY dostawca.nazwa ASC"));
+        dostawcy->current_data.prepend(dowolny);
     }
 }
