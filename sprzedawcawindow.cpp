@@ -110,9 +110,48 @@ void SprzedawcaWindow::on_pb_wybierz_klienta_reklamacje_clicked()
 void SprzedawcaWindow::on_le_nazwa_produktu_reklamacje_textChanged(const QString &arg1)
 {
     //wyświetlenie produktów do reklamacji
+    on_cb_stan_sztuk_reklamacja_activated(ui->cb_stan_sztuk_reklamacja->currentIndex());
 }
 
-void SprzedawcaWindow::on_comboBox_3_currentIndexChanged(int index)
+void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
 {
-    //wyśietlenie produktów jeżeli nazwa nie pusta
+    //"Nazwa Produktu" << "Numer seryjny"  << "Cena sprzedarzy" << "Status reklamacji" << "Wynk reklamacji";
+    if(!dane_klienta.isEmpty())
+    {
+        QString query;
+        if(index == 0) //sztuki niereklamowane
+        {
+            query = "SELECT produkt.nazwa, sztuka.numer_seryjny, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji "
+                    "FROM "
+                    "klient JOIN zamowienie ON klient.id_klient = zamowienie.id_klient "
+                    "JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+                    "JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
+                    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+                    "LEFT JOIN reklamacja ON sztuka.id_sztuka = reklamacja.id_sztuka "
+                    "WHERE zamowienie.status = 1 AND sztuka.numer_seryjny IS NOT NULL AND reklamacja.id_reklamacja IS NULL "
+                    "AND klient.id_klient = \'" +  dane_klienta.at(dane_klienta.size()-1) + "\' "
+                    "AND produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu_reklamacje->text() + "%\';";
+        }
+        else //sztuki reklamowane
+        {
+            query = "SELECT produkt.nazwa, sztuka.numer_seryjny, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji "
+                    "FROM "
+                    "klient JOIN zamowienie ON klient.id_klient = zamowienie.id_klient "
+                    "JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+                    "JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
+                    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+                    "LEFT JOIN reklamacja ON sztuka.id_sztuka = reklamacja.id_sztuka "
+                    "WHERE zamowienie.status = 1 AND sztuka.numer_seryjny IS NOT NULL AND reklamacja.id_reklamacja IS NOT NULL "
+                    "AND klient.id_klient = \'" +  dane_klienta.at(dane_klienta.size()-1) + "\' "
+                    "AND produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu_reklamacje->text() + "%\';";
+        }
+
+        qDebug() << query;
+
+        reklamacje->getDataFromDB(query);
+
+        ui->tv_reklamacje->setVisible(false);
+        ui->tv_reklamacje->resizeColumnsToContents();
+        ui->tv_reklamacje->setVisible(true);
+    }
 }

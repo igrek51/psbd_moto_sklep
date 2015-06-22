@@ -159,10 +159,10 @@
             <set>Qt::ImhDigitsOnly</set>
            </property>
            <property name="inputMask">
-            <string>999 999 999</string>
+            <string>999999999</string>
            </property>
            <property name="maxLength">
-            <number>11</number>
+            <number>9</number>
            </property>
           </widget>
          </item>

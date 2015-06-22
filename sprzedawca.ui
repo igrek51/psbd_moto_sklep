@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget_2">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabWidget_2Page1">
        <attribute name="title">
@@ -447,7 +447,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_3">
+           <widget class="QComboBox" name="cb_stan_sztuk_reklamacja">
             <property name="minimumSize">
              <size>
               <width>153</width>
@@ -457,6 +457,11 @@
             <item>
              <property name="text">
               <string>Niereklamowane</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Reklamowane</string>
              </property>
             </item>
            </widget>

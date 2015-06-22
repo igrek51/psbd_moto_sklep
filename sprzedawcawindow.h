@@ -38,7 +38,7 @@ private slots:
 
     void on_le_nazwa_produktu_reklamacje_textChanged(const QString &arg1);
 
-    void on_comboBox_3_currentIndexChanged(int index);
+    void on_cb_stan_sztuk_reklamacja_activated(int index);
 
 private:
     QVector<QString> dane_klienta;
