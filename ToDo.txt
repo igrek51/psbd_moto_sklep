@@ -1,0 +1,5 @@
+Poprawiæ model relacyjny w Workbenchu:
+	w tabelach dostawca, klient, pracownik, producent: grupy pól adresowych (numer mieszkania, kod, miasto) scaliæ w jedno pole adres
+	nazwê "objêtoœæ" silnika zmieniæ na "pojemnoœæ" silnika
+	sztuka: cena_sprzedazy - przez Z, nie RZ :)
+diagram aktywnoœci wyboru produktu do zamówienia - coœ siê Wnuk ostatnio przyczepi³, ale ju¿ nie pamiêtam o co chodzi³o
