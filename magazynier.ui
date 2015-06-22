@@ -254,7 +254,12 @@
           </column>
           <column>
            <property name="text">
-            <string>Data przyjęcia reklamacji</string>
+            <string>Data przyjęcia</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Producent</string>
            </property>
           </column>
           <column>

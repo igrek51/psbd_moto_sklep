@@ -4,20 +4,6 @@
 #include <QCloseEvent>
 #include <sstream>
 
-/* dostawa: status:
- * 0 - anulowana dostawa
- * 1 - niezamówiona dostawa (zapotrzebowanie)
- * 2 - zamówiona, nieodebrana (niezrealizowana)
- * 3 - zrealizowana dostawa (odebrana)
- * */
-
-/* reklamacja: status:
- * 1 - złożona przez klienta, sztuka czeka na wysłanie
- * 2 - sztuka wysłana do producenta, czeka na rozpatrzenie reklamacji, lub jest w trakcie powrotu
- * 3 - sztuka została odebrana i czeka na klienta
- * 4 - reklamacja rozpatrzona i zakończona
- * */
-
 MagazynierWindow::MagazynierWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MagazynierWindow)
@@ -132,9 +118,9 @@ void MagazynierWindow::tab_reklamacje(){
         ui->table_2->removeRow(0);
     }
     tab_reklamacje_id.clear();
-    //nazwa produktu, numer seryjny, data przyjęcia reklamacji, status reklamacji
+    //nazwa produktu, numer seryjny, data przyjęcia reklamacji, producent, adres producenta, status reklamacji
     //nowe zapytanie
-    App::mysql->get_result("SELECT reklamacja.id_reklamacja, produkt.nazwa, sztuka.numer_seryjny, reklamacja.data_zlozenia, reklamacja.status FROM (((reklamacja LEFT JOIN sztuka USING(id_sztuka)) LEFT JOIN dostawa USING(id_dostawa)) LEFT JOIN produkt USING(id_produkt)) WHERE reklamacja.status = 1 OR reklamacja.status = 2 ORDER BY reklamacja.status, reklamacja.data_zlozenia");
+    App::mysql->get_result("SELECT reklamacja.id_reklamacja, produkt.nazwa, sztuka.numer_seryjny, reklamacja.data_zlozenia, reklamacja.status, producent.nazwa AS 'nazwa_producenta', producent.adres FROM ((((reklamacja LEFT JOIN sztuka USING(id_sztuka)) LEFT JOIN dostawa USING(id_dostawa)) LEFT JOIN produkt USING(id_produkt)) LEFT JOIN producent USING(id_producent)) WHERE reklamacja.status = 1 OR reklamacja.status = 2 ORDER BY reklamacja.status, reklamacja.data_zlozenia");
     while(App::mysql->get_row()){
         ui->table_2->insertRow(App::mysql->row_nr);
         //wypełnienie komórek wiersza
@@ -146,17 +132,22 @@ void MagazynierWindow::tab_reklamacje(){
         ss<<App::mysql->el("data_zlozenia");
         item = new QTableWidgetItem(ss.str().c_str());
         ui->table_2->setItem(App::mysql->row_nr, 2, item);
-        string status = App::mysql->eli("status")==1 ? "przyjęto, do odesłania" : "odesłano, czeka na rozpatrzenie";
-        item = new QTableWidgetItem(status.c_str());
+        App::ss_clear(ss);
+        ss<<App::mysql->el("nazwa_producenta")<<",\r\n "<<App::mysql->el("adres");
+        item = new QTableWidgetItem(ss.str().c_str());
         ui->table_2->setItem(App::mysql->row_nr, 3, item);
+        string status = App::mysql->eli("status")==1 ? "przyjęto, do odesłania" : "odesłano, rozpatrywana";
+        item = new QTableWidgetItem(status.c_str());
+        ui->table_2->setItem(App::mysql->row_nr, 4, item);
         tab_reklamacje_id.push_back(App::mysql->eli("id_reklamacja"));
     }
     //zmiana rozmiaru kolumn
     QHeaderView *qheader = ui->table_2->horizontalHeader();
-    qheader->resizeSection(0,220);
-    qheader->resizeSection(1,150);
-    qheader->resizeSection(2,170);
-    qheader->resizeSection(3,180);
+    qheader->resizeSection(0,170);
+    qheader->resizeSection(1,90);
+    qheader->resizeSection(2,110);
+    qheader->resizeSection(3,260);
+    qheader->resizeSection(4,140);
 }
 
 int MagazynierWindow::get_tab_dostawy_id(){

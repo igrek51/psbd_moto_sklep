@@ -1,5 +1,4 @@
 KOD PROGRAMU:
-	magazynier: reklamacje: kolumna producent z danymi adresowymi
 
 MODEL RELACYJNY (w Workbenchu):
 	w tabelach dostawca, klient, pracownik, producent: grupy pól adresowych (numer mieszkania, kod, miasto) scaliæ w jedno pole adres
@@ -8,7 +7,7 @@ MODEL RELACYJNY (w Workbenchu):
 
 DIAGRAMY AKTYWNOŒCI:
 	diagram aktywnoœci wyboru produktu do zamówienia - coœ siê Wnuk ostatnio przyczepi³, ale ju¿ nie pamiêtam o co chodzi³o
-	poprawiæ rysunek 4 - teraz jest diagramem magazyniera, realizacja rozpatrzonych reklamacji
 
 DOKUMENTACJA:
+	poprawiæ rysunek 4 - teraz jest diagramem magazyniera (realizacja rozpatrzonych reklamacji)
 	Zmergowaæ ca³¹ dokumentacjê w 1 PDF
