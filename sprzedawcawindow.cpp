@@ -2,6 +2,7 @@
 #include "ui_sprzedawca.h"
 #include "app.h"
 #include <QCloseEvent>
+#include <QDateTime>
 #include <QDebug>
 
 SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
@@ -21,7 +22,7 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     ui->tv_zawartosc_zamowienia->setModel(zawartosc_zamowienia);
 
     reklamacje = new DataModel;
-    reklamacje->header << "Nazwa Produktu" << "Numer seryjny" << "Data wydania" << "Cena sprzedarzy" << "Status reklamacji" << "Wynk reklamacji";
+    reklamacje->header << "Nazwa Produktu" << "Numer seryjny" << "Data wydania" << "Cena sprzedaży" << "Status reklamacji" << "Wynk reklamacji";
     reklamacje->column_count = reklamacje->header.size();
     ui->tv_reklamacje->setModel(reklamacje);
 
@@ -115,17 +116,20 @@ void SprzedawcaWindow::on_le_nazwa_produktu_reklamacje_textChanged(const QString
 
 void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
 {
-    //"Nazwa Produktu" << "Numer seryjny"  << "Cena sprzedarzy" << "Status reklamacji" << "Wynk reklamacji";
     if(!dane_klienta.isEmpty())
     {
         QString query;
         if(index == 0) //sztuki niereklamowane
         {
-            query = "SELECT produkt.nazwa, sztuka.numer_seryjny, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji "
+            ui->pb_przyjmij_reklamacje->setEnabled(true);
+            ui->cb_wynik_reklamacji->setEnabled(false);
+
+            query = "SELECT produkt.nazwa, sztuka.numer_seryjny, faktura.data_zrealizowania, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji, produkt.okres_gwarancyjny, sztuka.id_sztuka "
                     "FROM "
                     "klient JOIN zamowienie ON klient.id_klient = zamowienie.id_klient "
-                    "JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-                    "JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
+                    "JOIN faktura ON zamowienie.id_zamowienie = faktura.id_zamowienie "
+                    "JOIN sztuka ON faktura.id_faktura = sztuka.id_faktura "
+                    "JOIN dostawa ON sztuka.id_dostawa = dostawa.id_dostawa "
                     "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
                     "LEFT JOIN reklamacja ON sztuka.id_sztuka = reklamacja.id_sztuka "
                     "WHERE zamowienie.status = 1 AND sztuka.numer_seryjny IS NOT NULL AND reklamacja.id_reklamacja IS NULL "
@@ -134,11 +138,15 @@ void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
         }
         else //sztuki reklamowane
         {
-            query = "SELECT produkt.nazwa, sztuka.numer_seryjny, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji "
+            ui->pb_przyjmij_reklamacje->setEnabled(false);
+            ui->cb_wynik_reklamacji->setEnabled(true);
+
+            query = "SELECT produkt.nazwa, sztuka.numer_seryjny, faktura.data_zrealizowania, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji, sztuka.id_sztuka "
                     "FROM "
                     "klient JOIN zamowienie ON klient.id_klient = zamowienie.id_klient "
-                    "JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-                    "JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
+                    "JOIN faktura ON zamowienie.id_zamowienie = faktura.id_zamowienie "
+                    "JOIN sztuka ON faktura.id_faktura = sztuka.id_faktura "
+                    "JOIN dostawa ON sztuka.id_dostawa = dostawa.id_dostawa "
                     "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
                     "LEFT JOIN reklamacja ON sztuka.id_sztuka = reklamacja.id_sztuka "
                     "WHERE zamowienie.status = 1 AND sztuka.numer_seryjny IS NOT NULL AND reklamacja.id_reklamacja IS NOT NULL "
@@ -146,12 +154,44 @@ void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
                     "AND produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu_reklamacje->text() + "%\';";
         }
 
-        qDebug() << query;
+//        qDebug() << query;
 
         reklamacje->getDataFromDB(query);
 
         ui->tv_reklamacje->setVisible(false);
         ui->tv_reklamacje->resizeColumnsToContents();
         ui->tv_reklamacje->setVisible(true);
+    }
+}
+
+void SprzedawcaWindow::on_pb_przyjmij_reklamacje_clicked()
+{
+    //przyjmowanie reklamacji
+    QModelIndexList indexes = ui->tv_reklamacje->selectionModel()->selection().indexes();
+    if(!indexes.isEmpty())
+    {
+        QVector<QString> wybrana_sztuka = reklamacje->current_data.at(indexes.at(0).row());
+        if(wybrana_sztuka.size() >= 7)
+        {
+            //2015-06-02 00:00:00
+            QString data_zakupu_str = wybrana_sztuka.at(2);
+            int okres_gwarancyjny = wybrana_sztuka.at(6).toInt();
+            //TODO uzupełnić format
+            QDateTime data_wygasniecia_gwarancji = QDateTime::fromString(data_zakupu_str, "").addDays(okres_gwarancyjny);
+            QDateTime obecna_data = QDateTime::currentDateTime();
+
+            qDebug() << obecna_data << data_wygasniecia_gwarancji;
+            int pozostaly_czas_gwarancji = obecna_data.daysTo(data_wygasniecia_gwarancji);
+            if(pozostaly_czas_gwarancji <= 0)
+                App::message("Gwarancja skończyła się " + QString::number(-pozostaly_czas_gwarancji).toStdString() + " dni temu.");
+            else
+            {
+                //TODO uzupełnić format
+                QString query = "INSERT INTO reklamacja(status, data_zlozenia, id_sztuka, id_pracownik) VALUES ( 1, "
+                                + obecna_data.toString("") + ", " +  wybrana_sztuka.at(7) + ", " + QString::number(App::login_id) + ")";
+
+                App::mysql->exec(query .toStdString());
+            }
+        }
     }
 }

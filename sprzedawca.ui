@@ -469,7 +469,11 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableView" name="tv_reklamacje"/>
+         <widget class="QTableView" name="tv_reklamacje">
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
