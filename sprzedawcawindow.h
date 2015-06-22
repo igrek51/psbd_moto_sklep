@@ -42,6 +42,8 @@ private slots:
 
     void on_pb_przyjmij_reklamacje_clicked();
 
+    void on_pb_zakoncz_reklamacje_clicked();
+
 private:
     QVector<QString> dane_klienta;
 

@@ -480,23 +480,15 @@
           <item>
            <widget class="QLabel" name="label_13">
             <property name="text">
-             <string>Wynik reklamacji</string>
+             <string>Zakończ proces reklamacji</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="cb_wynik_reklamacji">
-            <property name="minimumSize">
-             <size>
-              <width>206</width>
-              <height>0</height>
-             </size>
+           <widget class="QPushButton" name="pb_zakoncz_reklamacje">
+            <property name="text">
+             <string>Zakończ</string>
             </property>
-            <item>
-             <property name="text">
-              <string>Pozytywny - Zwrot pieniędzy</string>
-             </property>
-            </item>
            </widget>
           </item>
           <item>

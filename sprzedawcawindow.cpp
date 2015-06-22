@@ -122,7 +122,7 @@ void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
         if(index == 0) //sztuki niereklamowane
         {
             ui->pb_przyjmij_reklamacje->setEnabled(true);
-            ui->cb_wynik_reklamacji->setEnabled(false);
+            ui->pb_zakoncz_reklamacje->setEnabled(false);
 
             query = "SELECT produkt.nazwa, sztuka.numer_seryjny, faktura.data_zrealizowania, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji, produkt.okres_gwarancyjny, sztuka.id_sztuka "
                     "FROM "
@@ -139,9 +139,9 @@ void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
         else //sztuki reklamowane
         {
             ui->pb_przyjmij_reklamacje->setEnabled(false);
-            ui->cb_wynik_reklamacji->setEnabled(true);
+            ui->pb_zakoncz_reklamacje->setEnabled(true);
 
-            query = "SELECT produkt.nazwa, sztuka.numer_seryjny, faktura.data_zrealizowania, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji, sztuka.id_sztuka "
+            query = "SELECT produkt.nazwa, sztuka.numer_seryjny, faktura.data_zrealizowania, sztuka.cena_sprzedazy, reklamacja.status, reklamacja.wynik_reklamacji, sztuka.id_sztuka, reklamacja.id_reklamacja "
                     "FROM "
                     "klient JOIN zamowienie ON klient.id_klient = zamowienie.id_klient "
                     "JOIN faktura ON zamowienie.id_zamowienie = faktura.id_zamowienie "
@@ -171,13 +171,12 @@ void SprzedawcaWindow::on_pb_przyjmij_reklamacje_clicked()
     if(!indexes.isEmpty())
     {
         QVector<QString> wybrana_sztuka = reklamacje->current_data.at(indexes.at(0).row());
-        if(wybrana_sztuka.size() >= 7)
+        if(ui->cb_stan_sztuk_reklamacja->currentIndex() == 0)
         {
-            //2015-06-02 00:00:00
             QString data_zakupu_str = wybrana_sztuka.at(2);
             int okres_gwarancyjny = wybrana_sztuka.at(6).toInt();
-            //TODO uzupełnić format
-            QDateTime data_wygasniecia_gwarancji = QDateTime::fromString(data_zakupu_str, "").addDays(okres_gwarancyjny);
+
+            QDateTime data_wygasniecia_gwarancji = QDateTime::fromString(data_zakupu_str, "yyyy-MM-dd HH:mm:ss").addDays(okres_gwarancyjny);
             QDateTime obecna_data = QDateTime::currentDateTime();
 
             qDebug() << obecna_data << data_wygasniecia_gwarancji;
@@ -186,12 +185,34 @@ void SprzedawcaWindow::on_pb_przyjmij_reklamacje_clicked()
                 App::message("Gwarancja skończyła się " + QString::number(-pozostaly_czas_gwarancji).toStdString() + " dni temu.");
             else
             {
-                //TODO uzupełnić format
-                QString query = "INSERT INTO reklamacja(status, data_zlozenia, id_sztuka, id_pracownik) VALUES ( 1, "
-                                + obecna_data.toString("") + ", " +  wybrana_sztuka.at(7) + ", " + QString::number(App::login_id) + ")";
+                QString query = "INSERT INTO reklamacja(status, data_zlozenia, id_sztuka, id_pracownik) VALUES ( 1, \'"
+                                + obecna_data.toString("yyyy-MM-dd HH:mm:ss") + "\', " +  wybrana_sztuka.at(7) + ", " + QString::number(App::login_id) + ")";
 
                 App::mysql->exec(query .toStdString());
             }
+        }
+    }
+}
+
+void SprzedawcaWindow::on_pb_zakoncz_reklamacje_clicked()
+{
+    QModelIndexList indexes = ui->tv_reklamacje->selectionModel()->selection().indexes();
+    if(!indexes.isEmpty())
+    {
+        QVector<QString> wybrana_sztuka = reklamacje->current_data.at(indexes.at(0).row());
+        if(ui->cb_stan_sztuk_reklamacja->currentIndex() == 1)
+        {
+            if(wybrana_sztuka.at(4) == "3")
+            {
+                QString query = "UPDATE reklamacja SET reklamacja.status = 4 WHERE reklamacja.id_reklamacja = \'"
+                                + wybrana_sztuka.at(7) + "\';";
+
+                App::mysql->exec(query.toStdString());
+
+                on_cb_stan_sztuk_reklamacja_activated(1);
+            }
+            else
+                App::message("Nie można zakończyć procesu reklamacji sztuki");
         }
     }
 }
