@@ -104,7 +104,13 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
     "JOIN producent ON produkt.id_producent = producent.id_producent "
     "JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
-    "WHERE produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu->text() + "%\' ";
+    "WHERE zamowienie.id_zamowienie IN ( "
+    "SELECT DISTINCT zamowienie.id_zamowienie"
+        " FROM "
+        "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+        "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+        " WHERE  produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu->text() + "%\') ";
+
     if(!dane_klienta.isEmpty()) query += " AND klient.id_klient = \'" + dane_klienta.at(dane_klienta.size()-1) + "\' ";
 
     if(ui->cb_czy_okres->isChecked())
@@ -131,12 +137,17 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
         QVector<QString> s = statusy->current_data.at(status_index);
         query += " AND zamowienie.status = \'" + s.at(s.size()-1) + "\' ";
     }
-    query += "GROUP BY zamowienie.id_zamowienie;";
+    query += " GROUP BY zamowienie.id_zamowienie;";
 
     if(ui->cb_czy_okres->isChecked() && ui->de_koniec->dateTime() < ui->de_poczatek->dateTime())
         App::message("Data końcowa jest mniejsza niż początkowa");
     else
+    {
         zamowienia_wyszukane->getDataFromDB(query);
+        ui->tv_zamowienia_wyszukane->setVisible(false);
+        ui->tv_zamowienia_wyszukane->resizeColumnsToContents();
+        ui->tv_zamowienia_wyszukane->setVisible(true);
+    }
 }
 
 void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
@@ -286,4 +297,21 @@ void SprzedawcaWindow::on_tabWidget_2_currentChanged(int index)
         dostawcy->getDataFromDB(QString("SELECT dostawca.nazwa, dostawca.id_dostawca FROM dostawca ORDER BY dostawca.nazwa ASC"));
         dostawcy->current_data.prepend(dowolny);
     }
+}
+
+void SprzedawcaWindow::on_tv_zamowienia_wyszukane_clicked(const QModelIndex &index)
+{
+    QString id_zamowienia = zamowienia_wyszukane->current_data.at(index.row()).at(0);
+    //"Nazwa Produktu" << "Cena za sztukę";
+    QString query = "SELECT produkt.nazwa, ROUND(dostawa.cena_zakupu, 2)"
+    " FROM "
+    "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+    " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
+
+    zawartosc_zamowienia->getDataFromDB(query);
+
+    ui->tv_zawartosc_zamowienia->setVisible(false);
+    ui->tv_zawartosc_zamowienia->resizeColumnsToContents();
+    ui->tv_zawartosc_zamowienia->setVisible(true);
 }

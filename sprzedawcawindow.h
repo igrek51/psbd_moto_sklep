@@ -46,6 +46,8 @@ private slots:
 
     void on_tabWidget_2_currentChanged(int index);
 
+    void on_tv_zamowienia_wyszukane_clicked(const QModelIndex &index);
+
 private:
     QVector<QString> dane_klienta;
 
