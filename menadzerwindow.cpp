@@ -117,7 +117,7 @@ void MenadzerWindow::on_pb_raport_zamowien_clicked()
         plik<<"\""<<App::mysql->el("id_zamowienie")<<"\";";
         plik<<"\""<<App::mysql->el("data_zlozenia")<<"\";";
         plik<<"\""<<App::mysql->el("nazwisko")<<" "<<App::mysql->el("imie")<<"\";";
-        plik<<"\""<<App::mysql->el("liczba_produktow");
+        plik<<"\""<<App::mysql->el("liczba_produktow")<<"\"";
         plik<<endl;
     }
     plik.close();
@@ -137,7 +137,7 @@ void MenadzerWindow::on_pb_raport_dostaw_clicked()
     int status = ui->cb_status_dostawy->currentIndex();
     //zapytanie
     stringstream ss;
-    ss<<"SELECT produkt.nazwa AS 'nazwa_produktu', sztuka.id_sztuka, dostawa.cena_zakupu, dostawca.nazwa AS 'nazwa dostawcy', dostawa.data_utworzenia, dostawa.data_realizacji";
+    ss<<"SELECT produkt.nazwa AS 'nazwa_produktu', sztuka.id_sztuka, dostawa.cena_zakupu, dostawca.nazwa AS 'nazwa_dostawcy', dostawa.data_utworzenia, dostawa.data_realizacji";
     ss<<" FROM (((dostawa LEFT JOIN sztuka USING(id_dostawa)) LEFT JOIN produkt USING(id_produkt)) LEFT JOIN dostawca USING(id_dostawca))";
     ss<<" WHERE dostawa.status = '"<<status<<"'";
     ss<<" AND dostawa.data_utworzenia >= from_unixtime("<<time_od<<")";
@@ -158,15 +158,14 @@ void MenadzerWindow::on_pb_raport_dostaw_clicked()
         return;
     }
     //nagłówek
-    plik<<"\"Nazwa produktu\";\"Cena zakupu\";\"Dostawca\";\"Numer sztuki\";\"Data utworzenia\";\"Data realizacji\""<<endl;
+    plik<<"\"Nazwa produktu\";\"Cena zakupu [zł]\";\"Dostawca\";\"Numer sztuki\";\"Data utworzenia\";\"Data realizacji\""<<endl;
     while(App::mysql->get_row()){
         plik<<"\""<<App::mysql->el("nazwa_produktu")<<"\";";
         plik<<"\""<<App::mysql->el("cena_zakupu")<<"\";";
         plik<<"\""<<App::mysql->el("nazwa_dostawcy")<<"\";";
-
-
-
-        plik<<"\""<<App::mysql->el("liczba_produktow");
+        plik<<"\""<<App::mysql->el("id_sztuka")<<"\";";
+        plik<<"\""<<App::mysql->el("data_utworzenia")<<"\";";
+        plik<<"\""<<App::mysql->el("data_realizacji")<<"\"";
         plik<<endl;
     }
     plik.close();
