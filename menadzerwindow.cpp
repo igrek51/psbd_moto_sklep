@@ -72,7 +72,7 @@ void MenadzerWindow::tab_raporty(){
     App::mysql->get_result("SELECT id_producent, nazwa FROM producent ORDER BY nazwa");
     while(App::mysql->get_row()){
         ui->cb_producent->addItem(App::mysql->elc("nazwa"));
-        raport_klient_id.push_back(App::mysql->eli("id_producent"));
+        raport_producent_id.push_back(App::mysql->eli("id_producent"));
     }
 }
 
@@ -129,7 +129,7 @@ void MenadzerWindow::on_pb_raport_dostaw_clicked()
     if(!wczytaj_od_do()) return;
     //wybrany dostawca
     int dostawca_id = 0; //wszyscy
-    int index = ui->cb_klient->currentIndex();
+    int index = ui->cb_dostawca1->currentIndex();
     if(index>0){
         dostawca_id = raport_dostawca_id[index-1];
     }
@@ -175,5 +175,58 @@ void MenadzerWindow::on_pb_raport_dostaw_clicked()
 void MenadzerWindow::on_pb_raport_sztuk_clicked()
 {
     if(!wczytaj_od_do()) return;
-
+    //wybrany producent
+    int producent_id = 0; //wszyscy
+    int index = ui->cb_producent->currentIndex();
+    if(index>0){
+        producent_id = raport_producent_id[index-1];
+    }
+    //wybrany dostawca
+    int dostawca_id = 0; //wszyscy
+    index = ui->cb_dostawca2->currentIndex();
+    if(index>0){
+        dostawca_id = raport_dostawca_id[index-1];
+    }
+    //wybrany status
+    int status = ui->cb_status_sztuki->currentIndex();
+    //zapytanie
+    stringstream ss;
+    ss<<"SELECT sztuka.id_sztuka, sztuka.numer_seryjny, dostawa.cena_zakupu, sztuka.cena_sprzedazy, dostawa.data_realizacji, dostawca.nazwa AS 'nazwa_dostawcy', produkt.nazwa AS 'nazwa_produktu', producent.nazwa AS 'nazwa_producenta'";
+    ss<<" FROM ((((sztuka LEFT JOIN dostawa USING(id_dostawa)) LEFT JOIN produkt USING(id_produkt)) LEFT JOIN dostawca USING(id_dostawca)) LEFT JOIN producent USING(id_producent))";
+    ss<<" WHERE sztuka.status = '"<<status<<"'";
+    ss<<" AND dostawa.data_realizacji >= from_unixtime("<<time_od<<")";
+    ss<<" AND dostawa.data_realizacji <= from_unixtime("<<time_do<<")";
+    if(dostawca_id>0){
+        ss<<" AND dostawa.id_dostawca = '"<<dostawca_id<<"'";
+    }
+    if(producent_id>0){
+        ss<<" AND produkt.id_producent = '"<<producent_id<<"'";
+    }
+    ss<<" ORDER BY dostawa.data_realizacji";
+    App::mysql->get_result(ss.str());
+    if(!App::mysql->ok) return;
+    //zapisanie pliku
+    ofstream plik;
+    string nazwa_pliku = "raport_sztuk.csv";
+    plik.open(nazwa_pliku.c_str(), fstream::binary);
+    if(!plik.good()){
+        plik.close();
+        App::message("Błąd zapisywania do pliku");
+        return;
+    }
+    //nagłówek
+    plik<<"\"Numer sztuki\";\"Numer seryjny\";\"Nazwa produktu\";\"Producent\";\"Dostawca\";\"Data dostarczenia\";\"Cena zakupu [zł]\";\"Cena sprzedazy [zł]\""<<endl;
+    while(App::mysql->get_row()){
+        plik<<"\""<<App::mysql->el("id_sztuka")<<"\";";
+        plik<<"\""<<App::mysql->el("numer_seryjny")<<"\";";
+        plik<<"\""<<App::mysql->el("nazwa_produktu")<<"\";";
+        plik<<"\""<<App::mysql->el("nazwa_producenta")<<"\";";
+        plik<<"\""<<App::mysql->el("nazwa_dostawcy")<<"\";";
+        plik<<"\""<<App::mysql->el("data_realizacji")<<"\";";
+        plik<<"\""<<App::mysql->el("cena_zakupu")<<"\";";
+        plik<<"\""<<App::mysql->el("cena_sprzedazy")<<"\"";
+        plik<<endl;
+    }
+    plik.close();
+    App::message("Raport został wygenerowany i zapisany do pliku: "+nazwa_pliku);
 }

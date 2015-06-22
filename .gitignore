@@ -8,3 +8,6 @@ Makefile.Release
 moto_sklep.pro.user
 object_script.Moto_Sklep.Debug
 object_script.Moto_Sklep.Release
+release/raport_dostaw.cpp
+release/raport_sztuk.cpp
+release/raport_zamowien.cpp
