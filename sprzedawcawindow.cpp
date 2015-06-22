@@ -40,6 +40,7 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     ui->cb_statusy_zamowien->setModel(statusy);
     wybor_klienta = NULL;
 
+    ui->de_koniec->setDateTime(QDateTime::currentDateTime());
     on_cb_czy_okres_clicked(false);
     on_tabWidget_2_currentChanged(0);
 }
@@ -132,7 +133,10 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     }
     query += "GROUP BY zamowienie.id_zamowienie;";
 
-    zamowienia_wyszukane->getDataFromDB(query);
+    if(ui->cb_czy_okres->isChecked() && ui->de_koniec->dateTime() < ui->de_poczatek->dateTime())
+        App::message("Data końcowa jest mniejsza niż początkowa");
+    else
+        zamowienia_wyszukane->getDataFromDB(query);
 }
 
 void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
