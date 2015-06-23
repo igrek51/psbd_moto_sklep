@@ -23,6 +23,14 @@ private slots:
 
     void on_cb_wersja_currentIndexChanged(int index);
 
+    void on_tv_produkty_wyszukane_clicked(const QModelIndex &index);
+
+    void on_lv_kategorie_clicked(const QModelIndex &index);
+
+    void on_le_nazwa_textChanged(const QString &arg1);
+
+    void on_sb_ilosc_valueChanged(int arg1);
+
 private:
     void szukajProduktow();
 
@@ -35,6 +43,7 @@ private:
     DataModel* produkty_wyszukane;
     DataModel* produkty_w_zamowieniu;
     DataModel* dostawcy;
+    DataModel* wybrany_produkt;
 };
 
 #endif // EDYCJAZAMOWIENIA_H

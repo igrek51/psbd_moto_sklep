@@ -212,9 +212,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="l_opis">
+           <widget class="QLabel" name="l_opis_2">
             <property name="text">
              <string>Opis:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="l_opis">
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
@@ -235,9 +242,16 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="l_parametry">
+           <widget class="QLabel" name="l_parametry_2">
             <property name="text">
              <string>Parametry techniczne:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="l_parametry">
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
@@ -280,7 +294,17 @@
              </spacer>
             </item>
             <item>
-             <widget class="QLineEdit" name="l_ilosc"/>
+             <widget class="QSpinBox" name="sb_ilosc">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <number>999</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
