@@ -142,12 +142,10 @@ void EdycjaZamowienia::on_tv_produkty_wyszukane_clicked(const QModelIndex &index
 {
 //    wybrany_produkt
     QString produkt_id = produkty_wyszukane->current_data.at(index.row()).at(1);
-    QString query = "SELECT produkt.nazwa, produkt.opis, produkt.parametry_techniczne, Count(*), produkt.id_produkt"
+    QString query = "SELECT produkt.nazwa, produkt.opis, produkt.parametry_techniczne, produkt.id_produkt"
                     " FROM"
-                    " produkt LEFT JOIN dostawa ON produkt.id_produkt = dostawa.id_produkt"
-                    " LEFT JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa"
-                    " WHERE produkt.id_produkt = \'" + produkt_id + "\'"
-                    " GROUP BY produkt.id_produkt;";
+                    " produkt "
+                    " WHERE produkt.id_produkt = \'" + produkt_id + "\'";
 
     wybrany_produkt->getDataFromDB(query);
     if(wybrany_produkt->current_data.size() > 0)
@@ -156,18 +154,45 @@ void EdycjaZamowienia::on_tv_produkty_wyszukane_clicked(const QModelIndex &index
         ui->l_opis->setText(wybrany_produkt->current_data.at(0).at(1));
         ui->l_parametry->setText(wybrany_produkt->current_data.at(0).at(2));
     }
+    query = /*"(SELECT dostawca.nazwa, dostawca.id_dostawca"
+            " FROM"
+            " dostawca JOIN dostawa ON dostawca.id_dostawca = dostawa.id_dostawca"
+            " WHERE dostawa.id_dostawa IN "
+            " ( SELECT dostawa.id_dostawa FROM "
+            " dostawa LEFT JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
+            " WHERE dostawa.id_produkt = \'" + produkt_id + "\' AND sztuka.status = 1) "
+            " )"
+            "UNION"*/
+            "( SELECT dostawca.nazwa, dostawca.id_dostawca FROM "
+            " dostepnosc_dostawy JOIN dostawca ON dostepnosc_dostawy.id_dostawca = dostawca.id_dostawca"
+            " WHERE dostepnosc_dostawy.id_produkt =  \'" + produkt_id + "\'"
+            ")";
+    dostawcy->getDataFromDB(query);
+
+    ui->cb_dostawca->setCurrentIndex(0);
+    on_cb_dostawca_activated(0);
+    ui->cb_dostawca->update();
 }
 
-
-void EdycjaZamowienia::on_sb_ilosc_valueChanged(int arg1)
+void EdycjaZamowienia::on_cb_dostawca_activated(int index)
 {
-    ui->l_dostepnosc->setText("Dostępny");
-    if(wybrany_produkt->current_data.size() > 0)
+    //wybor dostawcy
+    if(index < 0 || dostawcy->current_data.size() <= index || wybrany_produkt->current_data.size() < 1) return;
+
+    QString dostawca_id = dostawcy->current_data.at(index).at(1);
+    QString produkt_id = wybrany_produkt->current_data.at(0).at(3);
+
+    QString query = " SELECT dostepnosc_dostawy.cena_sprzedazy, dostepnosc_dostawy.czas_dostawy"
+                    " FROM "
+                    " dostawca LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawca.id_dostawca"
+                    " WHERE dostepnosc_dostawy.id_produkt =  \'" + produkt_id + "\' "
+                    " AND dostawca.id_dostawca =  \'" + dostawca_id + "\'";
+    DataModel model;
+    model.getDataFromDB(query);
+
+    if(model.current_data.size() > 0)
     {
-        int dostepna_ilosc = wybrany_produkt->current_data.at(0).at(3).toInt();
-        if(arg1 > dostepna_ilosc)
-        {
-            ui->l_dostepnosc->setText("Nie dostępny");
-        }
+        ui->l_cena->setText("Cena sprzedarzy: " + model.current_data.at(0).at(0) + " zł");
+        ui->l_czas_dostawy->setText("Czas dostawy: " + model.current_data.at(0).at(1) + " dni");
     }
 }

@@ -29,7 +29,7 @@ private slots:
 
     void on_le_nazwa_textChanged(const QString &arg1);
 
-    void on_sb_ilosc_valueChanged(int arg1);
+    void on_cb_dostawca_activated(int index);
 
 private:
     void szukajProduktow();
