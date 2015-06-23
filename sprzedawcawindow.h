@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "datamodel.h"
 #include "wyborklientawindow.h"
+#include "edycjazamowienia.h"
 
 namespace Ui {
 class SprzedawcaWindow;
@@ -38,7 +39,15 @@ private slots:
 
     void on_le_nazwa_produktu_reklamacje_textChanged(const QString &arg1);
 
-    void on_comboBox_3_currentIndexChanged(int index);
+    void on_cb_stan_sztuk_reklamacja_activated(int index);
+
+    void on_pb_przyjmij_reklamacje_clicked();
+
+    void on_pb_zakoncz_reklamacje_clicked();
+
+    void on_tabWidget_2_currentChanged(int index);
+
+    void on_tv_zamowienia_wyszukane_clicked(const QModelIndex &index);
 
 private:
     QVector<QString> dane_klienta;
@@ -47,8 +56,9 @@ private:
     DataModel* zamowienia_wyszukane;
     DataModel* zawartosc_zamowienia;
     DataModel* reklamacje;
-
-    WyborKlientaWindow* wybor_klienta;
+    DataModel* producenci;
+    DataModel* dostawcy;
+    DataModel* statusy;
 };
 
 #endif // SPRZEDAWCAWINDOW_H

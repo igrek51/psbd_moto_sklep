@@ -13,7 +13,7 @@ class WyborKlientaWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit WyborKlientaWindow(QWidget *parent = 0);
+    explicit WyborKlientaWindow(QVector<QString> klient, QWidget *parent = 0);
     ~WyborKlientaWindow();
 
     //dane klienta: imie, nazwisko, adres, pesel, telefon, e_mail, id_klient
@@ -21,6 +21,7 @@ public:
 
 private slots:
 
+    //wybranie klienta i zamknięcie dialogu
     void on_pb_wybierz_clicked();
 
     void on_pb_dodaj_clicked();
