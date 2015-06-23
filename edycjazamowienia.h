@@ -16,6 +16,12 @@ public:
     explicit EdycjaZamowienia(QWidget *parent = 0);
     ~EdycjaZamowienia();
 
+
+    QVector< QVector<QString> > nowe_produkty;
+    QVector< QVector<QString> > stare_produkty;
+    QVector< QVector<QString> > usuniete_produkty;
+    QVector<QString> dane_klienta;
+
 private slots:
     void on_cb_marka_currentIndexChanged(int index);
 
@@ -33,6 +39,14 @@ private slots:
 
     void on_pb_dodaj_produkt_clicked();
 
+    void on_pb_usun_produkt_clicked();
+
+    void on_pw_zatwierdz_zmiany_clicked();
+
+    void on_pw_anuluj_zmiany_clicked();
+
+    void on_pb_wybierz_klienta_clicked();
+
 private:
     void szukajProduktow();
 
@@ -43,9 +57,9 @@ private:
     DataModel* modele;
     DataModel* wersje;
     DataModel* produkty_wyszukane;
-    DataModel* produkty_w_zamowieniu;
     DataModel* dostawcy;
     DataModel* wybrany_produkt;
+    DataModel* produkty_w_zamowieniu;
     QString cena, czas_dostawy;
 };
 

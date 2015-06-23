@@ -1,5 +1,6 @@
 #include "edycjazamowienia.h"
 #include "ui_edycja_zamowienia.h"
+#include "app.h"
 #include <QDebug>
 
 EdycjaZamowienia::EdycjaZamowienia(QWidget *parent) :
@@ -205,6 +206,63 @@ void EdycjaZamowienia::on_pb_dodaj_produkt_clicked()
     QVector <QString> produkt;
     produkt << wybrany_produkt->current_data.at(0).at(0) << cena << czas_dostawy << wybrany_produkt->current_data.at(0).at(1);
     for(int i = 0; i < ui->sb_ilosc->value(); i++)
+    {
         produkty_w_zamowieniu->current_data.append(produkt);
+        nowe_produkty.append(produkt);
+    }
     produkty_w_zamowieniu->layoutChanged();
+}
+
+void EdycjaZamowienia::on_pb_usun_produkt_clicked()
+{
+    QModelIndexList indexes = ui->tv_produkty_zamowienie->selectionModel()->selection().indexes();
+    if(!indexes.isEmpty() )
+    {
+        int row = indexes.at(0).row();
+        if(row < produkty_w_zamowieniu->current_data.size())
+        {
+            if(row < stare_produkty.size())
+            {
+                usuniete_produkty.append(stare_produkty.at(row));
+                stare_produkty.remove(row);
+            }
+            else
+                nowe_produkty.remove(row);
+
+            produkty_w_zamowieniu->current_data.remove(row);
+            produkty_w_zamowieniu->layoutChanged();
+        }
+    }
+}
+
+void EdycjaZamowienia::on_pw_zatwierdz_zmiany_clicked()
+{
+    //zatwierdz
+    if(dane_klienta.isEmpty())
+        App::message("Nie wybrano klienta");
+    else if((stare_produkty.size() + nowe_produkty.size()) == 0)
+        App::message("Brak produków w zamówieniu");
+    else
+        accept();
+}
+
+void EdycjaZamowienia::on_pw_anuluj_zmiany_clicked()
+{
+    reject();
+}
+
+void EdycjaZamowienia::on_pb_wybierz_klienta_clicked()
+{
+    WyborKlientaWindow wybor_klienta(dane_klienta);
+    wybor_klienta.setModal(true);
+    wybor_klienta.exec();
+
+    if(wybor_klienta.result() == QDialog::Accepted)
+    {
+        dane_klienta = wybor_klienta.dane_klienta;
+        if(dane_klienta.size() >= 2)
+            ui->l_klient->setText(dane_klienta.at(0) + " " + dane_klienta.at(1));
+        else
+            ui->l_klient->setText("Imie i nazwisko klienta");
+    }
 }
