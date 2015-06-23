@@ -33,6 +33,8 @@ public:
     string field_name(int index);
     //podaj indeks kolumny o podanej nazwie
     int field_index(string nazwa);
+    //indeks ostatniego wywołania INSERT lub UPDATE tabeli, która ma autoincrement
+    long long last_id();
 
     //   WIERSZ WYNIKU ZAPYTANIA
     MYSQL_ROW row; //tymczasowy wiersz

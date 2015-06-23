@@ -131,6 +131,10 @@ int MySQL_y::field_index(string nazwa){
     return -1;
 }
 
+long long MySQL_y::last_id(){
+    return mysql_insert_id(&mysql);
+}
+
 
 bool MySQL_y::get_row(){
     if(result==NULL){

@@ -151,6 +151,27 @@ void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
     EdycjaZamowienia edycja_zamowienia;
     edycja_zamowienia.setModal(true);
     edycja_zamowienia.exec();
+    if(edycja_zamowienia.result() == QDialog::Accepted)
+    {
+        //dodanie zamowienia klienta
+
+        QString query = "INSERT INTO zamowienie(status, data_zlozenia, id_pracownik, id_klient)"
+                        " VALUES ( \"1\", \"" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+                         + "\", \"" + QString::number(App::login_id) + "\", \"" +
+                edycja_zamowienia.dane_klienta.at(edycja_zamowienia.dane_klienta.size() - 1) + "\")";
+
+        App::mysql->exec(query.toStdString());
+        int zamowienie_id = App::mysql->last_id();
+
+        qDebug() << zamowienie_id;
+//        DataModel model;
+//        QString id_produkt, id_dostawca;
+
+//        query = "SELECT dostawa.id_dostawa, sztuka.id_sztuka"
+//                " FROM "
+//                " dostawa JOIN sztuka ON dostawa.id_dostawa = sztuks.id_dostawa "
+//                " WHERE dostawa"
+    }
 }
 
 void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
@@ -159,6 +180,10 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
     EdycjaZamowienia edycja_zamowienia;
     edycja_zamowienia.setModal(true);
     edycja_zamowienia.exec();
+    if(edycja_zamowienia.result() == QDialog::Accepted)
+    {
+
+    }
 }
 
 void SprzedawcaWindow::on_pb_anuluj_zamowienie_clicked()
