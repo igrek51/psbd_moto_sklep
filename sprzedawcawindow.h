@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "datamodel.h"
 #include "wyborklientawindow.h"
+#include "edycjazamowienia.h"
 
 namespace Ui {
 class SprzedawcaWindow;
@@ -58,8 +59,6 @@ private:
     DataModel* producenci;
     DataModel* dostawcy;
     DataModel* statusy;
-
-    WyborKlientaWindow* wybor_klienta;
 };
 
 #endif // SPRZEDAWCAWINDOW_H

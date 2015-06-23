@@ -13,7 +13,8 @@ SOURCES += main.cpp\
     sprzedawcawindow.cpp \
     menadzerwindow.cpp \
     datamodel.cpp \
-    wyborklientawindow.cpp
+    wyborklientawindow.cpp \
+    edycjazamowienia.cpp
 
 HEADERS  += mainwindow.h \
     mysql_y.h \
@@ -22,14 +23,16 @@ HEADERS  += mainwindow.h \
     sprzedawcawindow.h \
     menadzerwindow.h \
     datamodel.h \
-    wyborklientawindow.h
+    wyborklientawindow.h \
+    edycjazamowienia.h
 
 FORMS    += mainwindow.ui\
 		magazynier.ui\
 		menadzer.ui\
 		sprzedawca.ui\
     wybor_klienta.ui \
-    sprzedawca_zamowienie.ui
+    sprzedawca_zamowienie.ui \
+    edycja_zamowienia.ui
 
 
 LIBS += -Lmysql_lib -llibmysql

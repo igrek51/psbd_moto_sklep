@@ -13,7 +13,6 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     zamowienia_wyszukane = new DataModel;
     zamowienia_wyszukane->header << "Numer zamówienia" << "Data złożenia" << "Imię" << "Nazwisko" << "Wartość zamówienia" << "Status";
     zamowienia_wyszukane->column_count = zamowienia_wyszukane->header.size();
-//    zamowienia_wyszukane->getData("SELECT dostawa.id_dostawa AS 'id_dostawa', dostawca.nazwa AS 'dostawca', produkt.nazwa AS 'produkt', dostawa.cena_zakupu AS 'cena', dostawa.status AS 'status' FROM ((dostawa LEFT JOIN dostawca USING (id_dostawca)) LEFT JOIN produkt USING (id_produkt)) WHERE dostawa.status = 1 OR dostawa.status = 2 ORDER BY dostawa.status, dostawa.data_utworzenia");
     ui->tv_zamowienia_wyszukane->setModel(zamowienia_wyszukane);
 
     zawartosc_zamowienia = new DataModel;
@@ -38,7 +37,6 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     statusy->current_data << (QVector<QString>() << "Wszystkie") << (QVector<QString>() << "1") << (QVector<QString>() << "2") << (QVector<QString>() << "3") << (QVector<QString>() << "4");
     statusy->column_count = 1;
     ui->cb_statusy_zamowien->setModel(statusy);
-    wybor_klienta = NULL;
 
     ui->de_koniec->setDateTime(QDateTime::currentDateTime());
     on_cb_czy_okres_clicked(false);
@@ -95,8 +93,6 @@ void SprzedawcaWindow::on_cb_czy_okres_clicked(bool checked)
 void SprzedawcaWindow::on_pb_szukaj_clicked()
 {
     //wyszukanie pasujących zamówień
-//    "Numer zamówienia" << "Data złożenia" << "Imię" << "Nazwisko" << "Wartość zamówienia" << "Status";
-
     QString query = "SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, ROUND(SUM(dostawa.cena_zakupu), 2), zamowienie.status"
     " FROM "
     "klient JOIN zamowienie ON klient.id_klient = zamowienie.id_klient "
@@ -115,7 +111,6 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
 
     if(ui->cb_czy_okres->isChecked())
     {
-//        QDateTime::fromString(data_zakupu_str, "yyyy-MM-dd HH:mm:ss")
         query += " AND zamowienie.data_zlozenia >= \'" + ui->de_poczatek->dateTime().toString("yyyy-MM-dd HH:mm:ss") + "\'";
         query += " AND zamowienie.data_zlozenia <= \'" + ui->de_koniec->dateTime().toString("yyyy-MM-dd HH:mm:ss") + "\'";
     }
@@ -153,11 +148,17 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
 void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
 {
     //okno nowego zamówienia
+    EdycjaZamowienia edycja_zamowienia;
+    edycja_zamowienia.setModal(true);
+    edycja_zamowienia.exec();
 }
 
 void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
 {
     //okno edycji zamówienia
+    EdycjaZamowienia edycja_zamowienia;
+    edycja_zamowienia.setModal(true);
+    edycja_zamowienia.exec();
 }
 
 void SprzedawcaWindow::on_pb_anuluj_zamowienie_clicked()
