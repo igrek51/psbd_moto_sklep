@@ -16,7 +16,16 @@ public:
     explicit EdycjaZamowienia(QWidget *parent = 0);
     ~EdycjaZamowienia();
 
+private slots:
+    void on_cb_marka_currentIndexChanged(int index);
+
+    void on_cb_model_currentIndexChanged(int index);
+
+    void on_cb_wersja_currentIndexChanged(int index);
+
 private:
+    void szukajProduktow();
+
     Ui::EdycjaZamowienia *ui;
 
     DataModel* kategorie;
