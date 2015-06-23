@@ -118,7 +118,7 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     if(dostawca_index > 0)
     {
         QVector<QString> dostawca = dostawcy->current_data.at(dostawca_index);
-        query += " AND dostawca.id_dostwca = \'" + dostawca.at(dostawca.size()-1) + "\'";
+        query += " AND dostawca.id_dostawca = \'" + dostawca.at(dostawca.size()-1) + "\'";
     }
     int producent_index = ui->cb_producent->currentIndex();
     if(producent_index > 0)
@@ -156,34 +156,139 @@ void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
         //dodanie zamowienia klienta
 
         QString query = "INSERT INTO zamowienie(status, data_zlozenia, id_pracownik, id_klient)"
-                        " VALUES ( \"1\", \"" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
-                         + "\", \"" + QString::number(App::login_id) + "\", \"" +
-                edycja_zamowienia.dane_klienta.at(edycja_zamowienia.dane_klienta.size() - 1) + "\")";
+                        " VALUES ( \'1\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+                         + "\', \'" + QString::number(App::login_id) + "\', \'" +
+                edycja_zamowienia.dane_klienta.at(edycja_zamowienia.dane_klienta.size() - 1) + "\')";
 
         App::mysql->exec(query.toStdString());
-        int zamowienie_id = App::mysql->last_id();
+        QString zamowienie_id = QString::number(App::mysql->last_id());
 
-        qDebug() << zamowienie_id;
-//        DataModel model;
-//        QString id_produkt, id_dostawca;
+        DataModel model;
+        QString id_produkt, id_dostawca, cena_zakupu;
 
-//        query = "SELECT dostawa.id_dostawa, sztuka.id_sztuka"
-//                " FROM "
-//                " dostawa JOIN sztuka ON dostawa.id_dostawa = sztuks.id_dostawa "
-//                " WHERE dostawa"
+        QVector< QVector<QString> >::iterator iter = edycja_zamowienia.nowe_produkty.begin();
+        for(; iter != edycja_zamowienia.nowe_produkty.end(); iter++)
+        {
+            id_produkt = iter->at(3);
+            id_dostawca = iter->at(4);
+
+            query = "SELECT dostawa.id_dostawa, sztuka.id_sztuka"
+                    " FROM "
+                    " dostawa JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
+                    " WHERE dostawa.id_dostawca = \'" + id_dostawca + "\' AND "
+                    " dostawa.id_produkt = \'" + id_produkt + "\' "
+                    " AND sztuka.status = 1 "
+                    " LIMIT 1 ";
+
+            model.getDataFromDB(query);
+
+            if(model.current_data.size() > 0)
+            {
+                query = "UPDATE sztuka SET status = 2 WHERE id_sztuka = \'" + model.current_data.at(0).at(1) + "\'";
+                App::mysql->exec(query.toStdString());
+                query = "UPDATE dostawa SET id_zamowienie = \'" + zamowienie_id + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
+                App::mysql->exec(query.toStdString());
+                query = "UPDATE dostawa SET id_pracownik = \'" + QString::number(App::login_id) + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
+                App::mysql->exec(query.toStdString());
+            }
+            else
+            {
+                query = "SELECT dostepnosc_dostawy.cena_zakupu FROM dostepnosc_dostawy WHERE dostepnosc_dostawy.id_dostawca = \'" + id_dostawca + "\'"
+                        " AND dostepnosc_dostawy.id_produkt = \'" + id_produkt + "\'";
+                model.getDataFromDB(query);
+                if(model.current_data.size() > 0)
+                    cena_zakupu =  model.current_data.at(0).at(0);
+                else cena_zakupu = "0";
+
+                query = "INSERT INTO dostawa(status, cena_zakupu, data_utworzenia, id_pracownik, id_zamowienie, id_produkt, id_dostawca)"
+                         " VALUES ( \'2\', \'" + cena_zakupu + "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+                                         + "\', \'" + QString::number(App::login_id) + "\', \'" + zamowienie_id + "\', \'" + id_produkt + "\', \'" + id_dostawca + "\')";
+                App::mysql->exec(query.toStdString());
+            }
+        }
     }
 }
 
 void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
 {
     //okno edycji zamówienia
-    EdycjaZamowienia edycja_zamowienia;
+    QModelIndexList indexes = ui->tv_zamowienia_wyszukane->selectionModel()->selection().indexes();
+    if(indexes.isEmpty()) return;
+    QString id_zamowienia = zamowienia_wyszukane->current_data.at(indexes.at(0).row()).at(0);
+    //produkt.nazwa << cena << czas << produkt_id << dostawca_id
+    QString query = "SELECT produkt.nazwa, ROUND(dostepnosc_dostawy.cena_sprzedazy, 2), dostepnosc_dostawy.czas_dostawy, dostawa.id_dostawa "
+    " FROM "
+    "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+    "JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca AND dostepnosc_dostawy.id_produkt = dostawa.id_produkt"
+    " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
+
+    DataModel model;
+    model.getDataFromDB(query);
+
+    EdycjaZamowienia edycja_zamowienia(true);
     edycja_zamowienia.setModal(true);
+    edycja_zamowienia.stare_produkty = model.current_data;
+    edycja_zamowienia.produkty_w_zamowieniu->current_data = model.current_data;
+    edycja_zamowienia.dane_klienta = dane_klienta;
+    edycja_zamowienia.pokazKlienta();
     edycja_zamowienia.exec();
     if(edycja_zamowienia.result() == QDialog::Accepted)
     {
+        QString query;
+        QString id_produkt, id_dostawca, cena_zakupu;
 
+        QVector< QVector<QString> >::iterator iter = edycja_zamowienia.nowe_produkty.begin();
+        for(; iter != edycja_zamowienia.nowe_produkty.end(); iter++)
+        {
+            id_produkt = iter->at(3);
+            id_dostawca = iter->at(4);
+
+            query = "SELECT dostawa.id_dostawa, sztuka.id_sztuka"
+                    " FROM "
+                    " dostawa JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
+                    " WHERE dostawa.id_dostawca = \'" + id_dostawca + "\' AND "
+                    " dostawa.id_produkt = \'" + id_produkt + "\' "
+                    " AND sztuka.status = 1 "
+                    " LIMIT 1 ";
+
+            model.getDataFromDB(query);
+
+            if(model.current_data.size() > 0)
+            {
+                query = "UPDATE sztuka SET status = 2 WHERE id_sztuka = \'" + model.current_data.at(0).at(1) + "\'";
+                App::mysql->exec(query.toStdString());
+                query = "UPDATE dostawa SET id_zamowienie = \'" + id_zamowienia + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
+                App::mysql->exec(query.toStdString());
+                query = "UPDATE dostawa SET id_pracownik = \'" + QString::number(App::login_id) + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
+                App::mysql->exec(query.toStdString());
+            }
+            else
+            {
+                query = "SELECT dostepnosc_dostawy.cena_zakupu FROM dostepnosc_dostawy WHERE dostepnosc_dostawy.id_dostawca = \'" + id_dostawca + "\'"
+                        " AND dostepnosc_dostawy.id_produkt = \'" + id_produkt + "\'";
+                model.getDataFromDB(query);
+                if(model.current_data.size() > 0)
+                    cena_zakupu =  model.current_data.at(0).at(0);
+                else cena_zakupu = "0";
+
+                query = "INSERT INTO dostawa(status, cena_zakupu, data_utworzenia, id_pracownik, id_zamowienie, id_produkt, id_dostawca)"
+                         " VALUES ( \'2\', \'" + cena_zakupu + "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+                                         + "\', \'" + QString::number(App::login_id) + "\', \'" + id_zamowienia + "\', \'" + id_produkt + "\', \'" + id_dostawca + "\')";
+                App::mysql->exec(query.toStdString());
+            }
+        }
+        iter = edycja_zamowienia.usuniete_produkty.begin();
+        for(; iter != edycja_zamowienia.usuniete_produkty.end(); iter++)
+        {
+            query = "UPDATE dostawa SET id_zamowienie = \'NULL\' WHERE id_dostawa = \'" + iter->at(3) + "\'";
+            App::mysql->exec(query.toStdString());
+            query = "UPDATE dostawa SET status = \'1\' WHERE id_dostawa = \'" + iter->at(3) + "\'";
+            App::mysql->exec(query.toStdString());
+        }
     }
+
+    on_tv_zamowienia_wyszukane_clicked(indexes.at(0));
 }
 
 void SprzedawcaWindow::on_pb_anuluj_zamowienie_clicked()

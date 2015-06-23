@@ -3,11 +3,14 @@
 #include "app.h"
 #include <QDebug>
 
-EdycjaZamowienia::EdycjaZamowienia(QWidget *parent) :
+EdycjaZamowienia::EdycjaZamowienia(bool edycja, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EdycjaZamowienia)
 {
     ui->setupUi(this);
+    this->edycja = edycja;
+    if(edycja)
+        ui->pb_wybierz_klienta->setEnabled(false);
 
     kategorie = new DataModel;
     kategorie->column_count = 1;
@@ -49,6 +52,14 @@ EdycjaZamowienia::EdycjaZamowienia(QWidget *parent) :
 EdycjaZamowienia::~EdycjaZamowienia()
 {
     delete ui;
+}
+
+void EdycjaZamowienia::pokazKlienta()
+{
+    if(dane_klienta.size() >= 2)
+        ui->l_klient->setText(dane_klienta.at(0) + " " + dane_klienta.at(1));
+    else
+        ui->l_klient->setText("Imie i nazwisko klienta");
 }
 
 void EdycjaZamowienia::on_cb_marka_currentIndexChanged(int index)
@@ -203,6 +214,7 @@ void EdycjaZamowienia::on_cb_dostawca_activated(int index)
 
 void EdycjaZamowienia::on_pb_dodaj_produkt_clicked()
 {
+    if(wybrany_produkt->current_data.isEmpty()) return;
     QVector <QString> produkt;
     //produkt.nazwa << cena << czas << produkt_id << dostawca_id
     produkt << wybrany_produkt->current_data.at(0).at(0) << cena << czas_dostawy << wybrany_produkt->current_data.at(0).at(3) << dostawcy->current_data.at(ui->cb_dostawca->currentIndex()).at(1);
@@ -261,9 +273,6 @@ void EdycjaZamowienia::on_pb_wybierz_klienta_clicked()
     if(wybor_klienta.result() == QDialog::Accepted)
     {
         dane_klienta = wybor_klienta.dane_klienta;
-        if(dane_klienta.size() >= 2)
-            ui->l_klient->setText(dane_klienta.at(0) + " " + dane_klienta.at(1));
-        else
-            ui->l_klient->setText("Imie i nazwisko klienta");
+        pokazKlienta();
     }
 }
