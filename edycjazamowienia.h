@@ -31,6 +31,8 @@ private slots:
 
     void on_cb_dostawca_activated(int index);
 
+    void on_pb_dodaj_produkt_clicked();
+
 private:
     void szukajProduktow();
 
@@ -44,6 +46,7 @@ private:
     DataModel* produkty_w_zamowieniu;
     DataModel* dostawcy;
     DataModel* wybrany_produkt;
+    QString cena, czas_dostawy;
 };
 
 #endif // EDYCJAZAMOWIENIA_H

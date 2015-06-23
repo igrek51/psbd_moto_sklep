@@ -190,9 +190,21 @@ void EdycjaZamowienia::on_cb_dostawca_activated(int index)
     DataModel model;
     model.getDataFromDB(query);
 
+    cena = czas_dostawy = "";
     if(model.current_data.size() > 0)
     {
+        cena = model.current_data.at(0).at(0);
+        czas_dostawy =  model.current_data.at(0).at(1);
         ui->l_cena->setText("Cena sprzedarzy: " + model.current_data.at(0).at(0) + " zł");
         ui->l_czas_dostawy->setText("Czas dostawy: " + model.current_data.at(0).at(1) + " dni");
     }
+}
+
+void EdycjaZamowienia::on_pb_dodaj_produkt_clicked()
+{
+    QVector <QString> produkt;
+    produkt << wybrany_produkt->current_data.at(0).at(0) << cena << czas_dostawy << wybrany_produkt->current_data.at(0).at(1);
+    for(int i = 0; i < ui->sb_ilosc->value(); i++)
+        produkty_w_zamowieniu->current_data.append(produkt);
+    produkty_w_zamowieniu->layoutChanged();
 }
