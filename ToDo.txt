@@ -1,7 +1,6 @@
 KOD PROGRAMU:
-
-DIAGRAMY AKTYWNOŒCI:
-	diagram aktywnoœci wyboru produktu do zamówienia - coœ siê Wnuk ostatnio przyczepi³, ale ju¿ nie pamiêtam o co chodzi³o
-
-DOKUMENTACJA:
-	Zmergowaæ ca³¹ dokumentacjê w 1 PDF
+Dodaj produkt
+Kategorie: wszystkie
+lista produktów w zamówieniu
+edycja zamówienia: zatwierdŸ - nie wybrano klienta
+protected layouty
