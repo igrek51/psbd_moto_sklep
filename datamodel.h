@@ -24,8 +24,9 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role);
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
-    QVector <QString> header;
+    QVector< QString > header;
     QVector< QVector<QString> > current_data;
+    QMap<int, QMap <QString, QString> > state;
     int column_count;
 };
 

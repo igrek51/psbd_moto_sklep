@@ -1,5 +1,6 @@
 #include "datamodel.h"
 #include "app.h"
+#include <QDebug>
 
 DataModel::DataModel()
 {
@@ -72,6 +73,14 @@ QVariant DataModel::data(const QModelIndex &index, int role) const
         QVector<QString> data_row = current_data.at(row);
         QString str = "";
         if(column < data_row.size()) str = data_row.at(column);
+
+        QMap <QString, QString> map = state[column];
+        if(!map.isEmpty())
+        {
+            QString s = map[str];
+            if(!s.isEmpty()) return s;
+        }
+
         return str;
     }
 

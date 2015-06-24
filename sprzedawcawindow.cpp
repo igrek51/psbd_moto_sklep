@@ -14,6 +14,13 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     zamowienia_wyszukane->header << "Numer zamówienia" << "Data złożenia" << "Imię" << "Nazwisko" << "Wartość zamówienia" << "Status";
     zamowienia_wyszukane->column_count = zamowienia_wyszukane->header.size();
     ui->tv_zamowienia_wyszukane->setModel(zamowienia_wyszukane);
+    QMap<QString, QString> m1;
+    m1["1"] = "Przyjęte";
+    m1["2"] = "Gotowe do dobioru";
+    m1["3"] = "Zrealizowane";
+    m1["4"] = "Anulowane";
+    zamowienia_wyszukane->state[5] = m1;
+
 
     zawartosc_zamowienia = new DataModel;
     zawartosc_zamowienia->header << "Nazwa Produktu" << "Cena za sztukę";
@@ -24,6 +31,18 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     reklamacje->header << "Nazwa Produktu" << "Numer seryjny" << "Data wydania" << "Cena sprzedaży" << "Status reklamacji" << "Wynk reklamacji";
     reklamacje->column_count = reklamacje->header.size();
     ui->tv_reklamacje->setModel(reklamacje);
+    QMap<QString, QString> m2;
+    m2["1"] = "Przyjeto";
+    m2["2"] = "Odeslano";
+    m2["3"] = "Rozpatrzono i odebrano";
+    m2["4"] = "Zakończono";
+    reklamacje->state[4] = m2;
+    QMap<QString, QString> m3;
+    m3["1"] = "Negatywny";
+    m3["2"] = "Pozytywny - zwrot pieniędzy";
+    m3["3"] = "Pozytywny naprawa";
+    m3["4"] = "Pozytywny wymiana";
+    reklamacje->state[5] = m3;
 
     producenci = new DataModel;
     producenci->column_count = 1;
@@ -37,6 +56,12 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     statusy->current_data << (QVector<QString>() << "Wszystkie") << (QVector<QString>() << "1") << (QVector<QString>() << "2") << (QVector<QString>() << "3") << (QVector<QString>() << "4");
     statusy->column_count = 1;
     ui->cb_statusy_zamowien->setModel(statusy);
+    QMap<QString, QString> m4;
+    m4["1"] = "Przyjęte";
+    m4["2"] = "Gotowe do dobioru";
+    m4["3"] = "Zrealizowane";
+    m4["4"] = "Anulowane";
+    statusy->state[0] = m4;
 
     ui->de_koniec->setDateTime(QDateTime::currentDateTime());
     on_cb_czy_okres_clicked(false);
@@ -95,19 +120,22 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     //wyszukanie pasujących zamówień
     QString query = "SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, ROUND(SUM(dostawa.cena_zakupu), 2), zamowienie.status"
     " FROM "
-    "klient JOIN zamowienie ON klient.id_klient = zamowienie.id_klient "
-    "JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-    "JOIN producent ON produkt.id_producent = producent.id_producent "
-    "JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
-    "WHERE zamowienie.id_zamowienie IN ( "
+    "zamowienie LEFT JOIN klient ON klient.id_klient = zamowienie.id_klient "
+    "LEFT JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+    "LEFT JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+    "LEFT JOIN producent ON produkt.id_producent = producent.id_producent "
+    "LEFT JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
+    "WHERE 1 = 1 ";
+
+    if(!ui->le_nazwa_produktu->text().isEmpty())
+        query += " AND zamowienie.id_zamowienie IN ( "
     "SELECT DISTINCT zamowienie.id_zamowienie"
         " FROM "
         "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
         "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-        " WHERE  produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu->text() + "%\') ";
+        " WHERE  produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu->text() + "%\')" ;
 
-    if(!dane_klienta.isEmpty()) query += " AND klient.id_klient = \'" + dane_klienta.at(dane_klienta.size()-1) + "\' ";
+    if(!dane_klienta.isEmpty()) query += "  klient.id_klient = \'" + dane_klienta.at(dane_klienta.size()-1) + "\' ";
 
     if(ui->cb_czy_okres->isChecked())
     {
@@ -124,7 +152,7 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     if(producent_index > 0)
     {
         QVector<QString> producent = producenci->current_data.at(producent_index);
-        query += " AND producent.id_producenta = \'" + producent.at(producent.size()-1) + "\'";
+        query += " AND producent.id_producent = \'" + producent.at(producent.size()-1) + "\'";
     }
     int status_index = ui->cb_statusy_zamowien->currentIndex();
     if(status_index > 0)
@@ -163,6 +191,12 @@ void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
         App::mysql->exec(query.toStdString());
         QString zamowienie_id = QString::number(App::mysql->last_id());
 
+        query = "INSERT INTO faktura(id_zamowienie)"
+                " VALUES (\'" + zamowienie_id +  "\')";
+
+        App::mysql->exec(query.toStdString());
+        QString faktura_id = QString::number(App::mysql->last_id());
+
         DataModel model;
         QString id_produkt, id_dostawca, cena_zakupu;
 
@@ -185,6 +219,8 @@ void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
             if(model.current_data.size() > 0)
             {
                 query = "UPDATE sztuka SET status = 2 WHERE id_sztuka = \'" + model.current_data.at(0).at(1) + "\'";
+                App::mysql->exec(query.toStdString());
+                query = "UPDATE sztuka SET id_faktura = \'" + faktura_id + "\' WHERE id_sztuka = \'" + model.current_data.at(0).at(1) + "\'";
                 App::mysql->exec(query.toStdString());
                 query = "UPDATE dostawa SET id_zamowienie = \'" + zamowienie_id + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
                 App::mysql->exec(query.toStdString());
@@ -213,7 +249,11 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
 {
     //okno edycji zamówienia
     QModelIndexList indexes = ui->tv_zamowienia_wyszukane->selectionModel()->selection().indexes();
-    if(indexes.isEmpty()) return;
+    if(indexes.isEmpty())
+    {
+        App::message("Nie wybrano żadnego zamówienia");
+        return;
+    }
     QString id_zamowienia = zamowienia_wyszukane->current_data.at(indexes.at(0).row()).at(0);
     //produkt.nazwa << cena << czas << produkt_id << dostawca_id
     QString query = "SELECT produkt.nazwa, ROUND(dostepnosc_dostawy.cena_sprzedazy, 2), dostepnosc_dostawy.czas_dostawy, dostawa.id_dostawa "
@@ -238,6 +278,12 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
         QString query;
         QString id_produkt, id_dostawca, cena_zakupu;
 
+        query = "INSERT INTO faktura(id_zamowienie)"
+                " VALUES (\'" + id_zamowienia +  "\')";
+
+        App::mysql->exec(query.toStdString());
+        QString faktura_id = QString::number(App::mysql->last_id());
+
         QVector< QVector<QString> >::iterator iter = edycja_zamowienia.nowe_produkty.begin();
         for(; iter != edycja_zamowienia.nowe_produkty.end(); iter++)
         {
@@ -258,6 +304,8 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
             {
                 query = "UPDATE sztuka SET status = 2 WHERE id_sztuka = \'" + model.current_data.at(0).at(1) + "\'";
                 App::mysql->exec(query.toStdString());
+                query = "UPDATE sztuka SET id_faktura = \'" + faktura_id + "\' WHERE id_sztuka = \'" + model.current_data.at(0).at(1) + "\'";
+                App::mysql->exec(query.toStdString());
                 query = "UPDATE dostawa SET id_zamowienie = \'" + id_zamowienia + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
                 App::mysql->exec(query.toStdString());
                 query = "UPDATE dostawa SET id_pracownik = \'" + QString::number(App::login_id) + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
@@ -273,7 +321,7 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
                 else cena_zakupu = "0";
 
                 query = "INSERT INTO dostawa(status, cena_zakupu, data_utworzenia, id_pracownik, id_zamowienie, id_produkt, id_dostawca)"
-                         " VALUES ( \'2\', \'" + cena_zakupu + "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+                         " VALUES ( \'1\', \'" + cena_zakupu + "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
                                          + "\', \'" + QString::number(App::login_id) + "\', \'" + id_zamowienia + "\', \'" + id_produkt + "\', \'" + id_dostawca + "\')";
                 App::mysql->exec(query.toStdString());
             }
@@ -283,7 +331,11 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
         {
             query = "UPDATE dostawa SET id_zamowienie = \'NULL\' WHERE id_dostawa = \'" + iter->at(3) + "\'";
             App::mysql->exec(query.toStdString());
-            query = "UPDATE dostawa SET status = \'1\' WHERE id_dostawa = \'" + iter->at(3) + "\'";
+            query = "UPDATE dostawa SET status = \'0\' WHERE status = \'1\' AND id_dostawa = \'" + iter->at(3) + "\'";
+            App::mysql->exec(query.toStdString());
+            query = "UPDATE sztuka SET status = \'1\' WHERE status = \'2\' AND id_dostawa = \'" + iter->at(3) + "\'";
+            App::mysql->exec(query.toStdString());
+            query = "UPDATE sztuka SET id_faktura = NULL WHERE id_dostawa = \'" + iter->at(3) + "\'";
             App::mysql->exec(query.toStdString());
         }
     }
@@ -294,11 +346,44 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
 void SprzedawcaWindow::on_pb_anuluj_zamowienie_clicked()
 {
     //zmiana statusu zamówienia na anuluj
+    QModelIndexList indexes = ui->tv_zamowienia_wyszukane->selectionModel()->selection().indexes();
+    if(indexes.isEmpty())
+    {
+        App::message("Nie wybrano żadnego zamówienia");
+        return;
+    }
+
+    QString id_zamowienia = zamowienia_wyszukane->current_data.at(indexes.at(0).row()).at(0);
+    QString query = "UPDATE zamowienie SET status = \'4\' WHERE id_zamowienie = \'" + id_zamowienia + "\'";
+    App::mysql->exec(query.toStdString());
+    query = "UPDATE dostawa SET status = \'0\' WHERE status = \'1\' AND id_zamowienie = \'" + id_zamowienia + "\'";
+    App::mysql->exec(query.toStdString());
+    query = "UPDATE dostawa SET id_zamowienie = NULL WHERE id_zamowienie = \'" + id_zamowienia + "\'";
+    App::mysql->exec(query.toStdString());
+    query = "UPDATE sztuka SET id_faktura = NULL WHERE id_dostawa IN (SELECT dostawa.id_dostawa FROM dostawa WHERE dostawa.status = \'3\' AND dostawa.id_zamowienie = \'" + id_zamowienia + "\')";
+    App::mysql->exec(query.toStdString());
+    query = "DELETE FROM faktura WHERE id_zamowienie = \'" + id_zamowienia + "\'";
+    App::mysql->exec(query.toStdString());
 }
 
 void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
 {
     //zmiana statusu zamówienia na wydano
+    QModelIndexList indexes = ui->tv_zamowienia_wyszukane->selectionModel()->selection().indexes();
+    if(indexes.isEmpty())
+    {
+        App::message("Nie wybrano żadnego zamówienia");
+        return;
+    }
+
+    QString id_zamowienia = zamowienia_wyszukane->current_data.at(indexes.at(0).row()).at(0);
+    QString query = "UPDATE zamowienie SET status = \'3\' WHERE status = 2 AND id_zamowienie = \'" + id_zamowienia + "\'";
+    App::mysql->exec(query.toStdString());
+    query = "UPDATE sztuka SET status = \'3\' WHERE id_dostawa IN (SELECT dostawa.id_dostawa FROM dostawa WHERE dostawa.status = \'3\' AND dostawa.id_zamowienie = \'" + id_zamowienia + "\')";
+    App::mysql->exec(query.toStdString());
+    query = "UPDATE faktura SET data_zrealizowania = \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+            + "\' WHERE id_zamowienie = \'" + id_zamowienia + "\'";
+    App::mysql->exec(query.toStdString());
 }
 
 void SprzedawcaWindow::on_pb_wybierz_klienta_reklamacje_clicked()
@@ -330,7 +415,7 @@ void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
                     "JOIN dostawa ON sztuka.id_dostawa = dostawa.id_dostawa "
                     "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
                     "LEFT JOIN reklamacja ON sztuka.id_sztuka = reklamacja.id_sztuka "
-                    "WHERE zamowienie.status = 1 AND sztuka.numer_seryjny IS NOT NULL AND reklamacja.id_reklamacja IS NULL "
+                    "WHERE zamowienie.status = 3 AND sztuka.numer_seryjny IS NOT NULL AND reklamacja.id_reklamacja IS NULL "
                     "AND klient.id_klient = \'" +  dane_klienta.at(dane_klienta.size()-1) + "\' "
                     "AND produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu_reklamacje->text() + "%\';";
         }
@@ -347,7 +432,7 @@ void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
                     "JOIN dostawa ON sztuka.id_dostawa = dostawa.id_dostawa "
                     "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
                     "LEFT JOIN reklamacja ON sztuka.id_sztuka = reklamacja.id_sztuka "
-                    "WHERE zamowienie.status = 1 AND sztuka.numer_seryjny IS NOT NULL AND reklamacja.id_reklamacja IS NOT NULL "
+                    "WHERE zamowienie.status = 3 AND sztuka.numer_seryjny IS NOT NULL AND reklamacja.id_reklamacja IS NOT NULL "
                     "AND klient.id_klient = \'" +  dane_klienta.at(dane_klienta.size()-1) + "\' "
                     "AND produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu_reklamacje->text() + "%\';";
         }
