@@ -148,6 +148,10 @@ void EdycjaZamowienia::szukajProduktow()
         query += " AND kategoria.id_kategoria = \'" + kategoria.at(1) + "\'";
     }
     produkty_wyszukane->getDataFromDB(query);
+
+    ui->tv_produkty_wyszukane->setVisible(false);
+    ui->tv_produkty_wyszukane->resizeColumnsToContents();
+    ui->tv_produkty_wyszukane->setVisible(true);
 }
 
 void EdycjaZamowienia::on_tv_produkty_wyszukane_clicked(const QModelIndex &index)
@@ -224,6 +228,10 @@ void EdycjaZamowienia::on_pb_dodaj_produkt_clicked()
         nowe_produkty.append(produkt);
     }
     produkty_w_zamowieniu->layoutChanged();
+
+    ui->tv_produkty_zamowienie->setVisible(false);
+    ui->tv_produkty_zamowienie->resizeColumnsToContents();
+    ui->tv_produkty_zamowienie->setVisible(true);
 }
 
 void EdycjaZamowienia::on_pb_usun_produkt_clicked()

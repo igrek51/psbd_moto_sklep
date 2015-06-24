@@ -118,21 +118,33 @@ void SprzedawcaWindow::on_cb_czy_okres_clicked(bool checked)
 void SprzedawcaWindow::on_pb_szukaj_clicked()
 {
     //wyszukanie pasujących zamówień
-    QString query = "SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, ROUND(SUM(dostawa.cena_zakupu), 2), zamowienie.status"
+//    QString query = "SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, ROUND(SUM(dostawa.cena_zakupu), 2), zamowienie.status"
+//    " FROM "
+//    "zamowienie LEFT JOIN klient ON klient.id_klient = zamowienie.id_klient "
+//    "LEFT JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+//    "LEFT JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+//    "LEFT JOIN producent ON produkt.id_producent = producent.id_producent "
+//    "LEFT JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
+//    "WHERE 1 = 1 ";
+
+    QString query = " SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, ROUND(SUM(IF(dostawa.status = '3', ROUND(sztuka.cena_sprzedazy, 2), ROUND(dostepnosc_dostawy.cena_sprzedazy, 2))), 2), zamowienie.status"
     " FROM "
-    "zamowienie LEFT JOIN klient ON klient.id_klient = zamowienie.id_klient "
-    "LEFT JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-    "LEFT JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-    "LEFT JOIN producent ON produkt.id_producent = producent.id_producent "
-    "LEFT JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
+    " zamowienie LEFT JOIN klient ON klient.id_klient = zamowienie.id_klient "
+    " LEFT JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+    " LEFT JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+    " LEFT JOIN producent ON produkt.id_producent = producent.id_producent "
+    " LEFT JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
+    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_distawca = dostawa.id_distawca "
+    " AND dostepnosc_dostawy.id_produkt "
+    " LEFT JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa"
     "WHERE 1 = 1 ";
 
     if(!ui->le_nazwa_produktu->text().isEmpty())
         query += " AND zamowienie.id_zamowienie IN ( "
-    "SELECT DISTINCT zamowienie.id_zamowienie"
+        " SELECT DISTINCT zamowienie.id_zamowienie"
         " FROM "
-        "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-        "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+        " zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+        " JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
         " WHERE  produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu->text() + "%\')" ;
 
     if(!dane_klienta.isEmpty()) query += "  klient.id_klient = \'" + dane_klienta.at(dane_klienta.size()-1) + "\' ";
@@ -519,12 +531,20 @@ void SprzedawcaWindow::on_tv_zamowienia_wyszukane_clicked(const QModelIndex &ind
 {
     QString id_zamowienia = zamowienia_wyszukane->current_data.at(index.row()).at(0);
     //"Nazwa Produktu" << "Cena za sztukę";
-    QString query = "SELECT produkt.nazwa, ROUND(dostawa.cena_zakupu, 2)"
-    " FROM "
-    "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-    " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
+//    QString query = "SELECT produkt.nazwa, ROUND(dostawa.cena_zakupu, 2)"
+//    " FROM "
+//    "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+//    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+//    " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
 
+    QString query = "SELECT produkt.nazwa, IF(dostawa.status = '3', ROUND(sztuka.cena_sprzedazy, 2), ROUND(dostepnosc_dostawy.cena_sprzedazy, 2))"
+    " FROM "
+    " zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+    " JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_distawca = dostawa.id_distawca "
+    " AND dostepnosc_dostawy.id_produkt "
+    " LEFT JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa"
+    " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
     zawartosc_zamowienia->getDataFromDB(query);
 
     ui->tv_zawartosc_zamowienia->setVisible(false);
