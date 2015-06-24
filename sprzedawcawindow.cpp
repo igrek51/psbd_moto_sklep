@@ -127,16 +127,15 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
 //    "LEFT JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
 //    "WHERE 1 = 1 ";
 
-    QString query = " SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, ROUND(SUM(IF(dostawa.status = '3', ROUND(sztuka.cena_sprzedazy, 2), ROUND(dostepnosc_dostawy.cena_sprzedazy, 2))), 2), zamowienie.status"
+    QString query = " SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, SUM(ROUND(dostepnosc_dostawy.cena_sprzedazy, 2)), zamowienie.status"
     " FROM "
     " zamowienie LEFT JOIN klient ON klient.id_klient = zamowienie.id_klient "
     " LEFT JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
     " LEFT JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
     " LEFT JOIN producent ON produkt.id_producent = producent.id_producent "
     " LEFT JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
-    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_distawca = dostawa.id_distawca "
+    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca "
     " AND dostepnosc_dostawy.id_produkt "
-    " LEFT JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa"
     "WHERE 1 = 1 ";
 
     if(!ui->le_nazwa_produktu->text().isEmpty())
@@ -203,12 +202,6 @@ void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
         App::mysql->exec(query.toStdString());
         QString zamowienie_id = QString::number(App::mysql->last_id());
 
-        query = "INSERT INTO faktura(id_zamowienie)"
-                " VALUES (\'" + zamowienie_id +  "\')";
-
-        App::mysql->exec(query.toStdString());
-        QString faktura_id = QString::number(App::mysql->last_id());
-
         DataModel model;
         QString id_produkt, id_dostawca, cena_zakupu;
 
@@ -232,8 +225,6 @@ void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
             {
                 query = "UPDATE sztuka SET status = 2 WHERE id_sztuka = \'" + model.current_data.at(0).at(1) + "\'";
                 App::mysql->exec(query.toStdString());
-                query = "UPDATE sztuka SET id_faktura = \'" + faktura_id + "\' WHERE id_sztuka = \'" + model.current_data.at(0).at(1) + "\'";
-                App::mysql->exec(query.toStdString());
                 query = "UPDATE dostawa SET id_zamowienie = \'" + zamowienie_id + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
                 App::mysql->exec(query.toStdString());
                 query = "UPDATE dostawa SET id_pracownik = \'" + QString::number(App::login_id) + "\' WHERE id_dostawa = \'" + model.current_data.at(0).at(0) + "\'";
@@ -249,7 +240,7 @@ void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
                 else cena_zakupu = "0";
 
                 query = "INSERT INTO dostawa(status, cena_zakupu, data_utworzenia, id_pracownik, id_zamowienie, id_produkt, id_dostawca)"
-                         " VALUES ( \'2\', \'" + cena_zakupu + "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+                         " VALUES ( \'1\', \'" + cena_zakupu + "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
                                          + "\', \'" + QString::number(App::login_id) + "\', \'" + zamowienie_id + "\', \'" + id_produkt + "\', \'" + id_dostawca + "\')";
                 App::mysql->exec(query.toStdString());
             }
@@ -370,11 +361,9 @@ void SprzedawcaWindow::on_pb_anuluj_zamowienie_clicked()
     App::mysql->exec(query.toStdString());
     query = "UPDATE dostawa SET status = \'0\' WHERE status = \'1\' AND id_zamowienie = \'" + id_zamowienia + "\'";
     App::mysql->exec(query.toStdString());
+    query = "UPDATE sztuka SET status = \'1\' WHERE id_dostawa IN (SELECT dostawa.id_dostawa FROM dostawa WHERE dostawa.status = \'3\' AND dostawa.id_zamowienie = \'" + id_zamowienia + "\')";
+    App::mysql->exec(query.toStdString());
     query = "UPDATE dostawa SET id_zamowienie = NULL WHERE id_zamowienie = \'" + id_zamowienia + "\'";
-    App::mysql->exec(query.toStdString());
-    query = "UPDATE sztuka SET id_faktura = NULL WHERE id_dostawa IN (SELECT dostawa.id_dostawa FROM dostawa WHERE dostawa.status = \'3\' AND dostawa.id_zamowienie = \'" + id_zamowienia + "\')";
-    App::mysql->exec(query.toStdString());
-    query = "DELETE FROM faktura WHERE id_zamowienie = \'" + id_zamowienia + "\'";
     App::mysql->exec(query.toStdString());
 }
 
@@ -391,11 +380,47 @@ void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
     QString id_zamowienia = zamowienia_wyszukane->current_data.at(indexes.at(0).row()).at(0);
     QString query = "UPDATE zamowienie SET status = \'3\' WHERE status = 2 AND id_zamowienie = \'" + id_zamowienia + "\'";
     App::mysql->exec(query.toStdString());
+    query = "INSERT INTO faktura(id_zamowienie, data_zrealizowania)"
+            " VALUES (\'" + id_zamowienia +  "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+            + "\)";
+    App::mysql->exec(query.toStdString());
+    QString faktura_id = QString::number(App::mysql->last_id());
     query = "UPDATE sztuka SET status = \'3\' WHERE id_dostawa IN (SELECT dostawa.id_dostawa FROM dostawa WHERE dostawa.status = \'3\' AND dostawa.id_zamowienie = \'" + id_zamowienia + "\')";
     App::mysql->exec(query.toStdString());
-    query = "UPDATE faktura SET data_zrealizowania = \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
-            + "\' WHERE id_zamowienie = \'" + id_zamowienia + "\'";
+    query = "UPDATE sztuka SET id_faktura =  \'" + faktura_id + "\' WHERE id_dostawa IN (SELECT dostawa.id_dostawa FROM dostawa WHERE dostawa.status = \'3\' AND dostawa.id_zamowienie = \'" + id_zamowienia + "\')";
     App::mysql->exec(query.toStdString());
+
+    //dodawanie brakujących sztuk jeśli ich liczba poniżej minimum
+    query = " SELECT produkt.id_produkt, produkt.minimalna_liczba, COUNT(id_sztuk) "
+            " FROM "
+            " produkt JOIN dostawa ON produkt.id_produkt = dostawa.id_produkt "
+            " JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
+            " WHERE sztuka.status = \'1\'AND dostawa.id_zamowienie = \'" + id_zamowienia + "\';";
+    DataModel model, model2;
+    model.getDataFromDB(query);
+    int minimalan_liczba, obecna_liczba;
+    QString produkt_id, dostawca_id;
+    QVector< QVector<QString> >::iterator iter = model.current_data.begin();
+    for(; iter != model.current_data.end(); iter++)
+    {
+        produkt_id = iter->at(0);
+        minimalan_liczba = iter->at(1).toInt();
+        obecna_liczba = iter->at(2).toInt();
+        while(obecna_liczba < minimalan_liczba)
+        {
+            query = " SELECT id_dostawca, cena_zakupu FROM dostepnosc_dostawy WHERE id_produkt =  \'" + produkt_id + "\' AND id_dostawca IS NOT NULL LIMIT 1;";
+            model2.getDataFromDB(query);
+
+            if(model2.current_data.size()>0)
+            {
+                query = "INSERT INTO dostawa(status, cena_zakupu, data_utworzenia, id_pracownik, id_zamowienie, id_produkt, id_dostawca)"
+                         " VALUES ( \'1\', \'" + model2.current_data.at(0).at(1) + "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+                                         + "\', \'" + QString::number(App::login_id) + "\', \'NULL\', \'" + produkt_id + "\', \'" + model2.current_data.at(0).at(0) + "\')";
+                App::mysql->exec(query.toStdString());
+            }
+            obecna_liczba++;
+        }
+    }
 }
 
 void SprzedawcaWindow::on_pb_wybierz_klienta_reklamacje_clicked()
@@ -537,13 +562,12 @@ void SprzedawcaWindow::on_tv_zamowienia_wyszukane_clicked(const QModelIndex &ind
 //    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
 //    " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
 
-    QString query = "SELECT produkt.nazwa, IF(dostawa.status = '3', ROUND(sztuka.cena_sprzedazy, 2), ROUND(dostepnosc_dostawy.cena_sprzedazy, 2))"
+    QString query = "SELECT produkt.nazwa, ROUND(dostepnosc_dostawy.cena_sprzedazy, 2)"
     " FROM "
     " zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
     " JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_distawca = dostawa.id_distawca "
+    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca "
     " AND dostepnosc_dostawy.id_produkt "
-    " LEFT JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa"
     " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
     zawartosc_zamowienia->getDataFromDB(query);
 
