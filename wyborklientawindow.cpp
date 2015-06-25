@@ -57,7 +57,7 @@ void WyborKlientaWindow::on_pb_dodaj_clicked()
     else
     {
         if(pesel.size() != 11) App::message("Wprowadż poprawny PESEL.");
-        else if(email.isEmpty() && telefon.size() < 11) App::message("Wprowadź poprawny numer telefonu lub e-mail.");
+        else if(email.isEmpty() && telefon.size() < 9) App::message("Wprowadź poprawny numer telefonu lub e-mail.");
         else
         {
             QString query1 = "SELECT klient.id_klient FROM klient WHERE "

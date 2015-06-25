@@ -240,7 +240,9 @@ void EdycjaZamowienia::on_cb_dostawca_activated(int index)
 void EdycjaZamowienia::on_pb_dodaj_produkt_clicked()
 {
     if(wybrany_produkt->current_data.isEmpty()) return;
+    if(dostawcy->current_data.size() < ui->cb_dostawca->currentIndex()) return;
     QVector <QString> produkt;
+
     //produkt.nazwa << cena << czas << produkt_id << dostawca_id
     produkt << wybrany_produkt->current_data.at(0).at(0) << cena << czas_dostawy << wybrany_produkt->current_data.at(0).at(3) << dostawcy->current_data.at(ui->cb_dostawca->currentIndex()).at(1);
     for(int i = 0; i < ui->sb_ilosc->value(); i++)
