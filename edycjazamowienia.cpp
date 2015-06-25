@@ -232,7 +232,7 @@ void EdycjaZamowienia::on_cb_dostawca_activated(int index)
     {
         cena = model.current_data.at(0).at(0);
         czas_dostawy =  model.current_data.at(0).at(1);
-        ui->l_cena->setText("Cena sprzedarzy: " + model.current_data.at(0).at(0) + " zł");
+        ui->l_cena->setText("Cena sprzedaży: " + model.current_data.at(0).at(0) + " zł");
         ui->l_czas_dostawy->setText("Czas dostawy: " + model.current_data.at(0).at(1) + " dni");
     }
 }
