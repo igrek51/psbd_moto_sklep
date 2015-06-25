@@ -149,13 +149,22 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     if(dostawca_index > 0)
     {
         QVector<QString> dostawca = dostawcy->current_data.at(dostawca_index);
-        query += " AND dostawca.id_dostawca = \'" + dostawca.at(dostawca.size()-1) + "\'";
+        query += " AND zamowienie.id_zamowienie IN ( "
+        " SELECT DISTINCT zamowienie.id_zamowienie"
+        " FROM "
+        " zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+        " WHERE  dostawa.id_dostawca = \'" + dostawca.at(dostawca.size()-1) + "\')" ;
     }
     int producent_index = ui->cb_producent->currentIndex();
     if(producent_index > 0)
     {
         QVector<QString> producent = producenci->current_data.at(producent_index);
-        query += " AND producent.id_producent = \'" + producent.at(producent.size()-1) + "\'";
+        query += " AND zamowienie.id_zamowienie IN ( "
+        " SELECT DISTINCT zamowienie.id_zamowienie"
+        " FROM "
+        " zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+        " JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+        " WHERE produkt.id_producent = \'" + producent.at(producent.size()-1) + "\')" ;
     }
     int status_index = ui->cb_statusy_zamowien->currentIndex();
     if(status_index > 0)
@@ -165,6 +174,7 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     }
     query += " GROUP BY zamowienie.id_zamowienie;";
 
+    qDebug() << query;
     if(ui->cb_czy_okres->isChecked() && ui->de_koniec->dateTime() < ui->de_poczatek->dateTime())
         App::message("Data końcowa jest mniejsza niż początkowa");
     else
@@ -174,6 +184,8 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
         ui->tv_zamowienia_wyszukane->resizeColumnsToContents();
         ui->tv_zamowienia_wyszukane->setVisible(true);
     }
+
+    zawartosc_zamowienia->clear();
 }
 
 void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
