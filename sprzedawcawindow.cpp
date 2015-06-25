@@ -265,7 +265,16 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
     edycja_zamowienia.setModal(true);
     edycja_zamowienia.stare_produkty = model.current_data;
     edycja_zamowienia.produkty_w_zamowieniu->current_data = model.current_data;
-    edycja_zamowienia.dane_klienta = dane_klienta;
+    query = "SELECT klient.imie, klient.nazwisko, klient.adres, klient.pesel, klient.telefon, klient.e_mail, klient.id_klient "
+            " FROM zamowienie JOIN klient ON zamowienie.id_klient = klient.id_klient "
+            " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
+    model.getDataFromDB(query);
+    if(model.current_data.size() == 0)
+    {
+        App::message("Nie można znaleźć klienta");
+        return;
+    }
+    edycja_zamowienia.dane_klienta = model.current_data.at(0);
     edycja_zamowienia.pokazKlienta();
     edycja_zamowienia.exec();
     if(edycja_zamowienia.result() == QDialog::Accepted)
@@ -374,7 +383,7 @@ void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
     App::mysql->exec(query.toStdString());
     query = "INSERT INTO faktura(id_zamowienie, data_zrealizowania)"
             " VALUES (\'" + id_zamowienia +  "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
-            + "\)";
+            + "\'')";
     App::mysql->exec(query.toStdString());
     QString faktura_id = QString::number(App::mysql->last_id());
     query = "UPDATE sztuka SET status = \'3\' WHERE id_dostawa IN (SELECT dostawa.id_dostawa FROM dostawa WHERE dostawa.status = \'3\' AND dostawa.id_zamowienie = \'" + id_zamowienia + "\')";
