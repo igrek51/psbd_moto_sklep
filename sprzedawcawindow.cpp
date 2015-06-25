@@ -400,7 +400,7 @@ void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
     DataModel model, model2;
     model.getDataFromDB(query);
     int minimalan_liczba, obecna_liczba;
-    QString produkt_id, dostawca_id;
+    QString produkt_id;
     QVector< QVector<QString> >::iterator iter = model.current_data.begin();
     for(; iter != model.current_data.end(); iter++)
     {

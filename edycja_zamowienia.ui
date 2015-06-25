@@ -205,9 +205,19 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLabel" name="l_nazwa">
+           <widget class="QLabel" name="l_nazwa_3">
             <property name="text">
              <string>Nazwa produktu:</string>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="l_nazwa">
+            <property name="text">
+             <string/>
             </property>
             <property name="scaledContents">
              <bool>true</bool>

@@ -16,6 +16,7 @@ EdycjaZamowienia::EdycjaZamowienia(bool edycja, QWidget *parent) :
     kategorie->column_count = 1;
     ui->lv_kategorie->setModel(kategorie);
     kategorie->getDataFromDB(QString("SELECT kategoria.nazwa, kategoria.id_kategoria FROM kategoria"));
+    kategorie->current_data.prepend(QVector<QString>() << "Wszystkie" << "0");
 
     marki = new DataModel;
     marki->column_count = 1;
@@ -47,11 +48,13 @@ EdycjaZamowienia::EdycjaZamowienia(bool edycja, QWidget *parent) :
     wybrany_produkt = new DataModel;
 
     ui->cb_marka->setCurrentIndex(0);
+    czyscOpis();
 }
 
 EdycjaZamowienia::~EdycjaZamowienia()
 {
     delete ui;
+    delete wybrany_produkt;
 }
 
 void EdycjaZamowienia::pokazKlienta()
@@ -144,14 +147,33 @@ void EdycjaZamowienia::szukajProduktow()
     QModelIndexList indexes = ui->lv_kategorie->selectionModel()->selection().indexes();
     if(!indexes.isEmpty())
     {
-        QVector<QString> kategoria = kategorie->current_data.at(indexes.at(0).row());
-        query += " AND kategoria.id_kategoria = \'" + kategoria.at(1) + "\'";
+        int row = indexes.at(0).row();
+        if(row > 0)
+        {
+            QVector<QString> kategoria = kategorie->current_data.at(row);
+            query += " AND kategoria.id_kategoria = \'" + kategoria.at(1) + "\'";
+        }
     }
     produkty_wyszukane->getDataFromDB(query);
 
     ui->tv_produkty_wyszukane->setVisible(false);
     ui->tv_produkty_wyszukane->resizeColumnsToContents();
     ui->tv_produkty_wyszukane->setVisible(true);
+
+    czyscOpis();
+}
+
+void EdycjaZamowienia::czyscOpis()
+{
+    wybrany_produkt->clear();
+    dostawcy->clear();
+
+    ui->l_nazwa->setText("");
+    ui->l_opis->setText("");
+    ui->l_parametry->setText("");
+    ui->sb_ilosc->setValue(0);
+    ui->l_cena->setText("Cena sprzedarzy: ");
+    ui->l_czas_dostawy->setText("Czas dostawy: ");
 }
 
 void EdycjaZamowienia::on_tv_produkty_wyszukane_clicked(const QModelIndex &index)
@@ -166,7 +188,7 @@ void EdycjaZamowienia::on_tv_produkty_wyszukane_clicked(const QModelIndex &index
     wybrany_produkt->getDataFromDB(query);
     if(wybrany_produkt->current_data.size() > 0)
     {
-        ui->l_nazwa->setText("Nazwa produktu: " + wybrany_produkt->current_data.at(0).at(0));
+        ui->l_nazwa->setText(wybrany_produkt->current_data.at(0).at(0));
         ui->l_opis->setText(wybrany_produkt->current_data.at(0).at(1));
         ui->l_parametry->setText(wybrany_produkt->current_data.at(0).at(2));
     }

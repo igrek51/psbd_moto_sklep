@@ -53,6 +53,7 @@ private:
     bool edycja;
 
     void szukajProduktow();
+    void czyscOpis();
 
     Ui::EdycjaZamowienia *ui;
 
