@@ -118,14 +118,6 @@ void SprzedawcaWindow::on_cb_czy_okres_clicked(bool checked)
 void SprzedawcaWindow::on_pb_szukaj_clicked()
 {
     //wyszukanie pasujących zamówień
-//    QString query = "SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, ROUND(SUM(dostawa.cena_zakupu), 2), zamowienie.status"
-//    " FROM "
-//    "zamowienie LEFT JOIN klient ON klient.id_klient = zamowienie.id_klient "
-//    "LEFT JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-//    "LEFT JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-//    "LEFT JOIN producent ON produkt.id_producent = producent.id_producent "
-//    "LEFT JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
-//    "WHERE 1 = 1 ";
 
     QString query = " SELECT zamowienie.id_zamowienie, zamowienie.data_zlozenia, klient.imie, klient.nazwisko, SUM(ROUND(dostepnosc_dostawy.cena_sprzedazy, 2)), zamowienie.status"
     " FROM "
@@ -135,8 +127,8 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     " LEFT JOIN producent ON produkt.id_producent = producent.id_producent "
     " LEFT JOIN dostawca ON dostawa.id_dostawca = dostawca.id_dostawca "
     " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca "
-    " AND dostepnosc_dostawy.id_produkt "
-    "WHERE 1 = 1 ";
+    " AND dostepnosc_dostawy.id_produkt = dostawa.id_produkt "
+    " WHERE 1 = 1 ";
 
     if(!ui->le_nazwa_produktu->text().isEmpty())
         query += " AND zamowienie.id_zamowienie IN ( "
@@ -146,7 +138,7 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
         " JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
         " WHERE  produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu->text() + "%\')" ;
 
-    if(!dane_klienta.isEmpty()) query += "  klient.id_klient = \'" + dane_klienta.at(dane_klienta.size()-1) + "\' ";
+    if(!dane_klienta.isEmpty()) query += " AND klient.id_klient = \'" + dane_klienta.at(dane_klienta.size()-1) + "\' ";
 
     if(ui->cb_czy_okres->isChecked())
     {
