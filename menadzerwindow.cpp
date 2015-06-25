@@ -188,7 +188,7 @@ void MenadzerWindow::on_pb_raport_sztuk_clicked()
         dostawca_id = raport_dostawca_id[index-1];
     }
     //wybrany status
-    int status = ui->cb_status_sztuki->currentIndex();
+    int status = ui->cb_status_sztuki->currentIndex() + 1;
     //zapytanie
     stringstream ss;
     ss<<"SELECT sztuka.id_sztuka, sztuka.numer_seryjny, dostawa.cena_zakupu, sztuka.cena_sprzedazy, dostawa.data_realizacji, dostawca.nazwa AS 'nazwa_dostawcy', produkt.nazwa AS 'nazwa_produktu', producent.nazwa AS 'nazwa_producenta'";
