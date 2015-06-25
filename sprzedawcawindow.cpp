@@ -383,7 +383,7 @@ void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
     App::mysql->exec(query.toStdString());
     query = "INSERT INTO faktura(id_zamowienie, data_zrealizowania)"
             " VALUES (\'" + id_zamowienia +  "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
-            + "\'')";
+            + "\')";
     App::mysql->exec(query.toStdString());
     QString faktura_id = QString::number(App::mysql->last_id());
     query = "UPDATE sztuka SET status = \'3\' WHERE id_dostawa IN (SELECT dostawa.id_dostawa FROM dostawa WHERE dostawa.status = \'3\' AND dostawa.id_zamowienie = \'" + id_zamowienia + "\')";
