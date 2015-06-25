@@ -15,7 +15,7 @@ SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     ui->tv_zamowienia_wyszukane->setModel(zamowienia_wyszukane);
     QMap<QString, QString> m1;
     m1["1"] = "Przyjęte";
-    m1["2"] = "Gotowe do dobioru";
+    m1["2"] = "Gotowe do odbioru";
     m1["3"] = "Zrealizowane";
     m1["4"] = "Anulowane";
     zamowienia_wyszukane->state[5] = m1;
