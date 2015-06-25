@@ -556,6 +556,7 @@ void SprzedawcaWindow::on_pb_przyjmij_reklamacje_clicked()
             }
         }
     }
+    on_cb_stan_sztuk_reklamacja_activated(ui->cb_stan_sztuk_reklamacja->currentIndex());
 }
 
 void SprzedawcaWindow::on_pb_zakoncz_reklamacje_clicked()
@@ -579,6 +580,7 @@ void SprzedawcaWindow::on_pb_zakoncz_reklamacje_clicked()
                 App::message("Nie można zakończyć procesu reklamacji sztuki");
         }
     }
+    on_cb_stan_sztuk_reklamacja_activated(ui->cb_stan_sztuk_reklamacja->currentIndex());
 }
 
 void SprzedawcaWindow::on_tabWidget_2_currentChanged(int index)
