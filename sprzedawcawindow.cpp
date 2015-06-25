@@ -248,6 +248,8 @@ void SprzedawcaWindow::on_pb_nowe_zamowienie_clicked()
             }
         }
     }
+
+    on_pb_szukaj_clicked();
 }
 
 void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
@@ -260,15 +262,28 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
         return;
     }
     QString id_zamowienia = zamowienia_wyszukane->current_data.at(indexes.at(0).row()).at(0);
+    DataModel model;
+    QString query;
+    query = "SELECT id_zamowienie, status FROM zamowienie WHERE id_zamowienie = \'" + id_zamowienia + "\'";
+    model.getDataFromDB(query);
+    if(model.current_data.size() == 0)
+    {
+        App::message("Błąd: brak nie znaleziono zamówienia");
+        return;
+    }
+    else if(model.current_data.at(0).at(1) != "1")
+    {
+        App::message("Nie można już edytować zamówienia");
+        return;
+    }
     //produkt.nazwa << cena << czas << produkt_id << dostawca_id
-    QString query = "SELECT produkt.nazwa, ROUND(dostepnosc_dostawy.cena_sprzedazy, 2), dostepnosc_dostawy.czas_dostawy, dostawa.id_dostawa "
+    query = "SELECT produkt.nazwa, ROUND(dostepnosc_dostawy.cena_sprzedazy, 2), dostepnosc_dostawy.czas_dostawy, dostawa.id_dostawa "
     " FROM "
     " zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
     " JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
     " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca AND dostepnosc_dostawy.id_produkt = dostawa.id_produkt"
     " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
 
-    DataModel model;
     model.getDataFromDB(query);
 
     EdycjaZamowienia edycja_zamowienia(true);
@@ -355,6 +370,8 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
     }
 
     on_tv_zamowienia_wyszukane_clicked(indexes.at(0));
+
+    on_pb_szukaj_clicked();
 }
 
 void SprzedawcaWindow::on_pb_anuluj_zamowienie_clicked()
@@ -376,6 +393,8 @@ void SprzedawcaWindow::on_pb_anuluj_zamowienie_clicked()
     App::mysql->exec(query.toStdString());
     query = "UPDATE dostawa SET id_zamowienie = NULL WHERE id_zamowienie = \'" + id_zamowienia + "\'";
     App::mysql->exec(query.toStdString());
+
+    on_pb_szukaj_clicked();
 }
 
 void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
@@ -387,9 +406,22 @@ void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
         App::message("Nie wybrano żadnego zamówienia");
         return;
     }
-
+    DataModel model, model2;
     QString id_zamowienia = zamowienia_wyszukane->current_data.at(indexes.at(0).row()).at(0);
-    QString query = "UPDATE zamowienie SET status = \'3\' WHERE status = 2 AND id_zamowienie = \'" + id_zamowienia + "\'";
+    QString query;
+    query = "SELECT id_zamowienie, status FROM zamowienie WHERE id_zamowienie = \'" + id_zamowienia + "\'";
+    model.getDataFromDB(query);
+    if(model.current_data.size() == 0)
+    {
+        App::message("Błąd: brak nie znaleziono zamówienia");
+        return;
+    }
+    else if(model.current_data.at(0).at(1) != "2")
+    {
+        App::message("Nie można wydać zamówienia");
+        return;
+    }
+    query = "UPDATE zamowienie SET status = \'3\' WHERE status = 2 AND id_zamowienie = \'" + id_zamowienia + "\'";
     App::mysql->exec(query.toStdString());
     query = "INSERT INTO faktura(id_zamowienie, data_zrealizowania)"
             " VALUES (\'" + id_zamowienia +  "\', \'" + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
@@ -402,12 +434,14 @@ void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
     App::mysql->exec(query.toStdString());
 
     //dodawanie brakujących sztuk jeśli ich liczba poniżej minimum
-    query = " SELECT produkt.id_produkt, produkt.minimalna_liczba, COUNT(id_sztuk) "
+    query = " SELECT produkt.id_produkt, produkt.minimalna_liczba, COUNT(id_sztuka) "
             " FROM "
             " produkt JOIN dostawa ON produkt.id_produkt = dostawa.id_produkt "
             " JOIN sztuka ON dostawa.id_dostawa = sztuka.id_dostawa "
-            " WHERE sztuka.status = \'1\'AND dostawa.id_zamowienie = \'" + id_zamowienia + "\';";
-    DataModel model, model2;
+            " WHERE sztuka.status = \'1\'AND dostawa.id_zamowienie = \'" + id_zamowienia + "\'"
+            " GROUP BY produkt.id_produkt;";
+
+
     model.getDataFromDB(query);
     int minimalan_liczba, obecna_liczba;
     QString produkt_id;
@@ -432,11 +466,13 @@ void SprzedawcaWindow::on_pb_wydaj_zamowienei_clicked()
             obecna_liczba++;
         }
     }
+    on_pb_szukaj_clicked();
 }
 
 void SprzedawcaWindow::on_pb_wybierz_klienta_reklamacje_clicked()
 {
     on_pb_wybierz_klienta_clicked();
+    on_cb_stan_sztuk_reklamacja_activated(ui->cb_stan_sztuk_reklamacja->currentIndex());
 }
 
 void SprzedawcaWindow::on_le_nazwa_produktu_reklamacje_textChanged(const QString &arg1)

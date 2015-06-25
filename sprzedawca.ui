@@ -280,6 +280,9 @@
         </item>
         <item>
          <widget class="QTableView" name="tv_zamowienia_wyszukane">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
@@ -479,6 +482,9 @@
         </item>
         <item>
          <widget class="QTableView" name="tv_reklamacje">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>

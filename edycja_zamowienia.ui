@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>692</width>
-    <height>462</height>
+    <width>805</width>
+    <height>629</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
             <widget class="QListView" name="lv_kategorie">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>225</width>
                <height>0</height>
               </size>
              </property>
@@ -49,6 +49,18 @@
          </item>
          <item>
           <widget class="QGroupBox" name="groupBox_2">
+           <property name="minimumSize">
+            <size>
+             <width>220</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>220</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="title">
             <string>Samochód</string>
            </property>
@@ -171,6 +183,9 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
            </property>
            <attribute name="verticalHeaderCascadingSectionResizes">
             <bool>true</bool>
@@ -396,6 +411,9 @@
        <width>0</width>
        <height>117</height>
       </size>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
      </property>
      <property name="selectionBehavior">
       <enum>QAbstractItemView::SelectRows</enum>
