@@ -13,6 +13,7 @@ public:
 
     void getDataFromDB(std::string query);
     void getDataFromDB(QString query);
+    void updateView();
     void clear();
 
     int rowCount(const QModelIndex &parent) const;

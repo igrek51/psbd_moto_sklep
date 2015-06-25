@@ -20,7 +20,7 @@ void DataModel::getDataFromDB(std::string query)
 
         current_data.push_back(data_row);
     }
-    layoutChanged();
+    updateView();
 }
 
 void DataModel::getDataFromDB(QString query)
@@ -28,10 +28,15 @@ void DataModel::getDataFromDB(QString query)
     getDataFromDB(query.toStdString());
 }
 
+void DataModel::updateView() //wywołanie protected: layoutChanged w starszych wersjach qt
+{
+    layoutChanged();
+}
+
 void DataModel::clear()
 {
     current_data.clear();
-    layoutChanged();
+    updateView();
 }
 
 int DataModel::rowCount(const QModelIndex &parent) const

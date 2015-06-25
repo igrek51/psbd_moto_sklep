@@ -227,7 +227,7 @@ void EdycjaZamowienia::on_pb_dodaj_produkt_clicked()
         produkty_w_zamowieniu->current_data.append(produkt);
         nowe_produkty.append(produkt);
     }
-    produkty_w_zamowieniu->layoutChanged();
+    produkty_w_zamowieniu->updateView();
 
     ui->tv_produkty_zamowienie->setVisible(false);
     ui->tv_produkty_zamowienie->resizeColumnsToContents();
@@ -251,7 +251,7 @@ void EdycjaZamowienia::on_pb_usun_produkt_clicked()
                 nowe_produkty.remove(row);
 
             produkty_w_zamowieniu->current_data.remove(row);
-            produkty_w_zamowieniu->layoutChanged();
+            produkty_w_zamowieniu->updateView();
         }
     }
 }

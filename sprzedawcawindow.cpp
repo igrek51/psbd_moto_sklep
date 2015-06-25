@@ -261,9 +261,9 @@ void SprzedawcaWindow::on_pb_edytuj_zamowienie_clicked()
     //produkt.nazwa << cena << czas << produkt_id << dostawca_id
     QString query = "SELECT produkt.nazwa, ROUND(dostepnosc_dostawy.cena_sprzedazy, 2), dostepnosc_dostawy.czas_dostawy, dostawa.id_dostawa "
     " FROM "
-    "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-    "JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca AND dostepnosc_dostawy.id_produkt = dostawa.id_produkt"
+    " zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
+    " JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
+    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca AND dostepnosc_dostawy.id_produkt = dostawa.id_produkt"
     " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
 
     DataModel model;
@@ -555,20 +555,14 @@ void SprzedawcaWindow::on_tabWidget_2_currentChanged(int index)
 void SprzedawcaWindow::on_tv_zamowienia_wyszukane_clicked(const QModelIndex &index)
 {
     QString id_zamowienia = zamowienia_wyszukane->current_data.at(index.row()).at(0);
-    //"Nazwa Produktu" << "Cena za sztukę";
-//    QString query = "SELECT produkt.nazwa, ROUND(dostawa.cena_zakupu, 2)"
-//    " FROM "
-//    "zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
-//    "JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-//    " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
 
     QString query = "SELECT produkt.nazwa, ROUND(dostepnosc_dostawy.cena_sprzedazy, 2)"
     " FROM "
     " zamowienie JOIN dostawa ON zamowienie.id_zamowienie = dostawa.id_zamowienie "
     " JOIN produkt ON dostawa.id_produkt = produkt.id_produkt "
-    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca "
-    " AND dostepnosc_dostawy.id_produkt "
+    " LEFT JOIN dostepnosc_dostawy ON dostepnosc_dostawy.id_dostawca = dostawa.id_dostawca AND dostepnosc_dostawy.id_produkt = dostawa.id_produkt "
     " WHERE zamowienie.id_zamowienie = \'" + id_zamowienia + "\';";
+
     zawartosc_zamowienia->getDataFromDB(query);
 
     ui->tv_zawartosc_zamowienia->setVisible(false);
