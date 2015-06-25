@@ -2,7 +2,7 @@
 #include "wyborklientawindow.h"
 #include "ui_wybor_klienta.h"
 #include "app.h"
-#include <QDebug>
+
 WyborKlientaWindow::WyborKlientaWindow(QVector<QString> klient, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::WyborKlientaWindow)
