@@ -1,7 +1,6 @@
 #include "edycjazamowienia.h"
 #include "ui_edycja_zamowienia.h"
 #include "app.h"
-#include <QDebug>
 
 EdycjaZamowienia::EdycjaZamowienia(bool edycja, QWidget *parent) :
     QDialog(parent),

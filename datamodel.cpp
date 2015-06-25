@@ -1,6 +1,5 @@
 #include "datamodel.h"
 #include "app.h"
-#include <QDebug>
 
 DataModel::DataModel()
 {

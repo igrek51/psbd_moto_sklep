@@ -3,7 +3,6 @@
 #include "app.h"
 #include <QCloseEvent>
 #include <QDateTime>
-#include <QDebug>
 
 SprzedawcaWindow::SprzedawcaWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -174,7 +173,6 @@ void SprzedawcaWindow::on_pb_szukaj_clicked()
     }
     query += " GROUP BY zamowienie.id_zamowienie;";
 
-    qDebug() << query;
     if(ui->cb_czy_okres->isChecked() && ui->de_koniec->dateTime() < ui->de_poczatek->dateTime())
         App::message("Data końcowa jest mniejsza niż początkowa");
     else
@@ -487,8 +485,6 @@ void SprzedawcaWindow::on_cb_stan_sztuk_reklamacja_activated(int index)
                     "AND produkt.nazwa LIKE \'%" + ui->le_nazwa_produktu_reklamacje->text() + "%\';";
         }
 
-//        qDebug() << query;
-
         reklamacje->getDataFromDB(query);
 
         ui->tv_reklamacje->setVisible(false);
@@ -512,7 +508,6 @@ void SprzedawcaWindow::on_pb_przyjmij_reklamacje_clicked()
             QDateTime data_wygasniecia_gwarancji = QDateTime::fromString(data_zakupu_str, "yyyy-MM-dd HH:mm:ss").addDays(okres_gwarancyjny);
             QDateTime obecna_data = QDateTime::currentDateTime();
 
-            qDebug() << obecna_data << data_wygasniecia_gwarancji;
             int pozostaly_czas_gwarancji = obecna_data.daysTo(data_wygasniecia_gwarancji);
             if(pozostaly_czas_gwarancji <= 0)
                 App::message("Gwarancja skończyła się " + QString::number(-pozostaly_czas_gwarancji).toStdString() + " dni temu.");
