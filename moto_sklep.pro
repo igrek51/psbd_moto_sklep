@@ -31,7 +31,6 @@ FORMS    += mainwindow.ui\
 		menadzer.ui\
 		sprzedawca.ui\
     wybor_klienta.ui \
-    sprzedawca_zamowienie.ui \
     edycja_zamowienia.ui
 
 
