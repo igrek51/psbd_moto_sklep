@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>692</width>
-    <height>443</height>
+    <height>462</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -220,6 +220,9 @@
              <string/>
             </property>
             <property name="scaledContents">
+             <bool>false</bool>
+            </property>
+            <property name="wordWrap">
              <bool>true</bool>
             </property>
            </widget>
@@ -235,6 +238,9 @@
            <widget class="QLabel" name="l_opis">
             <property name="text">
              <string/>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -265,6 +271,9 @@
            <widget class="QLabel" name="l_parametry">
             <property name="text">
              <string/>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

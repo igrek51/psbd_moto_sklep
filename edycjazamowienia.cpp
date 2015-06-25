@@ -273,14 +273,7 @@ void EdycjaZamowienia::on_pb_usun_produkt_clicked()
                 nowe_produkty.remove(row);
 
             produkty_w_zamowieniu->current_data.remove(row);
-<<<<<<< HEAD
             produkty_w_zamowieniu->updateView();
-=======
-            //produkty_w_zamowieniu->layoutChanged();
-
-
-
->>>>>>> 0fe7303c0f311445b879c4ccc0e54f1420c72a69
         }
     }
 }
